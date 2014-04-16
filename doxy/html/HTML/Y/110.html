@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>data</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/28.html#L759'>data</a>              759 writer/h8write.c  int writecom(unsigned char *data, int size) {</span>
+<span class='curline'><a href='../S/28.html#L762'>data</a>              762 writer/h8write.c 	WriteFile(TheFd, data, size, &amp;num, &amp;WOp);</span>
+<span class='curline'><a href='../S/28.html#L789'>data</a>              789 writer/h8write.c  ssize_t writecom(unsigned char *data, size_t size) {</span>
+<span class='curline'><a href='../S/28.html#L792'>data</a>              792 writer/h8write.c 	num = write( TheFd, data, size);</span>
+<span class='curline'><a href='../S/28.html#L796'>data</a>              796 writer/h8write.c  ssize_t readcom(unsigned char *data, size_t size) {</span>
+<span class='curline'><a href='../S/28.html#L799'>data</a>              799 writer/h8write.c 	num = read( TheFd, data, size);</span>
+<span class='curline'><a href='../S/28.html#L823'>data</a>              823 writer/h8write.c void bytecheck(int c, int data) {</span>
+<span class='curline'><a href='../S/28.html#L826'>data</a>              826 writer/h8write.c 	if(c != data) {</span>
+<span class='curline'><a href='../S/28.html#L828'>data</a>              828 writer/h8write.c 		sprintf(buf, "H8 data should be %02X, but is %02X\n",data,c);</span>
+<span class='curline'><a href='../S/28.html#L830'>data</a>              830 writer/h8write.c 		snprintf(buf,COMBUF_SIZE,"H8 data should be %02X, but is %02X\n",data,c);</span>
+<span class='curline'><a href='../S/28.html#L1409'>data</a>             1409 writer/h8write.c 	unsigned char	*data;</span>
+<span class='curline'><a href='../S/28.html#L1612'>data</a>             1612 writer/h8write.c 				data = buffer + 8;</span>
+<span class='curline'><a href='../S/28.html#L1615'>data</a>             1615 writer/h8write.c 				data = buffer + 10;</span>
+<span class='curline'><a href='../S/28.html#L1618'>data</a>             1618 writer/h8write.c 				data = buffer + 12;</span>
+<span class='curline'><a href='../S/28.html#L1637'>data</a>             1637 writer/h8write.c 				numbuf[0] = *(data++);</span>
+<span class='curline'><a href='../S/28.html#L1638'>data</a>             1638 writer/h8write.c 				numbuf[1] = *(data++);</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,18 @@
+# os/Makefile
+
+OBJS = startup.o main.o lib.o kozos.o syscall.o
+MISCS = ../misc/serial.o ../misc/interrupt.o
+
+OBJS += test08_1.o
+
+TARGET = kozos
+
+include ../Makefile.in
+
+CFLAGS += -DKOZOS
+
+all: $(TARGET)
+
+clean:
+	rm -f $(OBJS) $(TARGET) $(TARGET).elf $(TARGET).c~
+

@@ -1,0 +1,181 @@
+#include "defines.h"
+#include "serial.h"
+#include "lib.h"
+
+/** \file lib.c
+ * 共通利用ライブラリ関数
+ *
+ * ソースコード
+ */
+
+/* メモリを特定のパターンで埋める */
+void * memset(void * b, int c, long len)
+{
+	char *p;
+
+	for(p = b; len > 0; len--){
+		*(p++) = c;
+	}
+
+	return b;
+}
+
+/* メモリのコピーを行う */
+void * memcpy(void * dst, const void * src, long len)
+{
+	char *d = dst;
+	const char *s = src;
+
+	for(; len > 0; len--){
+		*(d++) = *(s++);
+	}
+
+	return dst;
+}
+
+/* メモリ上のデータの比較を行う */
+int memcmp(const void * b1, const void * b2, long len)
+{
+	const char * p1 = b1;
+	const char * p2 = b2;
+
+	for(; len > 0; len--){
+		if(*p1 != *p2){
+			return (*p1 > *p2) ? 1 : -1;
+		}
+		p1++;
+		p2++;
+	}
+
+	return 0;
+}
+
+/*---------------------------*
+ * 文字列関連関数
+ *---------------------------*/
+
+/* 文字列の長さを返す */
+int strlen(cString s)
+{
+	int len;
+	for( len = 0; *s; s++, len++){
+		;
+	}
+
+	return len;
+}
+
+/* 文字列のコピーを行う */
+String strcpy(String dst, cString src)
+{
+	String d = dst;
+	for(;; dst++, src++){
+		*dst = *src;
+		if(!*src) break;
+	}
+
+	return d;
+}
+
+/* 文字列の比較を行う */
+int strcmp(cString s1, cString s2)
+{
+	while(*s1 || *s2) {
+		if(*s1 != *s2) {
+			return (*s1 > *s2) ? 1 : -1;
+		}
+		s1++;
+		s2++;
+	}
+
+	return 0;
+}
+
+/* 長さ指定の文字列比較 */
+int strncmp(cString s1, cString s2, int len)
+{
+	while((*s1 || *s2) && (len > 0)) {
+		if(*s1 != *s2) {
+			return (*s1 > *s2) ? 1 : -1;
+		}
+		s1++;
+		s2++;
+		len--;
+	}
+
+	return 0;
+}
+
+/* 1文字送信 */
+int putc(char c)
+{
+	if(c == '\n') {
+		serial_send_byte(SERIAL_DEFAULT_DEVICE, '\r');
+	}
+
+	return serial_send_byte(SERIAL_DEFAULT_DEVICE, c);
+}
+
+/* 1文字受信 */
+char getc(void)
+{
+	char c = serial_recv_byte(SERIAL_DEFAULT_DEVICE);
+	c = (c == '\r')? '\n' : c;
+	putc(c);
+
+	return c;
+}
+
+/* 文字列送信 */ 
+int puts(cString str)
+{
+	while(*str) {
+		putc(*str++);
+	}
+
+	return EXIT_SUCCESS;
+}
+
+/* 文字列受信 */
+int gets(String buf)
+{
+	int i = 0;
+	uint8 c;
+
+	do {
+		c = getc();
+		if (c == '\n') {
+			c = '\0';
+		}
+		buf[i++] = c;
+	} while (c);
+
+	return i - 1;
+}
+
+/* 数値の16進表示 */
+int putxval(uint32 value, int column)
+{
+	char buf[9];
+	String p;
+
+	// バッファの最後尾に終端文字を配置
+	p = buf + sizeof(buf) - 1;
+	*(p--) = '\0';
+
+	if(!value && !column) {
+		// valueがゼロの時、1桁出力桁を確保
+		column++;
+	}
+
+	while(value || column) {
+		*(p--) = "0123456789abcdef"[value & 0xf];
+		value >>= 4;
+		if(column) column--;
+	}
+
+	puts(p+1);
+
+	return EXIT_SUCCESS;
+}
+

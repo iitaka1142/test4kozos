@@ -1,0 +1,1907 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
+<title>kozos: src/os/kozos.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">kozos
+   &#160;<span id="projectnumber">Step 8</span>
+   </div>
+   <div id="projectbrief">Create OS in 12 steps</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 作成： Doxygen 1.8.5 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>メインページ</span></a></li>
+      <li><a href="annotated.html"><span>データ構造</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>グローバル</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('kozos_8c.html','');});
+</script>
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">データ構造</a> &#124;
+<a href="#define-members">マクロ定義</a> &#124;
+<a href="#func-members">関数</a> &#124;
+<a href="#var-members">変数</a>  </div>
+  <div class="headertitle">
+<div class="title">kozos.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="misra2012deviation_8h_source.html">../misc/misra2012deviation.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="defines_8h_source.html">../misc/defines.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="intr_8h_source.html">../misc/intr.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="interrupt_8h_source.html">../misc/interrupt.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="lib_8h_source.html">../misc/lib.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="syscall_8h_source.html">syscall.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="kozos_8h_source.html">kozos.h</a>&quot;</code><br/>
+</div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> kozos.cのインクルード依存関係図</div>
+<div id="dynsection-0-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-0-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c__incl.svg" width="100%" height="496"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</div>
+<p><a href="kozos_8c_source.html">ソースコードを見る。</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+データ構造</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkz__context.html">kz_context</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct__kz__thread.html">kz_thread</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Task Control Block(TCB)  <a href="struct__kz__thread.html#details">[詳細]</a><br/></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+マクロ定義</h2></td></tr>
+<tr class="memitem:acd532f688378febc70bf2aedccd9bb60"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#acd532f688378febc70bf2aedccd9bb60">THREAD_NUM</a>&#160;&#160;&#160;6</td></tr>
+<tr class="separator:acd532f688378febc70bf2aedccd9bb60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a172268da1c1e3cde359b6a3e67394126"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a172268da1c1e3cde359b6a3e67394126">PRIORITY_NUM</a>&#160;&#160;&#160;16</td></tr>
+<tr class="separator:a172268da1c1e3cde359b6a3e67394126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44aaaac804104d9f7bad7fb35f154347"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a44aaaac804104d9f7bad7fb35f154347">THREAD_NAME_MAX_SIZE</a>&#160;&#160;&#160;15</td></tr>
+<tr class="separator:a44aaaac804104d9f7bad7fb35f154347"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bbf8934e85237b96e5c4f9f7b331c15"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a0bbf8934e85237b96e5c4f9f7b331c15">push</a>(<a class="el" href="kozos_8c.html#aa824415a13ea9db9ce8a349fa9ad31b3">stack</a>, value)&#160;&#160;&#160;({ *(--(<a class="el" href="kozos_8c.html#aa824415a13ea9db9ce8a349fa9ad31b3">stack</a>)) = (value); <a class="el" href="defines_8h.html#a687984f47d8cce148d1b914d2b79612a">EXIT_SUCCESS</a>; })</td></tr>
+<tr class="memdesc:a0bbf8934e85237b96e5c4f9f7b331c15"><td class="mdescLeft">&#160;</td><td class="mdescRight">stack push  <a href="#a0bbf8934e85237b96e5c4f9f7b331c15">[詳細]</a><br/></td></tr>
+<tr class="separator:a0bbf8934e85237b96e5c4f9f7b331c15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ac26633a3e78b5a294e1ee394ff8f4a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a4ac26633a3e78b5a294e1ee394ff8f4a">pop</a>(<a class="el" href="kozos_8c.html#aa824415a13ea9db9ce8a349fa9ad31b3">stack</a>)&#160;&#160;&#160;(*((<a class="el" href="kozos_8c.html#aa824415a13ea9db9ce8a349fa9ad31b3">stack</a>)++))</td></tr>
+<tr class="memdesc:a4ac26633a3e78b5a294e1ee394ff8f4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">stack pop  <a href="#a4ac26633a3e78b5a294e1ee394ff8f4a">[詳細]</a><br/></td></tr>
+<tr class="separator:a4ac26633a3e78b5a294e1ee394ff8f4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+関数</h2></td></tr>
+<tr class="memitem:aea9bcaad7e6894ea99688f95d4adf3b7"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="struct__kz__thread.html">_kz_thread</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#aea9bcaad7e6894ea99688f95d4adf3b7">__attribute__</a> ((aligned(64)))</td></tr>
+<tr class="separator:aea9bcaad7e6894ea99688f95d4adf3b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22e9c35c1764d5ebe1d534d207f114b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a22e9c35c1764d5ebe1d534d207f114b1">dispatch</a> (<a class="el" href="structkz__context.html">kz_context</a> *<a class="el" href="kozos_8c.html#ae7583605f5daa4c6d138e62fcb1e83c3">context</a>) <a class="el" href="kozos_8c.html#aea9bcaad7e6894ea99688f95d4adf3b7">__attribute__</a>((noreturn))</td></tr>
+<tr class="separator:a22e9c35c1764d5ebe1d534d207f114b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a064de18830e60998f8be0d67a0f2aabf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a064de18830e60998f8be0d67a0f2aabf">thread_intr</a> (<a class="el" href="interrupt_8h.html#a1d4205a4d3300a9c9bb67cdc339fad90">softvec_type_t</a> <a class="el" href="kozos_8c.html#ad616090610222c75929471cec8a27f80">type</a>, <a class="el" href="interrupt_8h.html#a5550e6fc5d6d975ec8e9fcb2f975f84c">stack_ptr_t</a> sp) <a class="el" href="kozos_8c.html#aea9bcaad7e6894ea99688f95d4adf3b7">__attribute__</a>((noreturn))</td></tr>
+<tr class="separator:a064de18830e60998f8be0d67a0f2aabf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4d8f9724e6cfa40d91cd63fa8c275d2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#ac4d8f9724e6cfa40d91cd63fa8c275d2">thread_end</a> (void)</td></tr>
+<tr class="separator:ac4d8f9724e6cfa40d91cd63fa8c275d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ac934c923c7f023b80805c9b7dad8a3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a3ac934c923c7f023b80805c9b7dad8a3">thread_init</a> (kz_thread *thread)</td></tr>
+<tr class="memdesc:a3ac934c923c7f023b80805c9b7dad8a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">start up thread  <a href="#a3ac934c923c7f023b80805c9b7dad8a3">[詳細]</a><br/></td></tr>
+<tr class="separator:a3ac934c923c7f023b80805c9b7dad8a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1256a78fae60204861c0e9dc350ddfbf"><td class="memItemLeft" align="right" valign="top">static kz_thread *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a1256a78fae60204861c0e9dc350ddfbf">get</a> (int <a class="el" href="kozos_8c.html#acec9ce2df15222151ad66fcb1d74eb9f">priority</a>)</td></tr>
+<tr class="memdesc:a1256a78fae60204861c0e9dc350ddfbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">get 1 thread from ready queue  <a href="#a1256a78fae60204861c0e9dc350ddfbf">[詳細]</a><br/></td></tr>
+<tr class="separator:a1256a78fae60204861c0e9dc350ddfbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cc7c96bdff0e4416f354672b2b1d183"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a9cc7c96bdff0e4416f354672b2b1d183">put</a> (kz_thread *thread)</td></tr>
+<tr class="separator:a9cc7c96bdff0e4416f354672b2b1d183"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e6488cfd47118e19d4407d3a23eac3f"><td class="memItemLeft" align="right" valign="top">static kz_thread *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a2e6488cfd47118e19d4407d3a23eac3f">create_TCB</a> (void)</td></tr>
+<tr class="memdesc:a2e6488cfd47118e19d4407d3a23eac3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">create TCB  <a href="#a2e6488cfd47118e19d4407d3a23eac3f">[詳細]</a><br/></td></tr>
+<tr class="separator:a2e6488cfd47118e19d4407d3a23eac3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92177eed4eabc923bcd27462d8ce57b8"><td class="memItemLeft" align="right" valign="top">static char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a92177eed4eabc923bcd27462d8ce57b8">get_stack_area</a> (<a class="el" href="interrupt_8h.html#a5550e6fc5d6d975ec8e9fcb2f975f84c">stack_ptr_t</a> stack_size)</td></tr>
+<tr class="separator:a92177eed4eabc923bcd27462d8ce57b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fd64516a2230c46e0e866aa3c54470b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="syscall_8h.html#a9fda4a54e92b8b9e096596f98fa12763">kz_thread_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b">thread_run</a> (<a class="el" href="defines_8h.html#a2efe6d463d80744789f228f5dc4baa39">String</a> <a class="el" href="kozos_8c.html#a41fa0a02b3d4f33d6bb9543ed8e9bc4f">name</a>, <a class="el" href="syscall_8h.html#a22977edbee1722907e4e730059686ab7">kz_func_t</a> <a class="el" href="kozos_8c.html#aa786c43b96199cc59ccb0305e6a1b45d">func</a>, int <a class="el" href="kozos_8c.html#acec9ce2df15222151ad66fcb1d74eb9f">priority</a>, int <a class="el" href="kozos_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a>, char *<a class="el" href="kozos_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a>[], <a class="el" href="interrupt_8h.html#a5550e6fc5d6d975ec8e9fcb2f975f84c">stack_ptr_t</a> stack_size)</td></tr>
+<tr class="memdesc:a8fd64516a2230c46e0e866aa3c54470b"><td class="mdescLeft">&#160;</td><td class="mdescRight">system call  <a href="#a8fd64516a2230c46e0e866aa3c54470b">[詳細]</a><br/></td></tr>
+<tr class="separator:a8fd64516a2230c46e0e866aa3c54470b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dd8e8425a1c0c5d866a9271d243cdef"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a4dd8e8425a1c0c5d866a9271d243cdef">thread_exit</a> (kz_thread *thread)</td></tr>
+<tr class="separator:a4dd8e8425a1c0c5d866a9271d243cdef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c84d6deaccd84a660f082b63ec85e19"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a5c84d6deaccd84a660f082b63ec85e19">thread_wait</a> (void)</td></tr>
+<tr class="separator:a5c84d6deaccd84a660f082b63ec85e19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae26e9452148444d7181f9d193b81fcc3"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#ae26e9452148444d7181f9d193b81fcc3">thread_sleep</a> (void)</td></tr>
+<tr class="separator:ae26e9452148444d7181f9d193b81fcc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af731266922183ab6c1bb67d0b6bb84fa"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#af731266922183ab6c1bb67d0b6bb84fa">thread_wakeup</a> (<a class="el" href="syscall_8h.html#a9fda4a54e92b8b9e096596f98fa12763">kz_thread_id_t</a> id)</td></tr>
+<tr class="separator:af731266922183ab6c1bb67d0b6bb84fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeef3def4ae919a6db761b31bf1b800f"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="syscall_8h.html#a9fda4a54e92b8b9e096596f98fa12763">kz_thread_id_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#aaeef3def4ae919a6db761b31bf1b800f">thread_getid</a> (kz_thread thread)</td></tr>
+<tr class="separator:aaeef3def4ae919a6db761b31bf1b800f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff4b5a25b795dce424539eb82b95d9b6"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#aff4b5a25b795dce424539eb82b95d9b6">thread_chpri</a> (int <a class="el" href="kozos_8c.html#acec9ce2df15222151ad66fcb1d74eb9f">priority</a>)</td></tr>
+<tr class="separator:aff4b5a25b795dce424539eb82b95d9b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f5d62b70099d281d35e0336463c49fc"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a7f5d62b70099d281d35e0336463c49fc">setintr</a> (<a class="el" href="interrupt_8h.html#a1d4205a4d3300a9c9bb67cdc339fad90">softvec_type_t</a> <a class="el" href="kozos_8c.html#ad616090610222c75929471cec8a27f80">type</a>, <a class="el" href="syscall_8h.html#a4416db159f17222090aac71fdfdb1e07">kz_handler_t</a> handler)</td></tr>
+<tr class="memdesc:a7f5d62b70099d281d35e0336463c49fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">set interrupt handler  <a href="#a7f5d62b70099d281d35e0336463c49fc">[詳細]</a><br/></td></tr>
+<tr class="separator:a7f5d62b70099d281d35e0336463c49fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd68041208fa0120669ac78343a47dc0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#acd68041208fa0120669ac78343a47dc0">call_functions</a> (<a class="el" href="syscall_8h.html#a108aafe68a221f9803049c310a3c1699">kz_syscall_type_t</a> <a class="el" href="kozos_8c.html#ad616090610222c75929471cec8a27f80">type</a>, <a class="el" href="unionkz__syscall__param__t.html">kz_syscall_param_t</a> *<a class="el" href="kozos_8c.html#a8f1fea2177eb7807fd95237a9f1df290">param</a>)</td></tr>
+<tr class="separator:acd68041208fa0120669ac78343a47dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef8f2fde0f7865d66b9a7daf0e2426e0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#aef8f2fde0f7865d66b9a7daf0e2426e0">syscall_proc</a> (<a class="el" href="syscall_8h.html#a108aafe68a221f9803049c310a3c1699">kz_syscall_type_t</a> <a class="el" href="kozos_8c.html#ad616090610222c75929471cec8a27f80">type</a>, <a class="el" href="unionkz__syscall__param__t.html">kz_syscall_param_t</a> *<a class="el" href="kozos_8c.html#a8f1fea2177eb7807fd95237a9f1df290">param</a>)</td></tr>
+<tr class="separator:aef8f2fde0f7865d66b9a7daf0e2426e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63e3ec45b7bf0028e55f2b9ab1603306"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a63e3ec45b7bf0028e55f2b9ab1603306">schedule</a> (void)</td></tr>
+<tr class="separator:a63e3ec45b7bf0028e55f2b9ab1603306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69f871c66a43d6f0a644c57def130160"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a69f871c66a43d6f0a644c57def130160">syscall_intr</a> (void)</td></tr>
+<tr class="separator:a69f871c66a43d6f0a644c57def130160"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad878125b5a334d151d787886f190ccf2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#ad878125b5a334d151d787886f190ccf2">softerr_intr</a> (void)</td></tr>
+<tr class="separator:ad878125b5a334d151d787886f190ccf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4eea8b8785168bbebe79a49cab406171"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a4eea8b8785168bbebe79a49cab406171">kz_start</a> (<a class="el" href="syscall_8h.html#a22977edbee1722907e4e730059686ab7">kz_func_t</a> <a class="el" href="kozos_8c.html#aa786c43b96199cc59ccb0305e6a1b45d">func</a>, char *<a class="el" href="kozos_8c.html#a41fa0a02b3d4f33d6bb9543ed8e9bc4f">name</a>, <a class="el" href="defines_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a> stack_size, int <a class="el" href="kozos_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a>, char *<a class="el" href="kozos_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a>[])</td></tr>
+<tr class="memdesc:a4eea8b8785168bbebe79a49cab406171"><td class="mdescLeft">&#160;</td><td class="mdescRight">ライブラリ関数  <a href="#a4eea8b8785168bbebe79a49cab406171">[詳細]</a><br/></td></tr>
+<tr class="separator:a4eea8b8785168bbebe79a49cab406171"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad271cfae989a014d777a1f46903d6964"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#ad271cfae989a014d777a1f46903d6964">kz_sysdown</a> (void)</td></tr>
+<tr class="separator:ad271cfae989a014d777a1f46903d6964"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ef06efeac9f498bbabbf145fa8eb107"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a2ef06efeac9f498bbabbf145fa8eb107">kz_syscall</a> (<a class="el" href="syscall_8h.html#a108aafe68a221f9803049c310a3c1699">kz_syscall_type_t</a> <a class="el" href="kozos_8c.html#ad616090610222c75929471cec8a27f80">type</a>, <a class="el" href="unionkz__syscall__param__t.html">kz_syscall_param_t</a> *<a class="el" href="kozos_8c.html#a8f1fea2177eb7807fd95237a9f1df290">param</a>)</td></tr>
+<tr class="separator:a2ef06efeac9f498bbabbf145fa8eb107"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+変数</h2></td></tr>
+<tr class="memitem:a3094682cdc0e9d3c6efa16ab42161ac0"><td class="memItemLeft" align="right" valign="top">kz_thread *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a3094682cdc0e9d3c6efa16ab42161ac0">next</a></td></tr>
+<tr class="separator:a3094682cdc0e9d3c6efa16ab42161ac0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41fa0a02b3d4f33d6bb9543ed8e9bc4f"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a41fa0a02b3d4f33d6bb9543ed8e9bc4f">name</a> [<a class="el" href="kozos_8c.html#a44aaaac804104d9f7bad7fb35f154347">THREAD_NAME_MAX_SIZE</a>+1]</td></tr>
+<tr class="separator:a41fa0a02b3d4f33d6bb9543ed8e9bc4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acec9ce2df15222151ad66fcb1d74eb9f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#acec9ce2df15222151ad66fcb1d74eb9f">priority</a></td></tr>
+<tr class="memdesc:acec9ce2df15222151ad66fcb1d74eb9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">priority of thread  <a href="#acec9ce2df15222151ad66fcb1d74eb9f">[詳細]</a><br/></td></tr>
+<tr class="separator:acec9ce2df15222151ad66fcb1d74eb9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa824415a13ea9db9ce8a349fa9ad31b3"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#aa824415a13ea9db9ce8a349fa9ad31b3">stack</a></td></tr>
+<tr class="memdesc:aa824415a13ea9db9ce8a349fa9ad31b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">pointer to stack area of thread  <a href="#aa824415a13ea9db9ce8a349fa9ad31b3">[詳細]</a><br/></td></tr>
+<tr class="separator:aa824415a13ea9db9ce8a349fa9ad31b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63d3624be663478cc7f2f1922dbb2193"><td class="memItemLeft" >union {</td></tr>
+<tr class="memitem:acfa74dfe8065803f6eafe69ce6fa9f8c"><td class="memItemLeft" >&#160;&#160;&#160;struct {</td></tr>
+<tr class="memitem:a7aeba4d1d3bb3afa17fed1f90e7dad3a"><td class="memItemLeft" >&#160;&#160;&#160;&#160;&#160;&#160;<a class="el" href="defines_8h.html#a39db6982619d623273fad8a383489309">Bool</a>&#160;&#160;&#160;<a class="el" href="kozos_8c.html#af2a89a337b8f4324be7df1b02522887f">ready</a>: 1</td></tr>
+<tr class="separator:a7aeba4d1d3bb3afa17fed1f90e7dad3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfa74dfe8065803f6eafe69ce6fa9f8c"><td class="memItemLeft" valign="top">&#160;&#160;&#160;}&#160;&#160;&#160;<a class="el" href="kozos_8c.html#a11fdabbdd86e03bf8a526c923cd4b247">bit</a></td></tr>
+<tr class="separator:acfa74dfe8065803f6eafe69ce6fa9f8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf14861c334a68f6cde2cd300d4cfc68"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="defines_8h.html#a4b435a49c74bb91f284f075e63416cb6">uint32</a>&#160;&#160;&#160;<a class="el" href="kozos_8c.html#a26497f14b89039a398632200d7744e02">array</a></td></tr>
+<tr class="separator:adf14861c334a68f6cde2cd300d4cfc68"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63d3624be663478cc7f2f1922dbb2193"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a63d3624be663478cc7f2f1922dbb2193">flag</a></td></tr>
+<tr class="memdesc:a63d3624be663478cc7f2f1922dbb2193"><td class="mdescLeft">&#160;</td><td class="mdescRight">some flags  <a href="#a63d3624be663478cc7f2f1922dbb2193">[詳細]</a><br/></td></tr>
+<tr class="separator:a63d3624be663478cc7f2f1922dbb2193"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95127cf9ee0cf5ea0da8ed6f4772a3f1"><td class="memItemLeft" >struct {</td></tr>
+<tr class="memitem:a8a65fe9e154393fe05580465d8d10c5a"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="syscall_8h.html#a22977edbee1722907e4e730059686ab7">kz_func_t</a>&#160;&#160;&#160;<a class="el" href="kozos_8c.html#aa786c43b96199cc59ccb0305e6a1b45d">func</a></td></tr>
+<tr class="separator:a8a65fe9e154393fe05580465d8d10c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d2da607d25f6801c09995766858e1d1"><td class="memItemLeft" >&#160;&#160;&#160;int&#160;&#160;&#160;<a class="el" href="kozos_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a></td></tr>
+<tr class="separator:a2d2da607d25f6801c09995766858e1d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19fb9925cc03d91d8c88b52543c05e53"><td class="memItemLeft" >&#160;&#160;&#160;char **&#160;&#160;&#160;<a class="el" href="kozos_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a></td></tr>
+<tr class="separator:a19fb9925cc03d91d8c88b52543c05e53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95127cf9ee0cf5ea0da8ed6f4772a3f1"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a95127cf9ee0cf5ea0da8ed6f4772a3f1">init</a></td></tr>
+<tr class="separator:a95127cf9ee0cf5ea0da8ed6f4772a3f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28ce80c346f9483d1b3ea83fdac71110"><td class="memItemLeft" >struct {</td></tr>
+<tr class="memitem:a05bcf4b9e97450344edea6f88357c456"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="syscall_8h.html#a108aafe68a221f9803049c310a3c1699">kz_syscall_type_t</a>&#160;&#160;&#160;<a class="el" href="kozos_8c.html#ad616090610222c75929471cec8a27f80">type</a></td></tr>
+<tr class="separator:a05bcf4b9e97450344edea6f88357c456"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4de55ebe1b625cab9a011724b9cfc39f"><td class="memItemLeft" >&#160;&#160;&#160;<a class="el" href="unionkz__syscall__param__t.html">kz_syscall_param_t</a> *&#160;&#160;&#160;<a class="el" href="kozos_8c.html#a8f1fea2177eb7807fd95237a9f1df290">param</a></td></tr>
+<tr class="separator:a4de55ebe1b625cab9a011724b9cfc39f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28ce80c346f9483d1b3ea83fdac71110"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a28ce80c346f9483d1b3ea83fdac71110">syscall</a></td></tr>
+<tr class="separator:a28ce80c346f9483d1b3ea83fdac71110"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7583605f5daa4c6d138e62fcb1e83c3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structkz__context.html">kz_context</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#ae7583605f5daa4c6d138e62fcb1e83c3">context</a></td></tr>
+<tr class="separator:ae7583605f5daa4c6d138e62fcb1e83c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a9c7ca6773a9f5c1723d8669b2d2c8e"><td class="memItemLeft" >struct {</td></tr>
+<tr class="memitem:a0324b1bc7370b6fd683cdc8bca9310c7"><td class="memItemLeft" >&#160;&#160;&#160;kz_thread *&#160;&#160;&#160;<a class="el" href="kozos_8c.html#a35f09ae251e619be643a4a36f8448540">head</a></td></tr>
+<tr class="memdesc:a0324b1bc7370b6fd683cdc8bca9310c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">head item of queue  <a href="#a0324b1bc7370b6fd683cdc8bca9310c7">[詳細]</a><br/></td></tr>
+<tr class="separator:a0324b1bc7370b6fd683cdc8bca9310c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cdbdf0b74449c7157f7fa36bcbe1b59"><td class="memItemLeft" >&#160;&#160;&#160;kz_thread *&#160;&#160;&#160;<a class="el" href="kozos_8c.html#a0abf55dc7ec13ef1c75f8e94959e7ab8">tail</a></td></tr>
+<tr class="memdesc:a4cdbdf0b74449c7157f7fa36bcbe1b59"><td class="mdescLeft">&#160;</td><td class="mdescRight">last item of queue  <a href="#a4cdbdf0b74449c7157f7fa36bcbe1b59">[詳細]</a><br/></td></tr>
+<tr class="separator:a4cdbdf0b74449c7157f7fa36bcbe1b59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a9c7ca6773a9f5c1723d8669b2d2c8e"><td class="memItemLeft" valign="top">}&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a3a9c7ca6773a9f5c1723d8669b2d2c8e">readyque</a> [<a class="el" href="kozos_8c.html#a172268da1c1e3cde359b6a3e67394126">PRIORITY_NUM</a>]</td></tr>
+<tr class="memdesc:a3a9c7ca6773a9f5c1723d8669b2d2c8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">ready queue of thread  <a href="#a3a9c7ca6773a9f5c1723d8669b2d2c8e">[詳細]</a><br/></td></tr>
+<tr class="separator:a3a9c7ca6773a9f5c1723d8669b2d2c8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa07750419cd5a4d2211e5534d499eb3b"><td class="memItemLeft" align="right" valign="top">static kz_thread *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#aa07750419cd5a4d2211e5534d499eb3b">current</a></td></tr>
+<tr class="memdesc:aa07750419cd5a4d2211e5534d499eb3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">current thread  <a href="#aa07750419cd5a4d2211e5534d499eb3b">[詳細]</a><br/></td></tr>
+<tr class="separator:aa07750419cd5a4d2211e5534d499eb3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a456b0ca01b6a831b89ee34492ddca8b8"><td class="memItemLeft" align="right" valign="top">static kz_thread&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a456b0ca01b6a831b89ee34492ddca8b8">threads</a> [<a class="el" href="kozos_8c.html#acd532f688378febc70bf2aedccd9bb60">THREAD_NUM</a>]</td></tr>
+<tr class="memdesc:a456b0ca01b6a831b89ee34492ddca8b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Task Control Block(TCB)  <a href="#a456b0ca01b6a831b89ee34492ddca8b8">[詳細]</a><br/></td></tr>
+<tr class="separator:a456b0ca01b6a831b89ee34492ddca8b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b259131beec90ce0b663ae6be464c38"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="syscall_8h.html#a4416db159f17222090aac71fdfdb1e07">kz_handler_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="kozos_8c.html#a4b259131beec90ce0b663ae6be464c38">handlers</a> [<a class="el" href="intr_8h.html#afda811edb7ae226f29e5cdd98a8e228f">SOFTVEC_TYPE_NUM</a>]</td></tr>
+<tr class="memdesc:a4b259131beec90ce0b663ae6be464c38"><td class="mdescLeft">&#160;</td><td class="mdescRight">interrupt handler  <a href="#a4b259131beec90ce0b663ae6be464c38">[詳細]</a><br/></td></tr>
+<tr class="separator:a4b259131beec90ce0b663ae6be464c38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">マクロ定義</h2>
+<a class="anchor" id="a4ac26633a3e78b5a294e1ee394ff8f4a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define pop</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><a class="el" href="kozos_8c.html#aa824415a13ea9db9ce8a349fa9ad31b3">stack</a></td><td>)</td>
+          <td>&#160;&#160;&#160;(*((<a class="el" href="kozos_8c.html#aa824415a13ea9db9ce8a349fa9ad31b3">stack</a>)++))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>stack pop </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00174">174</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a172268da1c1e3cde359b6a3e67394126"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PRIORITY_NUM&#160;&#160;&#160;16</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00010">10</a> 行で定義されています。</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#a1256a78fae60204861c0e9dc350ddfbf">get()</a>, と <a class="el" href="kozos_8c.html#aff4b5a25b795dce424539eb82b95d9b6">thread_chpri()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0bbf8934e85237b96e5c4f9f7b331c15"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define push</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><a class="el" href="kozos_8c.html#aa824415a13ea9db9ce8a349fa9ad31b3">stack</a>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">value&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td>&#160;&#160;&#160;({ *(--(<a class="el" href="kozos_8c.html#aa824415a13ea9db9ce8a349fa9ad31b3">stack</a>)) = (value); <a class="el" href="defines_8h.html#a687984f47d8cce148d1b914d2b79612a">EXIT_SUCCESS</a>; })</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>stack push </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00171">171</a> 行で定義されています。</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b">thread_run()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a44aaaac804104d9f7bad7fb35f154347"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define THREAD_NAME_MAX_SIZE&#160;&#160;&#160;15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00011">11</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="acd532f688378febc70bf2aedccd9bb60"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define THREAD_NUM&#160;&#160;&#160;6</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00009">9</a> 行で定義されています。</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#a2e6488cfd47118e19d4407d3a23eac3f">create_TCB()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">関数</h2>
+<a class="anchor" id="aea9bcaad7e6894ea99688f95d4adf3b7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct <a class="el" href="struct__kz__thread.html">_kz_thread</a> __attribute__ </td>
+          <td>(</td>
+          <td class="paramtype">(aligned(64))&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="acd68041208fa0120669ac78343a47dc0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void call_functions </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syscall_8h.html#a108aafe68a221f9803049c310a3c1699">kz_syscall_type_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="unionkz__syscall__param__t.html">kz_syscall_param_t</a> *&#160;</td>
+          <td class="paramname"><em>param</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00327">327</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="unionkz__syscall__param__t.html#a482b435694c9f05e8bba378b01a50911">kz_syscall_param_t::argc</a>, <a class="el" href="unionkz__syscall__param__t.html#af42e1c3890cf2231b3205850113ab98c">kz_syscall_param_t::argv</a>, <a class="el" href="unionkz__syscall__param__t.html#a08927c190838bbe36ac6e238e64900ab">kz_syscall_param_t::func</a>, <a class="el" href="syscall_8h.html#a108aafe68a221f9803049c310a3c1699acd2fcc4aff9c0831c11b341db4bb68ff">KZ_SYSCALL_TYPE_EXIT</a>, <a class="el" href="syscall_8h.html#a108aafe68a221f9803049c310a3c1699a922ca86f8fc0cdc3d1beed5e7a6030ca">KZ_SYSCALL_TYPE_RUN</a>, <a class="el" href="unionkz__syscall__param__t.html#aa07a0d7bd2947dc155091bf8a5d9bb32">kz_syscall_param_t::name</a>, <a class="el" href="unionkz__syscall__param__t.html#a42e0143e6e7b30b971f9273241f21253">kz_syscall_param_t::ret</a>, <a class="el" href="unionkz__syscall__param__t.html#a25865795799f9de1b34abf07adf1f24e">kz_syscall_param_t::run</a>, <a class="el" href="unionkz__syscall__param__t.html#a463c95bd572cbd50da30472447ae2401">kz_syscall_param_t::stack_size</a>, <a class="el" href="kozos_8c.html#a4dd8e8425a1c0c5d866a9271d243cdef">thread_exit()</a>, と <a class="el" href="kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b">thread_run()</a>.</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#aef8f2fde0f7865d66b9a7daf0e2426e0">syscall_proc()</a>.</p>
+
+<p><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-1-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_acd68041208fa0120669ac78343a47dc0_cgraph.svg" width="100%" height="594"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</p>
+
+<p><div id="dynsection-2" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-2-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-2-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-2-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_acd68041208fa0120669ac78343a47dc0_icgraph.svg" width="614" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a2e6488cfd47118e19d4407d3a23eac3f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static kz_thread* create_TCB </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>create TCB </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00144">144</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="kozos_8c.html#a95127cf9ee0cf5ea0da8ed6f4772a3f1">init</a>, <a class="el" href="lib_8c.html#a89ddf4c406cf5f89be48dd3e4af4cdc4">memset()</a>, <a class="el" href="defines_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, と <a class="el" href="kozos_8c.html#acd532f688378febc70bf2aedccd9bb60">THREAD_NUM</a>.</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b">thread_run()</a>.</p>
+
+<p><div id="dynsection-3" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-3-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-3-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-3-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_a2e6488cfd47118e19d4407d3a23eac3f_cgraph.svg" width="227" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</p>
+
+<p><div id="dynsection-4" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-4-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-4-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-4-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_a2e6488cfd47118e19d4407d3a23eac3f_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a22e9c35c1764d5ebe1d534d207f114b1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void dispatch </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structkz__context.html">kz_context</a> *&#160;</td>
+          <td class="paramname"><em>context</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section see"><dt>参照</dt><dd>startup.s </dd></dl>
+
+<p>参照元 <a class="el" href="kozos_8h.html#a7078d5505c1e0c61af51bc66e5025685">kz_start()</a>, と <a class="el" href="kozos_8c.html#a064de18830e60998f8be0d67a0f2aabf">thread_intr()</a>.</p>
+
+<p><div id="dynsection-5" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-5-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-5-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-5-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_a22e9c35c1764d5ebe1d534d207f114b1_icgraph.svg" width="539" height="63"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a1256a78fae60204861c0e9dc350ddfbf"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static kz_thread* get </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>priority</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>get 1 thread from ready queue </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00087">87</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="kozos_8c.html#acec9ce2df15222151ad66fcb1d74eb9f">priority</a>, と <a class="el" href="kozos_8c.html#a172268da1c1e3cde359b6a3e67394126">PRIORITY_NUM</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a92177eed4eabc923bcd27462d8ce57b8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static char* get_stack_area </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interrupt_8h.html#a5550e6fc5d6d975ec8e9fcb2f975f84c">stack_ptr_t</a>&#160;</td>
+          <td class="paramname"><em>stack_size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00159">159</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="lib_8c.html#a89ddf4c406cf5f89be48dd3e4af4cdc4">memset()</a>.</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b">thread_run()</a>.</p>
+
+<p><div id="dynsection-6" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-6-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-6-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-6-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_a92177eed4eabc923bcd27462d8ce57b8_cgraph.svg" width="246" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</p>
+
+<p><div id="dynsection-7" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-7-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-7-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-7-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_a92177eed4eabc923bcd27462d8ce57b8_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a4eea8b8785168bbebe79a49cab406171"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void kz_start </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syscall_8h.html#a22977edbee1722907e4e730059686ab7">kz_func_t</a>&#160;</td>
+          <td class="paramname"><em>func</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="defines_8h.html#a05f6b0ae8f6a6e135b0e290c25fe0e4e">uint16</a>&#160;</td>
+          <td class="paramname"><em>stack_size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>argv</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ライブラリ関数 </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00394">394</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="kozos_8c.html#a22e9c35c1764d5ebe1d534d207f114b1">dispatch()</a>, <a class="el" href="lib_8c.html#a89ddf4c406cf5f89be48dd3e4af4cdc4">memset()</a>, <a class="el" href="defines_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, <a class="el" href="kozos_8c.html#a3a9c7ca6773a9f5c1723d8669b2d2c8e">readyque</a>, <a class="el" href="kozos_8c.html#a7f5d62b70099d281d35e0336463c49fc">setintr()</a>, <a class="el" href="kozos_8c.html#ad878125b5a334d151d787886f190ccf2">softerr_intr()</a>, <a class="el" href="intr_8h.html#a9fcde840d1f869c1edd8eff43785ad5f">SOFTVEC_TYPE_SOFTERR</a>, <a class="el" href="intr_8h.html#a43c1492f557be641bc3e1f772052688a">SOFTVEC_TYPE_SYSCALL</a>, <a class="el" href="kozos_8c.html#a69f871c66a43d6f0a644c57def130160">syscall_intr()</a>, と <a class="el" href="kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b">thread_run()</a>.</p>
+
+<p>参照元 <a class="el" href="os_2main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>.</p>
+
+<p><div id="dynsection-8" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-8-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-8-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-8-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_a4eea8b8785168bbebe79a49cab406171_cgraph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</p>
+
+<p><div id="dynsection-9" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-9-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-9-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-9-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_a4eea8b8785168bbebe79a49cab406171_icgraph.svg" width="179" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a2ef06efeac9f498bbabbf145fa8eb107"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void kz_syscall </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syscall_8h.html#a108aafe68a221f9803049c310a3c1699">kz_syscall_type_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="unionkz__syscall__param__t.html">kz_syscall_param_t</a> *&#160;</td>
+          <td class="paramname"><em>param</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00423">423</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="kozos_8c.html#a8f1fea2177eb7807fd95237a9f1df290">param</a>, と <a class="el" href="kozos_8c.html#ad616090610222c75929471cec8a27f80">type</a>.</p>
+
+<p>参照元 <a class="el" href="syscall_8c.html#a0e36d3c55bb22d6d54af1eeff7157ff7">kz_exit()</a>, と <a class="el" href="syscall_8c.html#a31494feb57a45fd53bbbe76c98b8630e">kz_run()</a>.</p>
+
+<p><div id="dynsection-10" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-10-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-10-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-10-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_a2ef06efeac9f498bbabbf145fa8eb107_icgraph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ad271cfae989a014d777a1f46903d6964"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void kz_sysdown </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00413">413</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="lib_8c.html#a44ddf1a8f6a75ff235a733ff8d90cae3">puts()</a>.</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#a63e3ec45b7bf0028e55f2b9ab1603306">schedule()</a>.</p>
+
+<p><div id="dynsection-11" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-11-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-11-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-11-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_ad271cfae989a014d777a1f46903d6964_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</p>
+
+<p><div id="dynsection-12" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-12-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-12-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-12-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_ad271cfae989a014d777a1f46903d6964_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a9cc7c96bdff0e4416f354672b2b1d183"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int put </td>
+          <td>(</td>
+          <td class="paramtype">kz_thread *&#160;</td>
+          <td class="paramname"><em>thread</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>put 1 thread to ready queue (ensure) queue is not empty otherwise exit with Error </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00120">120</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="defines_8h.html#a687984f47d8cce148d1b914d2b79612a">EXIT_SUCCESS</a>, <a class="el" href="defines_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, と <a class="el" href="kozos_8c.html#a3a9c7ca6773a9f5c1723d8669b2d2c8e">readyque</a>.</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#aff4b5a25b795dce424539eb82b95d9b6">thread_chpri()</a>, <a class="el" href="kozos_8c.html#aaeef3def4ae919a6db761b31bf1b800f">thread_getid()</a>, <a class="el" href="kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b">thread_run()</a>, <a class="el" href="kozos_8c.html#a5c84d6deaccd84a660f082b63ec85e19">thread_wait()</a>, と <a class="el" href="kozos_8c.html#af731266922183ab6c1bb67d0b6bb84fa">thread_wakeup()</a>.</p>
+
+<p><div id="dynsection-13" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-13-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-13-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-13-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_a9cc7c96bdff0e4416f354672b2b1d183_icgraph.svg" width="100%" height="480"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a63e3ec45b7bf0028e55f2b9ab1603306"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void schedule </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00352">352</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="kozos_8c.html#ad271cfae989a014d777a1f46903d6964">kz_sysdown()</a>, <a class="el" href="defines_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, と <a class="el" href="kozos_8c.html#a3a9c7ca6773a9f5c1723d8669b2d2c8e">readyque</a>.</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#a064de18830e60998f8be0d67a0f2aabf">thread_intr()</a>.</p>
+
+<p><div id="dynsection-14" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-14-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-14-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-14-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_a63e3ec45b7bf0028e55f2b9ab1603306_cgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</p>
+
+<p><div id="dynsection-15" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-15-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-15-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-15-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_a63e3ec45b7bf0028e55f2b9ab1603306_icgraph.svg" width="544" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a7f5d62b70099d281d35e0336463c49fc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int setintr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interrupt_8h.html#a1d4205a4d3300a9c9bb67cdc339fad90">softvec_type_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syscall_8h.html#a4416db159f17222090aac71fdfdb1e07">kz_handler_t</a>&#160;</td>
+          <td class="paramname"><em>handler</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>set interrupt handler </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00314">314</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="defines_8h.html#a687984f47d8cce148d1b914d2b79612a">EXIT_SUCCESS</a>, <a class="el" href="interrupt_8c.html#a77d3bbf145b56c7a6bc2706b44b71d68">softvec_setintr()</a>, <a class="el" href="intr_8h.html#afda811edb7ae226f29e5cdd98a8e228f">SOFTVEC_TYPE_NUM</a>, <a class="el" href="kozos_8c.html#a064de18830e60998f8be0d67a0f2aabf">thread_intr()</a>, と <a class="el" href="kozos_8c.html#ad616090610222c75929471cec8a27f80">type</a>.</p>
+
+<p>参照元 <a class="el" href="kozos_8h.html#a7078d5505c1e0c61af51bc66e5025685">kz_start()</a>.</p>
+
+<p><div id="dynsection-16" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-16-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-16-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-16-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_a7f5d62b70099d281d35e0336463c49fc_cgraph.svg" width="100%" height="385"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</p>
+
+<p><div id="dynsection-17" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-17-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-17-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-17-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_a7f5d62b70099d281d35e0336463c49fc_icgraph.svg" width="286" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ad878125b5a334d151d787886f190ccf2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void softerr_intr </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00370">370</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="lib_8c.html#a44ddf1a8f6a75ff235a733ff8d90cae3">puts()</a>, と <a class="el" href="kozos_8c.html#a4dd8e8425a1c0c5d866a9271d243cdef">thread_exit()</a>.</p>
+
+<p>参照元 <a class="el" href="kozos_8h.html#a7078d5505c1e0c61af51bc66e5025685">kz_start()</a>.</p>
+
+<p><div id="dynsection-18" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-18-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-18-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-18-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_ad878125b5a334d151d787886f190ccf2_cgraph.svg" width="100%" height="366"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</p>
+
+<p><div id="dynsection-19" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-19-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-19-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-19-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_ad878125b5a334d151d787886f190ccf2_icgraph.svg" width="310" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a69f871c66a43d6f0a644c57def130160"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void syscall_intr </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00363">363</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="kozos_8c.html#aef8f2fde0f7865d66b9a7daf0e2426e0">syscall_proc()</a>.</p>
+
+<p>参照元 <a class="el" href="kozos_8h.html#a7078d5505c1e0c61af51bc66e5025685">kz_start()</a>.</p>
+
+<p><div id="dynsection-20" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-20-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-20-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-20-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_a69f871c66a43d6f0a644c57def130160_cgraph.svg" width="100%" height="594"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</p>
+
+<p><div id="dynsection-21" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-21-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-21-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-21-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_a69f871c66a43d6f0a644c57def130160_icgraph.svg" width="315" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="aef8f2fde0f7865d66b9a7daf0e2426e0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void syscall_proc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syscall_8h.html#a108aafe68a221f9803049c310a3c1699">kz_syscall_type_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="unionkz__syscall__param__t.html">kz_syscall_param_t</a> *&#160;</td>
+          <td class="paramname"><em>param</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00343">343</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="kozos_8c.html#acd68041208fa0120669ac78343a47dc0">call_functions()</a>.</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#a69f871c66a43d6f0a644c57def130160">syscall_intr()</a>.</p>
+
+<p><div id="dynsection-22" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-22-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-22-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-22-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_aef8f2fde0f7865d66b9a7daf0e2426e0_cgraph.svg" width="100%" height="594"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</p>
+
+<p><div id="dynsection-23" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-23-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-23-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-23-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_aef8f2fde0f7865d66b9a7daf0e2426e0_icgraph.svg" width="462" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="aff4b5a25b795dce424539eb82b95d9b6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int thread_chpri </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>priority</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>change current thread priority</p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">priority</td><td>new priority </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>old priority </dd></dl>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00301">301</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="kozos_8c.html#acec9ce2df15222151ad66fcb1d74eb9f">priority</a>, <a class="el" href="kozos_8c.html#a172268da1c1e3cde359b6a3e67394126">PRIORITY_NUM</a>, と <a class="el" href="kozos_8c.html#a9cc7c96bdff0e4416f354672b2b1d183">put()</a>.</p>
+
+<p><div id="dynsection-24" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-24-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-24-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-24-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_aff4b5a25b795dce424539eb82b95d9b6_cgraph.svg" width="195" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ac4d8f9724e6cfa40d91cd63fa8c275d2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void thread_end </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>exit thread </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00073">73</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="kozos_8h.html#a0e36d3c55bb22d6d54af1eeff7157ff7">kz_exit()</a>.</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b">thread_run()</a>.</p>
+
+<p><div id="dynsection-25" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-25-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-25-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-25-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_ac4d8f9724e6cfa40d91cd63fa8c275d2_cgraph.svg" width="347" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</p>
+
+<p><div id="dynsection-26" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-26-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-26-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-26-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_ac4d8f9724e6cfa40d91cd63fa8c275d2_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a4dd8e8425a1c0c5d866a9271d243cdef"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int thread_exit </td>
+          <td>(</td>
+          <td class="paramtype">kz_thread *&#160;</td>
+          <td class="paramname"><em>thread</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>exit the thread </p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">thread</td><td>thread that exit now </td></tr>
+  </table>
+  </dd>
+</dl>
+<p>clear TCB </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00235">235</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="defines_8h.html#a687984f47d8cce148d1b914d2b79612a">EXIT_SUCCESS</a>, <a class="el" href="lib_8c.html#a89ddf4c406cf5f89be48dd3e4af4cdc4">memset()</a>, と <a class="el" href="lib_8c.html#a44ddf1a8f6a75ff235a733ff8d90cae3">puts()</a>.</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#acd68041208fa0120669ac78343a47dc0">call_functions()</a>, と <a class="el" href="kozos_8c.html#ad878125b5a334d151d787886f190ccf2">softerr_intr()</a>.</p>
+
+<p><div id="dynsection-27" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-27-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-27-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-27-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_a4dd8e8425a1c0c5d866a9271d243cdef_cgraph.svg" width="100%" height="366"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</p>
+
+<p><div id="dynsection-28" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-28-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-28-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-28-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_a4dd8e8425a1c0c5d866a9271d243cdef_icgraph.svg" width="100%" height="366"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="aaeef3def4ae919a6db761b31bf1b800f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="syscall_8h.html#a9fda4a54e92b8b9e096596f98fa12763">kz_thread_id_t</a> thread_getid </td>
+          <td>(</td>
+          <td class="paramtype">kz_thread&#160;</td>
+          <td class="paramname"><em>thread</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>get thread id of current thread</p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">thread</td><td>thread want to know its id </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>thread id </dd></dl>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00288">288</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="kozos_8c.html#a9cc7c96bdff0e4416f354672b2b1d183">put()</a>.</p>
+
+<p><div id="dynsection-29" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-29-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-29-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-29-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_aaeef3def4ae919a6db761b31bf1b800f_cgraph.svg" width="198" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a3ac934c923c7f023b80805c9b7dad8a3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void thread_init </td>
+          <td>(</td>
+          <td class="paramtype">kz_thread *&#160;</td>
+          <td class="paramname"><em>thread</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>start up thread </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00079">79</a> 行で定義されています。</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b">thread_run()</a>.</p>
+
+<p><div id="dynsection-30" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-30-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-30-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-30-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_a3ac934c923c7f023b80805c9b7dad8a3_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a064de18830e60998f8be0d67a0f2aabf"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void thread_intr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interrupt_8h.html#a1d4205a4d3300a9c9bb67cdc339fad90">softvec_type_t</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="interrupt_8h.html#a5550e6fc5d6d975ec8e9fcb2f975f84c">stack_ptr_t</a>&#160;</td>
+          <td class="paramname"><em>sp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>interrupt handler </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00379">379</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="kozos_8c.html#a22e9c35c1764d5ebe1d534d207f114b1">dispatch()</a>, <a class="el" href="defines_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, <a class="el" href="kozos_8c.html#a63e3ec45b7bf0028e55f2b9ab1603306">schedule()</a>, と <a class="el" href="kozos_8c.html#ad616090610222c75929471cec8a27f80">type</a>.</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#a7f5d62b70099d281d35e0336463c49fc">setintr()</a>.</p>
+
+<p><div id="dynsection-31" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-31-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-31-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-31-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_a064de18830e60998f8be0d67a0f2aabf_cgraph.svg" width="100%" height="366"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+</div>
+</p>
+
+<p><div id="dynsection-32" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-32-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-32-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-32-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_a064de18830e60998f8be0d67a0f2aabf_icgraph.svg" width="419" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a8fd64516a2230c46e0e866aa3c54470b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="syscall_8h.html#a9fda4a54e92b8b9e096596f98fa12763">kz_thread_id_t</a> thread_run </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="defines_8h.html#a2efe6d463d80744789f228f5dc4baa39">String</a>&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="syscall_8h.html#a22977edbee1722907e4e730059686ab7">kz_func_t</a>&#160;</td>
+          <td class="paramname"><em>func</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>priority</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>argv</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="interrupt_8h.html#a5550e6fc5d6d975ec8e9fcb2f975f84c">stack_ptr_t</a>&#160;</td>
+          <td class="paramname"><em>stack_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>system call </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00178">178</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="kozos_8c.html#ad1447518f4372828b8435ae82e48499e">argc</a>, <a class="el" href="kozos_8c.html#af2efa898e9eed6fe6715279cb1ec35b0">argv</a>, <a class="el" href="kozos_8c.html#a2e6488cfd47118e19d4407d3a23eac3f">create_TCB()</a>, <a class="el" href="kozos_8c.html#aa786c43b96199cc59ccb0305e6a1b45d">func</a>, <a class="el" href="kozos_8c.html#a92177eed4eabc923bcd27462d8ce57b8">get_stack_area()</a>, <a class="el" href="defines_8h.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a>, <a class="el" href="kozos_8c.html#a0bbf8934e85237b96e5c4f9f7b331c15">push</a>, <a class="el" href="kozos_8c.html#a9cc7c96bdff0e4416f354672b2b1d183">put()</a>, <a class="el" href="lib_8c.html#a4f18eec0e70dda8f611c6d629494a8de">strcpy()</a>, <a class="el" href="kozos_8c.html#ac4d8f9724e6cfa40d91cd63fa8c275d2">thread_end()</a>, と <a class="el" href="kozos_8c.html#a3ac934c923c7f023b80805c9b7dad8a3">thread_init()</a>.</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#acd68041208fa0120669ac78343a47dc0">call_functions()</a>, と <a class="el" href="kozos_8h.html#a7078d5505c1e0c61af51bc66e5025685">kz_start()</a>.</p>
+
+<p><div id="dynsection-33" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-33-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-33-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-33-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_a8fd64516a2230c46e0e866aa3c54470b_cgraph.svg" width="512" height="291"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</p>
+
+<p><div id="dynsection-34" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-34-trigger" src="closed.png" alt="+"/> 呼出しグラフ:</div>
+<div id="dynsection-34-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-34-content" class="dyncontent" style="display:none;">
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="kozos_8c_a8fd64516a2230c46e0e866aa3c54470b_icgraph.svg" width="100%" height="300"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="ae26e9452148444d7181f9d193b81fcc3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int thread_sleep </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>sleep thread</p>
+<dl class="section return"><dt>戻り値</dt><dd>EXIT_SUCCESS </dd></dl>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00262">262</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="defines_8h.html#a687984f47d8cce148d1b914d2b79612a">EXIT_SUCCESS</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5c84d6deaccd84a660f082b63ec85e19"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int thread_wait </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>give anothrer thread execution</p>
+<dl class="section return"><dt>戻り値</dt><dd>EXIT_SUCCESS </dd></dl>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00250">250</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="defines_8h.html#a687984f47d8cce148d1b914d2b79612a">EXIT_SUCCESS</a>, と <a class="el" href="kozos_8c.html#a9cc7c96bdff0e4416f354672b2b1d183">put()</a>.</p>
+
+<p><div id="dynsection-35" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-35-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-35-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-35-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_a5c84d6deaccd84a660f082b63ec85e19_cgraph.svg" width="190" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="af731266922183ab6c1bb67d0b6bb84fa"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int thread_wakeup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="syscall_8h.html#a9fda4a54e92b8b9e096596f98fa12763">kz_thread_id_t</a>&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>wakeup another thread</p>
+<dl class="params"><dt>引数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>thread id of wake up thread </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>戻り値</dt><dd>EXIT_SUCCESS </dd></dl>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00273">273</a> 行で定義されています。</p>
+
+<p>参照先 <a class="el" href="defines_8h.html#a687984f47d8cce148d1b914d2b79612a">EXIT_SUCCESS</a>, と <a class="el" href="kozos_8c.html#a9cc7c96bdff0e4416f354672b2b1d183">put()</a>.</p>
+
+<p><div id="dynsection-36" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
+  <img id="dynsection-36-trigger" src="closed.png" alt="+"/> 関数の呼び出しグラフ:</div>
+<div id="dynsection-36-summary" class="dynsummary" style="display:block;">
+</div>
+<div id="dynsection-36-content" class="dyncontent" style="display:none;">
+<div class="center"><iframe scrolling="no" frameborder="0" src="kozos_8c_af731266922183ab6c1bb67d0b6bb84fa_cgraph.svg" width="214" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+</p>
+
+</div>
+</div>
+<h2 class="groupheader">変数</h2>
+<a class="anchor" id="ad1447518f4372828b8435ae82e48499e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int argc</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00092">92</a> 行で定義されています。</p>
+
+<p>参照元 <a class="el" href="syscall_8c.html#a31494feb57a45fd53bbbe76c98b8630e">kz_run()</a>, と <a class="el" href="kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b">thread_run()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af2efa898e9eed6fe6715279cb1ec35b0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char** argv</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00093">93</a> 行で定義されています。</p>
+
+<p>参照元 <a class="el" href="syscall_8c.html#a31494feb57a45fd53bbbe76c98b8630e">kz_run()</a>, と <a class="el" href="kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b">thread_run()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a26497f14b89039a398632200d7744e02"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="defines_8h.html#a4b435a49c74bb91f284f075e63416cb6">uint32</a> array</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00086">86</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a11fdabbdd86e03bf8a526c923cd4b247"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }  bit</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ae7583605f5daa4c6d138e62fcb1e83c3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structkz__context.html">kz_context</a> context</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00102">102</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="aa07750419cd5a4d2211e5534d499eb3b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">kz_thread* current</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>current thread </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00058">58</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a63d3624be663478cc7f2f1922dbb2193"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">union { ... }   flag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>some flags </p>
+
+</div>
+</div>
+<a class="anchor" id="aa786c43b96199cc59ccb0305e6a1b45d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="syscall_8h.html#a22977edbee1722907e4e730059686ab7">kz_func_t</a> func</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00091">91</a> 行で定義されています。</p>
+
+<p>参照元 <a class="el" href="syscall_8c.html#a31494feb57a45fd53bbbe76c98b8630e">kz_run()</a>, と <a class="el" href="kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b">thread_run()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4b259131beec90ce0b663ae6be464c38"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="syscall_8h.html#a4416db159f17222090aac71fdfdb1e07">kz_handler_t</a> handlers[<a class="el" href="intr_8h.html#afda811edb7ae226f29e5cdd98a8e228f">SOFTVEC_TYPE_NUM</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>interrupt handler </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00060">60</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a35f09ae251e619be643a4a36f8448540"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">kz_thread* head</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>head item of queue </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00053">53</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a95127cf9ee0cf5ea0da8ed6f4772a3f1"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static int init</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>parameters for startup(<a class="el" href="kozos_8c.html#a3ac934c923c7f023b80805c9b7dad8a3" title="start up thread ">thread_init()</a>)</p>
+<p>初期化関数 </p>
+
+<p> <a class="el" href="bootload_2main_8c_source.html">main.c</a> の <a class="el" href="bootload_2main_8c_source.html#l00055">55</a> 行で定義されています。</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#a2e6488cfd47118e19d4407d3a23eac3f">create_TCB()</a>, と <a class="el" href="bootload_2main_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a41fa0a02b3d4f33d6bb9543ed8e9bc4f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char name[<a class="el" href="kozos_8c.html#a44aaaac804104d9f7bad7fb35f154347">THREAD_NAME_MAX_SIZE</a>+1]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00078">78</a> 行で定義されています。</p>
+
+<p>参照元 <a class="el" href="syscall_8c.html#a31494feb57a45fd53bbbe76c98b8630e">kz_run()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3094682cdc0e9d3c6efa16ab42161ac0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">kz_thread* next</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00076">76</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a8f1fea2177eb7807fd95237a9f1df290"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="unionkz__syscall__param__t.html">kz_syscall_param_t</a>* param</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00099">99</a> 行で定義されています。</p>
+
+<p>参照元 <a class="el" href="syscall_8c.html#a31494feb57a45fd53bbbe76c98b8630e">kz_run()</a>, と <a class="el" href="kozos_8h.html#a2ef06efeac9f498bbabbf145fa8eb107">kz_syscall()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acec9ce2df15222151ad66fcb1d74eb9f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int priority</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>priority of thread </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00079">79</a> 行で定義されています。</p>
+
+<p>参照元 <a class="el" href="kozos_8c.html#a1256a78fae60204861c0e9dc350ddfbf">get()</a>, と <a class="el" href="kozos_8c.html#aff4b5a25b795dce424539eb82b95d9b6">thread_chpri()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af2a89a337b8f4324be7df1b02522887f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="defines_8h.html#a39db6982619d623273fad8a383489309">Bool</a> ready</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00083">83</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a3a9c7ca6773a9f5c1723d8669b2d2c8e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   readyque[<a class="el" href="kozos_8c.html#a172268da1c1e3cde359b6a3e67394126">PRIORITY_NUM</a>]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ready queue of thread </p>
+
+<p>参照元 <a class="el" href="kozos_8h.html#a7078d5505c1e0c61af51bc66e5025685">kz_start()</a>, <a class="el" href="kozos_8c.html#a9cc7c96bdff0e4416f354672b2b1d183">put()</a>, と <a class="el" href="kozos_8c.html#a63e3ec45b7bf0028e55f2b9ab1603306">schedule()</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa824415a13ea9db9ce8a349fa9ad31b3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char* stack</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>pointer to stack area of thread </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00080">80</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a28ce80c346f9483d1b3ea83fdac71110"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct { ... }   syscall</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>buffer for system call </p>
+
+</div>
+</div>
+<a class="anchor" id="a0abf55dc7ec13ef1c75f8e94959e7ab8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">kz_thread* tail</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>last item of queue </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00054">54</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="a456b0ca01b6a831b89ee34492ddca8b8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">kz_thread threads[<a class="el" href="kozos_8c.html#acd532f688378febc70bf2aedccd9bb60">THREAD_NUM</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Task Control Block(TCB) </p>
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00059">59</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="ad616090610222c75929471cec8a27f80"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="syscall_8h.html#a108aafe68a221f9803049c310a3c1699">kz_syscall_type_t</a> type</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="kozos_8c_source.html">kozos.c</a> の <a class="el" href="kozos_8c_source.html#l00098">98</a> 行で定義されています。</p>
+
+<p>参照元 <a class="el" href="interrupt_8h.html#ad5771b6f07733b4e05cf70903438c071">interrupt()</a>, <a class="el" href="kozos_8h.html#a2ef06efeac9f498bbabbf145fa8eb107">kz_syscall()</a>, <a class="el" href="kozos_8c.html#a7f5d62b70099d281d35e0336463c49fc">setintr()</a>, <a class="el" href="interrupt_8h.html#ade04dbe32efde0b18e74a5f0e8502efb">softvec_init()</a>, <a class="el" href="interrupt_8h.html#a77d3bbf145b56c7a6bc2706b44b71d68">softvec_setintr()</a>, と <a class="el" href="kozos_8c.html#a064de18830e60998f8be0d67a0f2aabf">thread_intr()</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a71443761d886d6152d96ebd3fda63af.html">os</a></li><li class="navelem"><a class="el" href="kozos_8c.html">kozos.c</a></li>
+    <li class="footer">作成：
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
+  </ul>
+</div>
+</body>
+</html>

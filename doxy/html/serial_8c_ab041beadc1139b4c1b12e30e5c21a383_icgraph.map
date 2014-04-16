@@ -1,0 +1,10 @@
+<map id="serial_recv_byte" name="serial_recv_byte">
+<area shape="rect" id="node3" href="$lib_8h.html#ae0ca7622f88a0818572688d85919e6fe" title="getc" alt="" coords="224,5,272,32"/>
+<area shape="rect" id="node15" href="$xmodem_8c.html#a9bf979d7fd9f1e648f2df737556870dd" title="xmodem_read_block" alt="" coords="173,56,323,83"/>
+<area shape="rect" id="node17" href="$xmodem_8h.html#abe91c5bfd131f00e3485727decb0faca" title="xmodem_recv" alt="" coords="371,56,479,83"/>
+<area shape="rect" id="node5" href="$lib_8h.html#ac414099aa125e8638ec89b7593865b12" title="gets" alt="" coords="401,5,449,32"/>
+<area shape="rect" id="node7" href="$bootload_2main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="556,56,607,83"/>
+<area shape="rect" id="node9" href="$test08__1_8c.html#a365da73ee00836b826de141b6d662a78" title="ユーザースレッド " alt="" coords="528,5,635,32"/>
+<area shape="rect" id="node11" href="$os_2main_8c.html#aabc6304dfeadad471d074b11c6e057dd" title="start_threads" alt="" coords="683,5,781,32"/>
+<area shape="rect" id="node13" href="$os_2main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="829,5,880,32"/>
+</map>

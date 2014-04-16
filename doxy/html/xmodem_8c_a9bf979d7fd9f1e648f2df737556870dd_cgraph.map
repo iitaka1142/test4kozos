@@ -1,0 +1,4 @@
+<map id="xmodem_read_block" name="xmodem_read_block">
+<area shape="rect" id="node3" href="$serial_8c.html#ab041beadc1139b4c1b12e30e5c21a383" title="serial_recv_byte" alt="" coords="203,5,323,32"/>
+<area shape="rect" id="node5" href="$serial_8c.html#a3592a8e9f7fc0651cfcbc638d6192040" title="serial_is_recv_enable" alt="" coords="371,5,525,32"/>
+</map>

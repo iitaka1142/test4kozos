@@ -1,0 +1,11 @@
+<map id="test08_1_main" name="test08_1_main">
+<area shape="rect" id="node3" href="$lib_8c.html#ac414099aa125e8638ec89b7593865b12" title="gets" alt="" coords="171,5,219,32"/>
+<area shape="rect" id="node17" href="$lib_8c.html#a44ddf1a8f6a75ff235a733ff8d90cae3" title="puts" alt="" coords="278,56,325,83"/>
+<area shape="rect" id="node20" href="$lib_8c.html#a33518be6fe96efe10f366f211a8726c9" title="strncmp" alt="" coords="161,107,229,133"/>
+<area shape="rect" id="node5" href="$lib_8c.html#ae0ca7622f88a0818572688d85919e6fe" title="getc" alt="" coords="277,5,325,32"/>
+<area shape="rect" id="node7" href="$lib_8c.html#acee36427208c7c321ab875217dca17c4" title="putc" alt="" coords="410,56,457,83"/>
+<area shape="rect" id="node13" href="$serial_8c.html#ab041beadc1139b4c1b12e30e5c21a383" title="serial_recv_byte" alt="" coords="373,5,493,32"/>
+<area shape="rect" id="node9" href="$serial_8c.html#aed0806bd3de71f20d6df8ef6f49bda31" title="serial_send_byte" alt="" coords="557,56,681,83"/>
+<area shape="rect" id="node11" href="$serial_8c.html#abf48ded30f8aa6fff8cb48dce0af0590" title="serial_is_send_enable" alt="" coords="744,56,901,83"/>
+<area shape="rect" id="node15" href="$serial_8c.html#a3592a8e9f7fc0651cfcbc638d6192040" title="serial_is_recv_enable" alt="" coords="542,5,695,32"/>
+</map>

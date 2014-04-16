@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>addr</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/28.html#L1319'>addr</a>             1319 writer/h8write.c unsigned char put_long(int addr, unsigned char _sum) {</span>
+<span class='curline'><a href='../S/28.html#L1323'>addr</a>             1323 writer/h8write.c 	c = (addr &gt;&gt; 24) &amp; 0xff;</span>
+<span class='curline'><a href='../S/28.html#L1325'>addr</a>             1325 writer/h8write.c 	c = (addr &gt;&gt; 16) &amp; 0xff;</span>
+<span class='curline'><a href='../S/28.html#L1327'>addr</a>             1327 writer/h8write.c 	c = (addr &gt;&gt; 8) &amp; 0xff;</span>
+<span class='curline'><a href='../S/28.html#L1329'>addr</a>             1329 writer/h8write.c 	c = addr &amp; 0xff;</span>
+<span class='curline'><a href='../S/28.html#L1408'>addr</a>             1408 writer/h8write.c 	int		c, s, addr, h, freq;</span>
+<span class='curline'><a href='../S/28.html#L1630'>addr</a>             1630 writer/h8write.c 			sscanf(numbuf,"%X",&amp;addr);</span>
+<span class='curline'><a href='../S/28.html#L1631'>addr</a>             1631 writer/h8write.c 			if(addr &lt; startrom || (addr + s) &gt; endrom) {</span>
+<span class='curline'><a href='../S/28.html#L1641'>addr</a>             1641 writer/h8write.c 				rombuf[addr + i] = h;</span>
+<span class='curline'><a href='../S/28.html#L1642'>addr</a>             1642 writer/h8write.c 				enable[(addr + i) &gt;&gt; pagebit] = 1;</span>
+<span class='curline'><a href='../S/28.html#L1659'>addr</a>             1659 writer/h8write.c 				addr = i &lt;&lt; pagebit;</span>
+<span class='curline'><a href='../S/28.html#L1663'>addr</a>             1663 writer/h8write.c 				sum = put_long(addr, sum);</span>
+</pre>
+</body>
+</html>

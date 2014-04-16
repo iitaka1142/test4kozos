@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>stack_size</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/5.html#L135'>stack_size</a>        135 os/kozos.c     inline static char * get_stack_area(stack_ptr_t stack_size)</span>
+<span class='curline'><a href='../S/5.html#L140'>stack_size</a>        140 os/kozos.c       memset(thread_stack, 0, stack_size);</span>
+<span class='curline'><a href='../S/5.html#L141'>stack_size</a>        141 os/kozos.c       thread_stack += stack_size;</span>
+<span class='curline'><a href='../S/5.html#L159'>stack_size</a>        159 os/kozos.c     static kz_thread_id_t thread_run(String name, kz_func_t func, int argc, char * argv[], stack_ptr_t stack_size)</span>
+<span class='curline'><a href='../S/5.html#L180'>stack_size</a>        180 os/kozos.c       thread-&gt;stack = get_stack_area(stack_size);</span>
+<span class='curline'><a href='../S/5.html#L238'>stack_size</a>        238 os/kozos.c         param-&gt;run.ret = thread_run(param-&gt;run.name, param-&gt;run.func, param-&gt;run.argc, param-&gt;run.argv, param-&gt;run.stack_size);</span>
+<span class='curline'><a href='../S/5.html#L301'>stack_size</a>        301 os/kozos.c     void kz_start(kz_func_t func, char * name, uint16 stack_size, int argc, char * argv[])</span>
+<span class='curline'><a href='../S/5.html#L313'>stack_size</a>        313 os/kozos.c       current = (kz_thread *)thread_run(name, func, argc, argv, stack_size);</span>
+<span class='curline'><a href='../S/11.html#L8'>stack_size</a>          8 os/kozos.h     kz_thread_id_t kz_run(kz_func_t func, char * name, int stack_size, int argc, char * argv[]);</span>
+<span class='curline'><a href='../S/11.html#L14'>stack_size</a>         14 os/kozos.h     void kz_start(kz_func_t func, char * name, uint16 stack_size, int argc, char * argv[]) __attribute__((noreturn));</span>
+<span class='curline'><a href='../S/14.html#L5'>stack_size</a>          5 os/syscall.c   kz_thread_id_t kz_run(kz_func_t func, char * name, int stack_size, int argc, char * argv[])</span>
+<span class='curline'><a href='../S/14.html#L11'>stack_size</a>         11 os/syscall.c     param.run.stack_size = stack_size;</span>
+<span class='curline'><a href='../S/7.html#L22'>stack_size</a>         22 os/syscall.h       int stack_size;</span>
+</pre>
+</body>
+</html>

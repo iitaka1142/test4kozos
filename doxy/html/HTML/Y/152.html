@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>header</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/19.html#L61'>header</a>             61 bootload/elf.c static int elf_check(struct elf_header * header);</span>
+<span class='curline'><a href='../S/19.html#L72'>header</a>             72 bootload/elf.c static int elf_load_program(struct elf_header * header);</span>
+<span class='curline'><a href='../S/19.html#L83'>header</a>             83 bootload/elf.c static int elf_load_header(struct elf_header * header, struct elf_program_header * phdr);</span>
+<span class='curline'><a href='../S/19.html#L92'>header</a>             92 bootload/elf.c static int elf_check(struct elf_header * header)</span>
+<span class='curline'><a href='../S/19.html#L94'>header</a>             94 bootload/elf.c 	if (memcmp(header-&gt;id.magic, "\x7f" "ELF", 4)) { </span>
+<span class='curline'><a href='../S/19.html#L96'>header</a>             96 bootload/elf.c 	} else if (header-&gt;id.class != 1) {</span>
+<span class='curline'><a href='../S/19.html#L98'>header</a>             98 bootload/elf.c 	} else if (header-&gt;id.format != 2) {</span>
+<span class='curline'><a href='../S/19.html#L100'>header</a>            100 bootload/elf.c 	} else if (header-&gt;id.version != 1) {</span>
+<span class='curline'><a href='../S/19.html#L102'>header</a>            102 bootload/elf.c 	} else if (header-&gt;type != 2) {</span>
+<span class='curline'><a href='../S/19.html#L104'>header</a>            104 bootload/elf.c 	} else if (header-&gt;version != 1) {</span>
+<span class='curline'><a href='../S/19.html#L106'>header</a>            106 bootload/elf.c 	} else if ((header-&gt;arch != 46) &amp;&amp; (header-&gt;arch != 47)) {</span>
+<span class='curline'><a href='../S/19.html#L117'>header</a>            117 bootload/elf.c static int elf_load_program(struct elf_header * header)</span>
+<span class='curline'><a href='../S/19.html#L119'>header</a>            119 bootload/elf.c 	for (int i=0; i&lt;header-&gt;program_header_num; i++) {</span>
+<span class='curline'><a href='../S/19.html#L121'>header</a>            121 bootload/elf.c 			(struct elf_program_header *) ((char *)header + header-&gt;program_header_offset + header-&gt;program_header_size * i);</span>
+<span class='curline'><a href='../S/19.html#L123'>header</a>            123 bootload/elf.c 		elf_load_header(header, phdr);</span>
+<span class='curline'><a href='../S/19.html#L130'>header</a>            130 bootload/elf.c static int elf_load_header(struct elf_header * header, struct elf_program_header * phdr)</span>
+<span class='curline'><a href='../S/19.html#L137'>header</a>            137 bootload/elf.c 		memcpy(start_addr, (char *)header + phdr-&gt;offset, phdr-&gt;file_size);</span>
+<span class='curline'><a href='../S/19.html#L147'>header</a>            147 bootload/elf.c 	struct elf_header * header = (struct elf_header *)buf;</span>
+<span class='curline'><a href='../S/19.html#L149'>header</a>            149 bootload/elf.c 	if (elf_check(header) &lt; 0) {</span>
+<span class='curline'><a href='../S/19.html#L150'>header</a>            150 bootload/elf.c 	} else if (elf_load_program(header) == EXIT_SUCCESS) {</span>
+<span class='curline'><a href='../S/19.html#L151'>header</a>            151 bootload/elf.c 		return (char *)header-&gt;entry_point;</span>
+</pre>
+</body>
+</html>

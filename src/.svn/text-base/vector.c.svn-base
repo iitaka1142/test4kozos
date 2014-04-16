@@ -1,0 +1,22 @@
+#include "defines.h"
+
+/** \file vector.c
+ * 割り込み処理関数の定義
+ */
+
+extern void start(void); ///< 実行開始時の関数
+
+/** 割り込みベクタの設定。
+ * 
+ * リンカスクリプトの起動により、先頭番地に配置される。
+ */
+void (*vectors[])(void) = {
+	start, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+	NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+};

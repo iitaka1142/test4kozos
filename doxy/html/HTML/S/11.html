@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>os/kozos.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP' /><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/45.html'>os</a>/kozos.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/18.html' title='Multiple included from 4 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1' />   1 <em class='sharp'>#ifndef</em> <a href='../S/11.html#L2' title='Defined at 2 in os/kozos.h.'>_KOZOS_H_INCLUDED_</a>
+<a id='L2' name='L2' />   2 <em class='sharp'>#define</em> <a href='../S/11.html#L1' title='Referred from 1 in os/kozos.h.'>_KOZOS_H_INCLUDED_</a>
+<a id='L3' name='L3' />   3 
+<a id='L4' name='L4' />   4 <em class='sharp'>#include</em> "<a href='39.html'>../misc/defines.h</a>"
+<a id='L5' name='L5' />   5 <em class='sharp'>#include</em> "<a href='7.html'>syscall.h</a>"
+<a id='L6' name='L6' />   6 
+<a id='L7' name='L7' />   7 <em class='comment'>///  システムコール</em>
+<a id='L8' name='L8' />   8 <a href='../S/7.html#L12' title='Defined at 12 in os/syscall.h.'>kz_thread_id_t</a> <a href='../S/14.html#L5' title='Defined at 5 in os/syscall.c.'>kz_run</a>(<a href='../Y/161.html' title='Multiple used in 8 places.'>kz_func_t</a> <a href='../Y/143.html' title='Multiple used in 13 places.'>func</a>, <strong class='reserved'>char</strong> * <a href='../Y/171.html' title='Multiple used in 17 places.'>name</a>, <strong class='reserved'>int</strong> <a href='../Y/231.html' title='Multiple used in 13 places.'>stack_size</a>, <strong class='reserved'>int</strong> <a href='../Y/68.html' title='Multiple used in 18 places.'>argc</a>, <strong class='reserved'>char</strong> * <a href='../Y/69.html' title='Multiple used in 25 places.'>argv</a>[]);
+<a id='L9' name='L9' />   9 
+<a id='L10' name='L10' />  10 <em class='comment'>/// スレッド強制終了</em>
+<a id='L11' name='L11' />  11 <strong class='reserved'>void</strong> <a href='../S/14.html#L20' title='Defined at 20 in os/syscall.c.'>kz_exit</a>(<strong class='reserved'>void</strong>);
+<a id='L12' name='L12' />  12 
+<a id='L13' name='L13' />  13 <em class='comment'>/// ライブラリ関数</em>
+<a id='L14' name='L14' />  14 <strong class='reserved'>void</strong> <a href='../S/5.html#L301' title='Defined at 301 in os/kozos.c.'>kz_start</a>(<a href='../Y/161.html' title='Multiple used in 8 places.'>kz_func_t</a> <a href='../Y/143.html' title='Multiple used in 13 places.'>func</a>, <strong class='reserved'>char</strong> * <a href='../Y/171.html' title='Multiple used in 17 places.'>name</a>, <a href='../S/39.html#L15' title='Defined at 15 in misc/defines.h.'>uint16</a> <a href='../Y/231.html' title='Multiple used in 13 places.'>stack_size</a>, <strong class='reserved'>int</strong> <a href='../Y/68.html' title='Multiple used in 18 places.'>argc</a>, <strong class='reserved'>char</strong> * <a href='../Y/69.html' title='Multiple used in 25 places.'>argv</a>[]) <strong class='reserved'>__attribute__</strong>((<a href='../Y/173.html' title='Multiple used in 6 places.'>noreturn</a>));
+<a id='L15' name='L15' />  15 <strong class='reserved'>void</strong> <a href='../S/5.html#L321' title='Defined at 321 in os/kozos.c.'>kz_sysdown</a>(<strong class='reserved'>void</strong>) <strong class='reserved'>__attribute__</strong>((<a href='../Y/173.html' title='Multiple used in 6 places.'>noreturn</a>));
+<a id='L16' name='L16' />  16 <strong class='reserved'>void</strong> <a href='../S/5.html#L330' title='Defined at 330 in os/kozos.c.'>kz_syscall</a>(<a href='../S/7.html#L10' title='Defined at 10 in os/syscall.h.'>kz_syscall_type_t</a> <a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>, <a href='../S/7.html#L32' title='Defined at 32 in os/syscall.h.'>kz_syscall_param_t</a> * <a href='../Y/183.html' title='Multiple used in 17 places.'>param</a>);
+<a id='L17' name='L17' />  17 
+<a id='L18' name='L18' />  18 <em class='comment'>/// ユーザースレッド</em>
+<a id='L19' name='L19' />  19 <em class='comment'>//  テストプログラムをここに書くのは、ちょっと疑問</em>
+<a id='L20' name='L20' />  20 <strong class='reserved'>int</strong> <a href='../S/3.html#L7' title='Defined at 7 in os/test08_1.c.'>test08_1_main</a>(<strong class='reserved'>int</strong> <a href='../Y/68.html' title='Multiple used in 18 places.'>argc</a>, <strong class='reserved'>char</strong> * <a href='../Y/69.html' title='Multiple used in 25 places.'>argv</a>[]);
+<a id='L21' name='L21' />  21 
+<a id='L22' name='L22' />  22 <em class='sharp'>#endif</em> 
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM' />
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

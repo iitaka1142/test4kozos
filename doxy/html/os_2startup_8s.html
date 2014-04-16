@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
+<title>kozos: src/os/startup.s</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">kozos
+   &#160;<span id="projectnumber">Step 8</span>
+   </div>
+   <div id="projectbrief">Create OS in 12 steps</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 作成： Doxygen 1.8.5 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>メインページ</span></a></li>
+      <li><a href="annotated.html"><span>データ構造</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>グローバル</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('os_2startup_8s.html','');});
+</script>
+<div id="doc-content">
+<div class="header">
+  <div class="summary">
+<a href="#var-members">変数</a>  </div>
+  <div class="headertitle">
+<div class="title">startup.s</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><a href="os_2startup_8s_source.html">ソースコードを見る。</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+変数</h2></td></tr>
+<tr class="memitem:adfcb7652f91f1152da554264d5bc970b"><td class="memItemLeft" align="right" valign="top">h8300h section text global _start&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="os_2startup_8s.html#adfcb7652f91f1152da554264d5bc970b">_start</a></td></tr>
+<tr class="separator:adfcb7652f91f1152da554264d5bc970b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a776d0c7366e13dc8849c4ebe2c4b2e73"><td class="memItemLeft" align="right" valign="top">h8300h section text global <br class="typebreak"/>
+<a class="el" href="os_2startup_8s.html#adfcb7652f91f1152da554264d5bc970b">_start</a> sp jsr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="os_2startup_8s.html#a776d0c7366e13dc8849c4ebe2c4b2e73">_main</a></td></tr>
+<tr class="separator:a776d0c7366e13dc8849c4ebe2c4b2e73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af759ab9585feae8c1b03e0838c0c164e"><td class="memItemLeft" align="right" valign="top">h8300h section text global <br class="typebreak"/>
+<a class="el" href="os_2startup_8s.html#adfcb7652f91f1152da554264d5bc970b">_start</a> sp jsr er7 mov l&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="os_2startup_8s.html#af759ab9585feae8c1b03e0838c0c164e">er7</a></td></tr>
+<tr class="separator:af759ab9585feae8c1b03e0838c0c164e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">変数</h2>
+<a class="anchor" id="a776d0c7366e13dc8849c4ebe2c4b2e73"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">h8300h section text global <a class="el" href="os_2startup_8s.html#adfcb7652f91f1152da554264d5bc970b">_start</a> sp jsr _main</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="os_2startup_8s_source.html">startup.s</a> の <a class="el" href="os_2startup_8s_source.html#l00006">6</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="adfcb7652f91f1152da554264d5bc970b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">h8300h section text global _start _start</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="os_2startup_8s_source.html">startup.s</a> の <a class="el" href="os_2startup_8s_source.html#l00006">6</a> 行で定義されています。</p>
+
+</div>
+</div>
+<a class="anchor" id="af759ab9585feae8c1b03e0838c0c164e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">h8300h section text global <a class="el" href="os_2startup_8s.html#adfcb7652f91f1152da554264d5bc970b">_start</a> sp jsr er7 mov l <a class="el" href="intr_8S.html#a08b22b34cb4f14a85f8f846cb288da8f">er0</a> mov l <a class="el" href="intr_8S.html#afb80ae4838a32fb0105465a4207606d5">er1</a> mov l <a class="el" href="intr_8S.html#a5ca497045a7557a398ad2a8c2d04864d">er2</a> mov l <a class="el" href="intr_8S.html#a053b3a1833b96f7edadf3cc9f9e79b0d">er3</a> mov l <a class="el" href="intr_8S.html#ae7e670ff53d30bbce9da0eedd93d5eed">er4</a> mov l <a class="el" href="intr_8S.html#a3874aad3d5a45b23d963ec2a4468a8eb">er5</a> mov l er7</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p> <a class="el" href="os_2startup_8s_source.html">startup.s</a> の <a class="el" href="os_2startup_8s_source.html#l00006">6</a> 行で定義されています。</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_a71443761d886d6152d96ebd3fda63af.html">os</a></li><li class="navelem"><a class="el" href="os_2startup_8s.html">startup.s</a></li>
+    <li class="footer">作成：
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
+  </ul>
+</div>
+</body>
+</html>

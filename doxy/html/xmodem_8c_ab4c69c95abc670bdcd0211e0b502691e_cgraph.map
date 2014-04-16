@@ -1,0 +1,5 @@
+<map id="xmodem_wait" name="xmodem_wait">
+<area shape="rect" id="node3" href="$serial_8c.html#a3592a8e9f7fc0651cfcbc638d6192040" title="serial_is_recv_enable" alt="" coords="161,5,314,32"/>
+<area shape="rect" id="node5" href="$serial_8c.html#aed0806bd3de71f20d6df8ef6f49bda31" title="serial_send_byte" alt="" coords="175,56,299,83"/>
+<area shape="rect" id="node7" href="$serial_8c.html#abf48ded30f8aa6fff8cb48dce0af0590" title="serial_is_send_enable" alt="" coords="363,56,520,83"/>
+</map>

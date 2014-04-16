@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>os/lib.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP' /><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/45.html'>os</a>/lib.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/5.html' title='Multiple included from 8 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1' />   1 <em class='sharp'>#ifndef</em> <a href='../D/187.html' title='Multiple defined in 2 places.'>_LIB_H_INCLUDE_</a>
+<a id='L2' name='L2' />   2 <em class='sharp'>#define</em> <a href='../R/150.html' title='Multiple referred from 2 places.'>_LIB_H_INCLUDE_</a>
+<a id='L3' name='L3' />   3 
+<a id='L4' name='L4' />   4 <em class='comment'>/**</em>
+<a id='L5' name='L5' />   5 <em class='comment'>   @file lib.h</em>
+<a id='L6' name='L6' />   6 <em class='comment'>   共通使用するライブラリ関数</em>
+<a id='L7' name='L7' />   7 <em class='comment'> */</em>
+<a id='L8' name='L8' />   8 
+<a id='L9' name='L9' />   9 <em class='comment'>/*---------------------------*</em>
+<a id='L10' name='L10' />  10 <em class='comment'> * メモリ関連関数</em>
+<a id='L11' name='L11' />  11 <em class='comment'> *---------------------------*/</em>
+<a id='L12' name='L12' />  12 
+<a id='L13' name='L13' />  13 <em class='comment'>/** メモリを特定のパターンで埋める */</em>
+<a id='L14' name='L14' />  14 <strong class='reserved'>void</strong> * <a href='../D/230.html' title='Multiple defined in 2 places.'>memset</a>(<strong class='reserved'>void</strong> * <a href='../Y/71.html' title='Multiple used in 8 places.'>b</a>, <strong class='reserved'>int</strong> <a href='../Y/90.html' title='Multiple used in 80 places.'>c</a>, <strong class='reserved'>long</strong> <a href='../Y/163.html' title='Multiple used in 32 places.'>len</a>);
+<a id='L15' name='L15' />  15 <em class='comment'>/**&lt;</em>
+<a id='L16' name='L16' />  16 <em class='comment'> * \param b (void*)対象メモリ領域の先頭位置へのポインタ</em>
+<a id='L17' name='L17' />  17 <em class='comment'> * \param c (int)埋めるためのパターン</em>
+<a id='L18' name='L18' />  18 <em class='comment'> * \param len (long)対象メモリ領域のサイズ</em>
+<a id='L19' name='L19' />  19 <em class='comment'> *</em>
+<a id='L20' name='L20' />  20 <em class='comment'> * \return 対象メモリ領域の先頭位置へのポインタ</em>
+<a id='L21' name='L21' />  21 <em class='comment'> */</em>
+<a id='L22' name='L22' />  22 
+<a id='L23' name='L23' />  23 <em class='comment'>/** メモリのコピーを行う */</em>
+<a id='L24' name='L24' />  24 <strong class='reserved'>void</strong> * <a href='../D/229.html' title='Multiple defined in 2 places.'>memcpy</a>(<strong class='reserved'>void</strong> * <a href='../Y/118.html' title='Multiple used in 18 places.'>dst</a>, <strong class='reserved'>const</strong> <strong class='reserved'>void</strong> * <a href='../Y/226.html' title='Multiple used in 16 places.'>src</a>, <strong class='reserved'>long</strong> <a href='../Y/163.html' title='Multiple used in 32 places.'>len</a>);
+<a id='L25' name='L25' />  25 <em class='comment'>/**&lt;</em>
+<a id='L26' name='L26' />  26 <em class='comment'> * \param dst (void*)コピーするメモリ領域の先頭位置へのポインタ</em>
+<a id='L27' name='L27' />  27 <em class='comment'> * \param src (const void*)コピーされるメモリ領域の先頭位置へのポインタ</em>
+<a id='L28' name='L28' />  28 <em class='comment'> * \param len (long)領域のサイズ</em>
+<a id='L29' name='L29' />  29 <em class='comment'> *</em>
+<a id='L30' name='L30' />  30 <em class='comment'> * \return コピーした領域の先頭位置へのポインタ</em>
+<a id='L31' name='L31' />  31 <em class='comment'> */</em>
+<a id='L32' name='L32' />  32 
+<a id='L33' name='L33' />  33 <em class='comment'>/** メモリ上のデータの比較を行う */</em>
+<a id='L34' name='L34' />  34 <strong class='reserved'>int</strong> <a href='../D/228.html' title='Multiple defined in 2 places.'>memcmp</a>(<strong class='reserved'>const</strong> <strong class='reserved'>void</strong> * <a href='../Y/72.html' title='Multiple used in 6 places.'>b1</a>, <strong class='reserved'>const</strong> <strong class='reserved'>void</strong> * <a href='../Y/73.html' title='Multiple used in 6 places.'>b2</a>, <strong class='reserved'>long</strong> <a href='../Y/163.html' title='Multiple used in 32 places.'>len</a>);
+<a id='L35' name='L35' />  35 <em class='comment'>/**&lt;</em>
+<a id='L36' name='L36' />  36 <em class='comment'> * \param b1 (const void*)比較するデータ1への先頭ポインタ</em>
+<a id='L37' name='L37' />  37 <em class='comment'> * \param b2 (const void*)比較するデータ2への先頭ポインタ</em>
+<a id='L38' name='L38' />  38 <em class='comment'> * \param len (long)領域のサイズ</em>
+<a id='L39' name='L39' />  39 <em class='comment'> *</em>
+<a id='L40' name='L40' />  40 <em class='comment'> * \retval 0  2つは同じ</em>
+<a id='L41' name='L41' />  41 <em class='comment'> * \retval 1  b1が大きい</em>
+<a id='L42' name='L42' />  42 <em class='comment'> * \retval -1 b2が大きい</em>
+<a id='L43' name='L43' />  43 <em class='comment'> */</em>
+<a id='L44' name='L44' />  44 
+<a id='L45' name='L45' />  45 <em class='comment'>/*---------------------------*</em>
+<a id='L46' name='L46' />  46 <em class='comment'> * 文字列関連関数</em>
+<a id='L47' name='L47' />  47 <em class='comment'> *---------------------------*/</em>
+<a id='L48' name='L48' />  48 
+<a id='L49' name='L49' />  49 <em class='comment'>/** 文字列の長さを返す */</em>
+<a id='L50' name='L50' />  50 <strong class='reserved'>int</strong> <a href='../D/276.html' title='Multiple defined in 2 places.'>strlen</a>(<a href='../S/39.html#L18' title='Defined at 18 in misc/defines.h.'>cString</a> <a href='../Y/205.html' title='Multiple used in 71 places.'>s</a>);
+<a id='L51' name='L51' />  51 <em class='comment'>/**&lt;</em>
+<a id='L52' name='L52' />  52 <em class='comment'> * \param s (const char*)文字列の先頭へのポインタ</em>
+<a id='L53' name='L53' />  53 <em class='comment'> *</em>
+<a id='L54' name='L54' />  54 <em class='comment'> * \return 文字列の長さ</em>
+<a id='L55' name='L55' />  55 <em class='comment'> */</em>
+<a id='L56' name='L56' />  56 
+<a id='L57' name='L57' />  57 <em class='comment'>/** 文字列のコピーを行う */</em>
+<a id='L58' name='L58' />  58 <a href='../S/39.html#L17' title='Defined at 17 in misc/defines.h.'>String</a> <a href='../D/275.html' title='Multiple defined in 2 places.'>strcpy</a>(<a href='../S/39.html#L17' title='Defined at 17 in misc/defines.h.'>String</a> <a href='../Y/118.html' title='Multiple used in 18 places.'>dst</a>,  <a href='../S/39.html#L18' title='Defined at 18 in misc/defines.h.'>cString</a> <a href='../Y/226.html' title='Multiple used in 16 places.'>src</a>);
+<a id='L59' name='L59' />  59 <em class='comment'>/**&lt;</em>
+<a id='L60' name='L60' />  60 <em class='comment'> * \param dst (String)コピーする文字列の先頭ポインタ</em>
+<a id='L61' name='L61' />  61 <em class='comment'> * \param src (String)コピーされる文字列の先頭ポインタ</em>
+<a id='L62' name='L62' />  62 <em class='comment'> * </em>
+<a id='L63' name='L63' />  63 <em class='comment'> * \return コピーした文字列の先頭ポインタ</em>
+<a id='L64' name='L64' />  64 <em class='comment'> */</em>
+<a id='L65' name='L65' />  65 
+<a id='L66' name='L66' />  66 <strong class='reserved'>typedef</strong> <strong class='reserved'>enum</strong> <em class='brace'>{</em>
+<a id='L67' name='L67' />  67   Earlier = -1,
+<a id='L68' name='L68' />  68   <a href='../R/127.html' title='Multiple referred from 2 places.'>Same</a> = 0,
+<a id='L69' name='L69' />  69   Later = 1
+<a id='L70' name='L70' />  70 <em class='brace'>}</em> <a href='../R/159.html' title='Multiple referred from 2 places.'>comp_result</a>;
+<a id='L71' name='L71' />  71 
+<a id='L72' name='L72' />  72 <em class='comment'>/** 文字列の比較を行う */</em>
+<a id='L73' name='L73' />  73 <a href='../S/1.html#L70' title='Defined at 70 in os/lib.h.'>comp_result</a> <a href='../D/274.html' title='Multiple defined in 2 places.'>strcmp</a>(<a href='../S/39.html#L18' title='Defined at 18 in misc/defines.h.'>cString</a> <a href='../Y/206.html' title='Multiple used in 24 places.'>s1</a>, <a href='../S/39.html#L18' title='Defined at 18 in misc/defines.h.'>cString</a> <a href='../Y/207.html' title='Multiple used in 24 places.'>s2</a>);
+<a id='L74' name='L74' />  74 <em class='comment'>/**&lt;</em>
+<a id='L75' name='L75' />  75 <em class='comment'> * \param[in] s1 (const void*)比較する文字列1への先頭ポインタ</em>
+<a id='L76' name='L76' />  76 <em class='comment'> * \param[in] s2 (const void*)比較する文字列2への先頭ポインタ</em>
+<a id='L77' name='L77' />  77 <em class='comment'> *</em>
+<a id='L78' name='L78' />  78 <em class='comment'> * \retval 0  2つは同じ</em>
+<a id='L79' name='L79' />  79 <em class='comment'> * \retval 1  s1が大きい</em>
+<a id='L80' name='L80' />  80 <em class='comment'> * \retval -1 s2が大きい</em>
+<a id='L81' name='L81' />  81 <em class='comment'> */</em>
+<a id='L82' name='L82' />  82 
+<a id='L83' name='L83' />  83 <em class='comment'>/** 長さ指定の文字列比較 */</em>
+<a id='L84' name='L84' />  84 <a href='../S/1.html#L70' title='Defined at 70 in os/lib.h.'>comp_result</a> <a href='../D/277.html' title='Multiple defined in 2 places.'>strncmp</a>(<a href='../S/39.html#L18' title='Defined at 18 in misc/defines.h.'>cString</a> <a href='../Y/206.html' title='Multiple used in 24 places.'>s1</a>, <a href='../S/39.html#L18' title='Defined at 18 in misc/defines.h.'>cString</a> <a href='../Y/207.html' title='Multiple used in 24 places.'>s2</a>, <strong class='reserved'>int</strong> <a href='../Y/163.html' title='Multiple used in 32 places.'>len</a>);
+<a id='L85' name='L85' />  85 <em class='comment'>/**&lt;</em>
+<a id='L86' name='L86' />  86 <em class='comment'> * \param[in] s1 (const void*)比較する文字列1への先頭ポインタ</em>
+<a id='L87' name='L87' />  87 <em class='comment'> * \param[in] s2 (const void*)比較する文字列2への先頭ポインタ</em>
+<a id='L88' name='L88' />  88 <em class='comment'> * \param[in] len (int)比較する長さ</em>
+<a id='L89' name='L89' />  89 <em class='comment'> *</em>
+<a id='L90' name='L90' />  90 <em class='comment'> * \retval 0  2つは同じ</em>
+<a id='L91' name='L91' />  91 <em class='comment'> * \retval 1  s1が大きい</em>
+<a id='L92' name='L92' />  92 <em class='comment'> * \retval -1 s2が大きい</em>
+<a id='L93' name='L93' />  93 <em class='comment'> */</em>
+<a id='L94' name='L94' />  94 
+<a id='L95' name='L95' />  95 <em class='comment'>/** 1文字送信 */</em>
+<a id='L96' name='L96' />  96 <strong class='reserved'>int</strong> <a href='../D/240.html' title='Multiple defined in 2 places.'>putc</a>(<strong class='reserved'>char</strong> <a href='../Y/90.html' title='Multiple used in 80 places.'>c</a>);
+<a id='L97' name='L97' />  97 <em class='comment'>/**&lt;</em>
+<a id='L98' name='L98' />  98 <em class='comment'> * \param c (char)送信文字</em>
+<a id='L99' name='L99' />  99 <em class='comment'> * \retval EXIT_SUCCESS 正常終了</em>
+<a id='L100' name='L100' /> 100 <em class='comment'> *</em>
+<a id='L101' name='L101' /> 101 <em class='comment'> * 改行文字を\nから\rへ変換する</em>
+<a id='L102' name='L102' /> 102 <em class='comment'> */</em>
+<a id='L103' name='L103' /> 103 
+<a id='L104' name='L104' /> 104 <em class='comment'>/** 1文字受信 */</em>
+<a id='L105' name='L105' /> 105 <strong class='reserved'>char</strong> <a href='../D/212.html' title='Multiple defined in 2 places.'>getc</a>(<strong class='reserved'>void</strong>);
+<a id='L106' name='L106' /> 106 <em class='comment'>/**&lt;</em>
+<a id='L107' name='L107' /> 107 <em class='comment'> * \return 受信文字</em>
+<a id='L108' name='L108' /> 108 <em class='comment'> */</em>
+<a id='L109' name='L109' /> 109 
+<a id='L110' name='L110' /> 110 <em class='comment'>/** 文字列送信 */</em> 
+<a id='L111' name='L111' /> 111 <strong class='reserved'>int</strong> <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>(<a href='../S/39.html#L18' title='Defined at 18 in misc/defines.h.'>cString</a> <a href='../Y/240.html' title='Multiple used in 8 places.'>str</a>);
+<a id='L112' name='L112' /> 112 <em class='comment'>/**&lt;</em>
+<a id='L113' name='L113' /> 113 <em class='comment'> * \param[in] str (char*)送信文字列</em>
+<a id='L114' name='L114' /> 114 <em class='comment'> * \retval EXIT_SUCCESS 正常終了 </em>
+<a id='L115' name='L115' /> 115 <em class='comment'> */</em>
+<a id='L116' name='L116' /> 116 
+<a id='L117' name='L117' /> 117 <em class='comment'>/** 文字列受信 */</em>
+<a id='L118' name='L118' /> 118 <strong class='reserved'>int</strong> <a href='../D/213.html' title='Multiple defined in 2 places.'>gets</a>(<a href='../S/39.html#L17' title='Defined at 17 in misc/defines.h.'>String</a> <a href='../Y/87.html' title='Multiple used in 73 places.'>buf</a>);
+<a id='L119' name='L119' /> 119 <em class='comment'>/**&lt;</em>
+<a id='L120' name='L120' /> 120 <em class='comment'> * \param[out] buf 受信文字列格納バッファ</em>
+<a id='L121' name='L121' /> 121 <em class='comment'> * </em>
+<a id='L122' name='L122' /> 122 <em class='comment'> * \return EXIT_SUCCESS</em>
+<a id='L123' name='L123' /> 123 <em class='comment'> */</em>
+<a id='L124' name='L124' /> 124 
+<a id='L125' name='L125' /> 125 <em class='comment'>/** 数値の16進表示 */</em>
+<a id='L126' name='L126' /> 126 <strong class='reserved'>int</strong> <a href='../D/242.html' title='Multiple defined in 2 places.'>putxval</a>(<a href='../S/39.html#L16' title='Defined at 16 in misc/defines.h.'>uint32</a> <a href='../Y/255.html' title='Multiple used in 14 places.'>value</a>, <strong class='reserved'>int</strong> <a href='../Y/102.html' title='Multiple used in 12 places.'>column</a>);
+<a id='L127' name='L127' /> 127 <em class='comment'>/**&lt;</em>
+<a id='L128' name='L128' /> 128 <em class='comment'> * \param value (unsigned long)表示する数値</em>
+<a id='L129' name='L129' /> 129 <em class='comment'> * \param column (int)桁数</em>
+<a id='L130' name='L130' /> 130 <em class='comment'> *</em>
+<a id='L131' name='L131' /> 131 <em class='comment'> * \retval EXIT_SUCCESS 処理成功</em>
+<a id='L132' name='L132' /> 132 <em class='comment'> */</em>
+<a id='L133' name='L133' /> 133 
+<a id='L134' name='L134' /> 134 <em class='sharp'>#endif</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM' />
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

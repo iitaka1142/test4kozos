@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>argc</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/5.html#L26'>argc</a>               26 os/kozos.c         int argc;</span>
+<span class='curline'><a href='../S/5.html#L116'>argc</a>              116 os/kozos.c       thread-&gt;init.func(thread-&gt;init.argc, thread-&gt;init.argv);</span>
+<span class='curline'><a href='../S/5.html#L159'>argc</a>              159 os/kozos.c     static kz_thread_id_t thread_run(String name, kz_func_t func, int argc, char * argv[], stack_ptr_t stack_size)</span>
+<span class='curline'><a href='../S/5.html#L176'>argc</a>              176 os/kozos.c       thread-&gt;init.argc = argc;</span>
+<span class='curline'><a href='../S/5.html#L238'>argc</a>              238 os/kozos.c         param-&gt;run.ret = thread_run(param-&gt;run.name, param-&gt;run.func, param-&gt;run.argc, param-&gt;run.argv, param-&gt;run.stack_size);</span>
+<span class='curline'><a href='../S/5.html#L301'>argc</a>              301 os/kozos.c     void kz_start(kz_func_t func, char * name, uint16 stack_size, int argc, char * argv[])</span>
+<span class='curline'><a href='../S/5.html#L313'>argc</a>              313 os/kozos.c       current = (kz_thread *)thread_run(name, func, argc, argv, stack_size);</span>
+<span class='curline'><a href='../S/11.html#L8'>argc</a>                8 os/kozos.h     kz_thread_id_t kz_run(kz_func_t func, char * name, int stack_size, int argc, char * argv[]);</span>
+<span class='curline'><a href='../S/11.html#L14'>argc</a>               14 os/kozos.h     void kz_start(kz_func_t func, char * name, uint16 stack_size, int argc, char * argv[]) __attribute__((noreturn));</span>
+<span class='curline'><a href='../S/11.html#L20'>argc</a>               20 os/kozos.h     int test08_1_main(int argc, char * argv[]);</span>
+<span class='curline'><a href='../S/4.html#L6'>argc</a>                6 os/main.c      static int start_threads(int argc, char * argv[])</span>
+<span class='curline'><a href='../S/14.html#L5'>argc</a>                5 os/syscall.c   kz_thread_id_t kz_run(kz_func_t func, char * name, int stack_size, int argc, char * argv[])</span>
+<span class='curline'><a href='../S/14.html#L12'>argc</a>               12 os/syscall.c     param.run.argc = argc;</span>
+<span class='curline'><a href='../S/7.html#L13'>argc</a>               13 os/syscall.h   typedef int (* kz_func_t)(int argc, char * argv[]);</span>
+<span class='curline'><a href='../S/7.html#L23'>argc</a>               23 os/syscall.h       int argc;</span>
+<span class='curline'><a href='../S/3.html#L7'>argc</a>                7 os/test08_1.c  int test08_1_main(int argc, char * argv[])</span>
+<span class='curline'><a href='../S/28.html#L1404'>argc</a>             1404 writer/h8write.c int main(int argc, char **argv) {</span>
+<span class='curline'><a href='../S/28.html#L1436'>argc</a>             1436 writer/h8write.c 	for(i = 1; i &lt; argc ; i++){</span>
+</pre>
+</body>
+</html>

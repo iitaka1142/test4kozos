@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>rombuf</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/28.html#L1418'>rombuf</a>           1418 writer/h8write.c 	static unsigned char rombuf[0x80000], enable[0x8000];</span>
+<span class='curline'><a href='../S/28.html#L1605'>rombuf</a>           1605 writer/h8write.c 	for(i = 0;i &lt;= endrom;i++) rombuf[i] = (char)0xff;</span>
+<span class='curline'><a href='../S/28.html#L1641'>rombuf</a>           1641 writer/h8write.c 				rombuf[addr + i] = h;</span>
+<span class='curline'><a href='../S/28.html#L1665'>rombuf</a>           1665 writer/h8write.c 					putbyte(rombuf[i * pagesize + j]);</span>
+<span class='curline'><a href='../S/28.html#L1666'>rombuf</a>           1666 writer/h8write.c 					sum += rombuf[i * pagesize + j] &amp; 0xff;</span>
+<span class='curline'><a href='../S/28.html#L1711'>rombuf</a>           1711 writer/h8write.c 				for(j = 0;j &lt; pagesize;j++) putbyte(rombuf[i * pagesize + j]);</span>
+</pre>
+</body>
+</html>

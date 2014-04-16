@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>bootload/main.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP' /><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/43.html'>bootload</a>/main.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L45'>[^]</a><a href='#L115'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L45' title='Defined at 45.'>wait</a></li>
+<li><a href='#L54' title='Defined at 54.'>init</a></li>
+<li><a href='#L80' title='Defined at 80.'>dump</a></li>
+<li><a href='#L106' title='Defined at 106.'>printval</a></li>
+<li><a href='#L115' title='Defined at 115.'>main</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1' />   1 <em class='comment'>/**</em>
+<a id='L2' name='L2' />   2 <em class='comment'>   @file main.c</em>
+<a id='L3' name='L3' />   3 <em class='comment'>   エントリポイント</em>
+<a id='L4' name='L4' />   4 <em class='comment'> */</em>
+<a id='L5' name='L5' />   5 
+<a id='L6' name='L6' />   6 <em class='sharp'>#include</em> "<a href='39.html'>../misc/defines.h</a>"
+<a id='L7' name='L7' />   7 <em class='sharp'>#include</em> "<a href='37.html'>../misc/interrupt.h</a>"
+<a id='L8' name='L8' />   8 <em class='sharp'>#include</em> "<a href='31.html'>../misc/serial.h</a>"
+<a id='L9' name='L9' />   9 <em class='sharp'>#include</em> "<a href='15.html'>xmodem.h</a>"
+<a id='L10' name='L10' />  10 <em class='sharp'>#include</em> "<a href='16.html'>elf.h</a>"
+<a id='L11' name='L11' />  11 <em class='sharp'>#include</em> "<a href='../I/5.html'>lib.h</a>"
+<a id='L12' name='L12' />  12 
+<a id='L13' name='L13' />  13 <strong class='reserved'>int</strong> <a href='../Y/146.html' title='Multiple used in 2 places.'>global_data</a> = 0x10;
+<a id='L14' name='L14' />  14 <strong class='reserved'>int</strong> <a href='../Y/145.html' title='Multiple used in 2 places.'>global_bss</a>;
+<a id='L15' name='L15' />  15 <em class='comment'>//static int static_data = 0x20;</em>
+<a id='L16' name='L16' />  16 <em class='comment'>//static int static_bss;</em>
+<a id='L17' name='L17' />  17 
+<a id='L18' name='L18' />  18 <em class='comment'>/** 初期化関数 */</em>
+<a id='L19' name='L19' />  19 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../S/20.html#L54' title='Defined at 54 in bootload/main.c.'>init</a>(<strong class='reserved'>void</strong>);
+<a id='L20' name='L20' />  20 <em class='comment'>/**&lt;</em>
+<a id='L21' name='L21' />  21 <em class='comment'>   @return EXIT_SUCCESS</em>
+<a id='L22' name='L22' />  22 <em class='comment'></em>
+<a id='L23' name='L23' />  23 <em class='comment'>   メモリ領域とシリアルポートの初期化を行う</em>
+<a id='L24' name='L24' />  24 <em class='comment'> */</em>
+<a id='L25' name='L25' />  25 
+<a id='L26' name='L26' />  26 <em class='sharp'>#if</em> 0
+<a id='L27' name='L27' />  27 <em class='comment'>/** 変数値出力関数 */</em>
+<a id='L28' name='L28' />  28 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/20.html#L106' title='Defined at 106 in bootload/main.c.'>printval</a>(<strong class='reserved'>void</strong>);
+<a id='L29' name='L29' />  29 <em class='sharp'>#endif</em>
+<a id='L30' name='L30' />  30 
+<a id='L31' name='L31' />  31 <em class='comment'>/** メモリの16進ダンプ出力 */</em>
+<a id='L32' name='L32' />  32 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../S/20.html#L80' title='Defined at 80 in bootload/main.c.'>dump</a>(<strong class='reserved'>char</strong> * <a href='../Y/87.html' title='Multiple used in 73 places.'>buf</a>, <strong class='reserved'>long</strong> <a href='../Y/218.html' title='Multiple used in 22 places.'>size</a>);
+<a id='L33' name='L33' />  33 <em class='comment'>/**&lt;</em>
+<a id='L34' name='L34' />  34 <em class='comment'>   @param[in] buf 表示するデータの格納バッファ</em>
+<a id='L35' name='L35' />  35 <em class='comment'>   @param size データサイズ</em>
+<a id='L36' name='L36' />  36 <em class='comment'>   </em>
+<a id='L37' name='L37' />  37 <em class='comment'>   @retval EXIT_SUCCESS 正常終了</em>
+<a id='L38' name='L38' />  38 <em class='comment'>   @retval -1 エラー</em>
+<a id='L39' name='L39' />  39 <em class='comment'> */</em>
+<a id='L40' name='L40' />  40 
+<a id='L41' name='L41' />  41 <em class='comment'>/** ウェイト関数 */</em>
+<a id='L42' name='L42' />  42 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/20.html#L45' title='Defined at 45 in bootload/main.c.'>wait</a>();
+<a id='L43' name='L43' />  43 
+<a id='L44' name='L44' />  44 <em class='comment'>/* ウェイト関数 */</em>
+<a id='L45' name='L45' />  45 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../R/249.html' title='Multiple referred from 2 places.'>wait</a>()
+<a id='L46' name='L46' />  46 <em class='brace'>{</em>
+<a id='L47' name='L47' />  47   <strong class='reserved'>volatile</strong> <strong class='reserved'>long</strong> <a href='../Y/154.html' title='Multiple used in 85 places.'>i</a>;
+<a id='L48' name='L48' />  48   <strong class='reserved'>for</strong>(<a href='../Y/154.html' title='Multiple used in 85 places.'>i</a> = 0; <a href='../Y/154.html' title='Multiple used in 85 places.'>i</a> &lt; 300000; <a href='../Y/154.html' title='Multiple used in 85 places.'>i</a>++)<em class='brace'>{</em>
+<a id='L49' name='L49' />  49     ;
+<a id='L50' name='L50' />  50   <em class='brace'>}</em>
+<a id='L51' name='L51' />  51 <em class='brace'>}</em>
+<a id='L52' name='L52' />  52 
+<a id='L53' name='L53' />  53 <em class='comment'>/** 初期化関数 */</em>
+<a id='L54' name='L54' />  54 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../R/177.html' title='Multiple referred from 8 places.'>init</a>(<strong class='reserved'>void</strong>)
+<a id='L55' name='L55' />  55 <em class='brace'>{</em>
+<a id='L56' name='L56' />  56   <em class='comment'>/* 以下はリンカスクリプトで定義されたシンボル */</em>
+<a id='L57' name='L57' />  57   <strong class='reserved'>extern</strong> <strong class='reserved'>int</strong> <a href='../Y/126.html' title='Multiple used in 2 places.'>erodata</a>, <a href='../Y/111.html' title='Multiple used in 2 places.'>data_start</a>, <a href='../Y/121.html' title='Multiple used in 2 places.'>edata</a>, <a href='../Y/86.html' title='Multiple used in 2 places.'>bss_start</a>, <a href='../Y/120.html' title='Multiple used in 2 places.'>ebss</a>;
+<a id='L58' name='L58' />  58 
+<a id='L59' name='L59' />  59   <em class='comment'>/*</em>
+<a id='L60' name='L60' />  60 <em class='comment'>   * データ領域とBSS領域を初期化する</em>
+<a id='L61' name='L61' />  61 <em class='comment'>   * この処理以降、グローバル変数が利用できる</em>
+<a id='L62' name='L62' />  62 <em class='comment'>   */</em>
+<a id='L63' name='L63' />  63   <a href='../D/229.html' title='Multiple defined in 2 places.'>memcpy</a>(&amp;<a href='../Y/111.html' title='Multiple used in 2 places.'>data_start</a>, &amp;<a href='../Y/126.html' title='Multiple used in 2 places.'>erodata</a>, (<strong class='reserved'>long</strong>)&amp;<a href='../Y/121.html' title='Multiple used in 2 places.'>edata</a> - (<strong class='reserved'>long</strong>)&amp;<a href='../Y/111.html' title='Multiple used in 2 places.'>data_start</a>);
+<a id='L64' name='L64' />  64   <a href='../D/230.html' title='Multiple defined in 2 places.'>memset</a>(&amp;<a href='../Y/86.html' title='Multiple used in 2 places.'>bss_start</a>, 0, (<strong class='reserved'>long</strong>)&amp;<a href='../Y/120.html' title='Multiple used in 2 places.'>ebss</a> - (<strong class='reserved'>long</strong>)&amp;<a href='../Y/86.html' title='Multiple used in 2 places.'>bss_start</a>);
+<a id='L65' name='L65' />  65 
+<a id='L66' name='L66' />  66   <em class='comment'>/*</em>
+<a id='L67' name='L67' />  67 <em class='comment'>   * ソフトウェア割り込みベクタの初期化</em>
+<a id='L68' name='L68' />  68 <em class='comment'>   */</em>
+<a id='L69' name='L69' />  69   <a href='../S/36.html#L8' title='Defined at 8 in misc/interrupt.c.'>softvec_init</a>();
+<a id='L70' name='L70' />  70 
+<a id='L71' name='L71' />  71   <em class='comment'>/*</em>
+<a id='L72' name='L72' />  72 <em class='comment'>   * シリアルポートの初期化</em>
+<a id='L73' name='L73' />  73 <em class='comment'>   */</em>
+<a id='L74' name='L74' />  74   <a href='../S/33.html#L61' title='Defined at 61 in misc/serial.c.'>serial_init</a>(<a href='../S/31.html#L17' title='Defined at 17 in misc/serial.h.'>SERIAL_DEFAULT_DEVICE</a>);
+<a id='L75' name='L75' />  75 
+<a id='L76' name='L76' />  76   <strong class='reserved'>return</strong> <a href='../S/39.html#L10' title='Defined at 10 in misc/defines.h.'>EXIT_SUCCESS</a>;
+<a id='L77' name='L77' />  77 <em class='brace'>}</em>
+<a id='L78' name='L78' />  78 
+<a id='L79' name='L79' />  79 <em class='comment'>/* メモリの16進ダンプ出力 */</em>
+<a id='L80' name='L80' />  80 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../R/160.html' title='Multiple referred from 2 places.'>dump</a>(<strong class='reserved'>char</strong> * <a href='../Y/87.html' title='Multiple used in 73 places.'>buf</a>, <strong class='reserved'>long</strong> <a href='../Y/218.html' title='Multiple used in 22 places.'>size</a>)
+<a id='L81' name='L81' />  81 <em class='brace'>{</em>
+<a id='L82' name='L82' />  82   <strong class='reserved'>long</strong> <a href='../Y/154.html' title='Multiple used in 85 places.'>i</a>;
+<a id='L83' name='L83' />  83 
+<a id='L84' name='L84' />  84   <strong class='reserved'>if</strong> (<a href='../Y/218.html' title='Multiple used in 22 places.'>size</a> &lt; 0) <em class='brace'>{</em>
+<a id='L85' name='L85' />  85     <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("no data.\n");
+<a id='L86' name='L86' />  86     <strong class='reserved'>return</strong> -1;
+<a id='L87' name='L87' />  87   <em class='brace'>}</em>
+<a id='L88' name='L88' />  88 
+<a id='L89' name='L89' />  89   <strong class='reserved'>for</strong> (<a href='../Y/154.html' title='Multiple used in 85 places.'>i</a>=0; <a href='../Y/154.html' title='Multiple used in 85 places.'>i</a> &lt; <a href='../Y/218.html' title='Multiple used in 22 places.'>size</a> ; <a href='../Y/154.html' title='Multiple used in 85 places.'>i</a>++) <em class='brace'>{</em>
+<a id='L90' name='L90' />  90     <a href='../D/242.html' title='Multiple defined in 2 places.'>putxval</a>(<a href='../Y/87.html' title='Multiple used in 73 places.'>buf</a>[<a href='../Y/154.html' title='Multiple used in 85 places.'>i</a>], 2);
+<a id='L91' name='L91' />  91     <strong class='reserved'>if</strong> ((<a href='../Y/154.html' title='Multiple used in 85 places.'>i</a> &amp; 0xf) == 0xf) <em class='brace'>{</em>
+<a id='L92' name='L92' />  92       <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("\n");
+<a id='L93' name='L93' />  93     <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L94' name='L94' />  94       <strong class='reserved'>if</strong> ((<a href='../Y/154.html' title='Multiple used in 85 places.'>i</a> &amp; 0xf) == 0x7)<em class='brace'>{</em>
+<a id='L95' name='L95' />  95         <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>(" ");
+<a id='L96' name='L96' />  96       <em class='brace'>}</em>
+<a id='L97' name='L97' />  97       <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>(" ");
+<a id='L98' name='L98' />  98     <em class='brace'>}</em>
+<a id='L99' name='L99' />  99   <em class='brace'>}</em>
+<a id='L100' name='L100' /> 100   <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>(" ");
+<a id='L101' name='L101' /> 101 
+<a id='L102' name='L102' /> 102   <strong class='reserved'>return</strong> <a href='../S/39.html#L10' title='Defined at 10 in misc/defines.h.'>EXIT_SUCCESS</a>;
+<a id='L103' name='L103' /> 103 <em class='brace'>}</em>
+<a id='L104' name='L104' /> 104 
+<a id='L105' name='L105' /> 105 <em class='sharp'>#if</em> 0
+<a id='L106' name='L106' /> 106 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/20.html#L28' title='Referred from 28 in bootload/main.c.'>printval</a>(<strong class='reserved'>void</strong>)
+<a id='L107' name='L107' /> 107 <em class='brace'>{</em>
+<a id='L108' name='L108' /> 108   <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("global_data = "); <a href='../D/242.html' title='Multiple defined in 2 places.'>putxval</a>(<a href='../Y/146.html' title='Multiple used in 2 places.'>global_data</a>, 0); <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("\n");
+<a id='L109' name='L109' /> 109   <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("global_bss = "); <a href='../D/242.html' title='Multiple defined in 2 places.'>putxval</a>(<a href='../Y/145.html' title='Multiple used in 2 places.'>global_bss</a>, 0); <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("\n");
+<a id='L110' name='L110' /> 110   <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("static_data = "); <a href='../D/242.html' title='Multiple defined in 2 places.'>putxval</a>(static_data, 0); <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("\n");
+<a id='L111' name='L111' /> 111   <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("static_bss = "); <a href='../D/242.html' title='Multiple defined in 2 places.'>putxval</a>(static_bss, 0); <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("\n");
+<a id='L112' name='L112' /> 112 <em class='brace'>}</em>
+<a id='L113' name='L113' /> 113 <em class='sharp'>#endif</em>
+<a id='L114' name='L114' /> 114 
+<a id='L115' name='L115' /> 115 <strong class='reserved'>int</strong> main(<strong class='reserved'>void</strong>)
+<a id='L116' name='L116' /> 116 <em class='brace'>{</em>
+<a id='L117' name='L117' /> 117   <strong class='reserved'>static</strong> <strong class='reserved'>char</strong> <a href='../Y/87.html' title='Multiple used in 73 places.'>buf</a>[16];
+<a id='L118' name='L118' /> 118   <strong class='reserved'>static</strong> <strong class='reserved'>long</strong> <a href='../Y/218.html' title='Multiple used in 22 places.'>size</a> = -1;
+<a id='L119' name='L119' /> 119   <strong class='reserved'>static</strong> <a href='../S/39.html#L17' title='Defined at 17 in misc/defines.h.'>String</a> <a href='../Y/165.html' title='Multiple used in 5 places.'>loadbuf</a> = <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>;
+<a id='L120' name='L120' /> 120   <strong class='reserved'>char</strong> * <a href='../Y/125.html' title='Multiple used in 7 places.'>entry_point</a>;
+<a id='L121' name='L121' /> 121   <strong class='reserved'>void</strong> (*<a href='../Y/129.html' title='Multiple used in 3 places.'>f</a>)(<strong class='reserved'>void</strong>);
+<a id='L122' name='L122' /> 122         
+<a id='L123' name='L123' /> 123   <strong class='reserved'>extern</strong> <strong class='reserved'>int</strong> <a href='../Y/89.html' title='Multiple used in 2 places.'>buffer_start</a>;
+<a id='L124' name='L124' /> 124         
+<a id='L125' name='L125' /> 125   <a href='../S/37.html#L28' title='Defined at 28 in misc/interrupt.h.'>INTR_DISABLE</a>;
+<a id='L126' name='L126' /> 126   <a href='../S/20.html#L54' title='Defined at 54 in bootload/main.c.'>init</a>();
+<a id='L127' name='L127' /> 127 
+<a id='L128' name='L128' /> 128   <em class='comment'>/* 4th step */</em>
+<a id='L129' name='L129' /> 129   <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("kzload (kozos boot loader) started. \n");
+<a id='L130' name='L130' /> 130 
+<a id='L131' name='L131' /> 131   <strong class='reserved'>while</strong> (1) <em class='brace'>{</em>
+<a id='L132' name='L132' /> 132     <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("kzload&gt; "); <em class='comment'>/* プロンプト表示 */</em>
+<a id='L133' name='L133' /> 133     <a href='../D/213.html' title='Multiple defined in 2 places.'>gets</a>(<a href='../Y/87.html' title='Multiple used in 73 places.'>buf</a>);
+<a id='L134' name='L134' /> 134 
+<a id='L135' name='L135' /> 135     <strong class='reserved'>if</strong> (!<a href='../D/274.html' title='Multiple defined in 2 places.'>strcmp</a>(<a href='../Y/87.html' title='Multiple used in 73 places.'>buf</a>, "load")) <em class='brace'>{</em>
+<a id='L136' name='L136' /> 136       <em class='comment'>/* ファイル転送 */</em>
+<a id='L137' name='L137' /> 137       <a href='../Y/165.html' title='Multiple used in 5 places.'>loadbuf</a> = (<strong class='reserved'>char</strong> *)(&amp;<a href='../Y/89.html' title='Multiple used in 2 places.'>buffer_start</a>);
+<a id='L138' name='L138' /> 138       <a href='../Y/218.html' title='Multiple used in 22 places.'>size</a> = <a href='../S/18.html#L87' title='Defined at 87 in bootload/xmodem.c.'>xmodem_recv</a>(<a href='../Y/165.html' title='Multiple used in 5 places.'>loadbuf</a>);
+<a id='L139' name='L139' /> 139       <a href='../S/20.html#L45' title='Defined at 45 in bootload/main.c.'>wait</a>();
+<a id='L140' name='L140' /> 140       <strong class='reserved'>if</strong> (<a href='../Y/218.html' title='Multiple used in 22 places.'>size</a> &lt; 0) <em class='brace'>{</em>
+<a id='L141' name='L141' /> 141         <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("\nXMODEM receive error!\n");
+<a id='L142' name='L142' /> 142       <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L143' name='L143' /> 143         <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("\nXMODEM receive succeed.\n");
+<a id='L144' name='L144' /> 144       <em class='brace'>}</em>
+<a id='L145' name='L145' /> 145     <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong> (!<a href='../D/274.html' title='Multiple defined in 2 places.'>strcmp</a>(<a href='../Y/87.html' title='Multiple used in 73 places.'>buf</a>, "dump")) <em class='brace'>{</em>
+<a id='L146' name='L146' /> 146       <em class='comment'>/* バッファの16進ダンプ */</em>
+<a id='L147' name='L147' /> 147       <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("size : ");
+<a id='L148' name='L148' /> 148       <a href='../D/242.html' title='Multiple defined in 2 places.'>putxval</a>(<a href='../Y/218.html' title='Multiple used in 22 places.'>size</a>, 0);
+<a id='L149' name='L149' /> 149       <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("\n");
+<a id='L150' name='L150' /> 150 
+<a id='L151' name='L151' /> 151       <a href='../S/20.html#L80' title='Defined at 80 in bootload/main.c.'>dump</a>(<a href='../Y/165.html' title='Multiple used in 5 places.'>loadbuf</a>, <a href='../Y/218.html' title='Multiple used in 22 places.'>size</a>);
+<a id='L152' name='L152' /> 152     <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong> (!<a href='../D/274.html' title='Multiple defined in 2 places.'>strcmp</a>(<a href='../Y/87.html' title='Multiple used in 73 places.'>buf</a>, "run")) <em class='brace'>{</em>
+<a id='L153' name='L153' /> 153       <em class='comment'>/* ELF形式ファイルをメモリ上に展開 */</em>
+<a id='L154' name='L154' /> 154       <a href='../Y/125.html' title='Multiple used in 7 places.'>entry_point</a> = <a href='../S/19.html#L145' title='Defined at 145 in bootload/elf.c.'>elf_load</a>(<a href='../Y/165.html' title='Multiple used in 5 places.'>loadbuf</a>);
+<a id='L155' name='L155' /> 155       <strong class='reserved'>if</strong>(!<a href='../Y/125.html' title='Multiple used in 7 places.'>entry_point</a>) <em class='brace'>{</em>
+<a id='L156' name='L156' /> 156         <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("run error!");
+<a id='L157' name='L157' /> 157       <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L158' name='L158' /> 158         <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("starting from entry_point ");
+<a id='L159' name='L159' /> 159         <a href='../D/242.html' title='Multiple defined in 2 places.'>putxval</a>((<a href='../S/39.html#L16' title='Defined at 16 in misc/defines.h.'>uint32</a>)<a href='../Y/125.html' title='Multiple used in 7 places.'>entry_point</a>, 0);
+<a id='L160' name='L160' /> 160         <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("\n");
+<a id='L161' name='L161' /> 161 
+<a id='L162' name='L162' /> 162         <a href='../Y/129.html' title='Multiple used in 3 places.'>f</a> = (<strong class='reserved'>void</strong> (*)(<strong class='reserved'>void</strong>))<a href='../Y/125.html' title='Multiple used in 7 places.'>entry_point</a>;
+<a id='L163' name='L163' /> 163         <a href='../Y/129.html' title='Multiple used in 3 places.'>f</a>(); <em class='comment'>/* ロードしたプログラムに処理を渡す */</em>
+<a id='L164' name='L164' /> 164       <em class='brace'>}</em>
+<a id='L165' name='L165' /> 165     <em class='brace'>}</em> <strong class='reserved'>else</strong> <strong class='reserved'>if</strong> (!<a href='../D/274.html' title='Multiple defined in 2 places.'>strcmp</a>(<a href='../Y/87.html' title='Multiple used in 73 places.'>buf</a>, "exit")) <em class='brace'>{</em>
+<a id='L166' name='L166' /> 166       <strong class='reserved'>break</strong>;
+<a id='L167' name='L167' /> 167     <em class='brace'>}</em> <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L168' name='L168' /> 168       <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("unknown.\n");
+<a id='L169' name='L169' /> 169     <em class='brace'>}</em>
+<a id='L170' name='L170' /> 170   <em class='brace'>}</em>
+<a id='L171' name='L171' /> 171 
+<a id='L172' name='L172' /> 172   <strong class='reserved'>return</strong> <a href='../S/39.html#L10' title='Defined at 10 in misc/defines.h.'>EXIT_SUCCESS</a>;
+<a id='L173' name='L173' /> 173 <em class='brace'>}</em>
+<a id='L174' name='L174' /> 174 
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM' />
+<em class='comment'>/* [&lt;][&gt;]<a href='#L45'>[^]</a><a href='#L115'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

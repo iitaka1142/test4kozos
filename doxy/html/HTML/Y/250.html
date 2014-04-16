@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>thread</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/5.html#L86'>thread</a>             86 os/kozos.c     static int put( kz_thread * thread )</span>
+<span class='curline'><a href='../S/5.html#L88'>thread</a>             88 os/kozos.c       if(thread == NULL) {</span>
+<span class='curline'><a href='../S/5.html#L94'>thread</a>             94 os/kozos.c         readyque.head = thread;</span>
+<span class='curline'><a href='../S/5.html#L98'>thread</a>             98 os/kozos.c         readyque.tail-&gt;next = thread;</span>
+<span class='curline'><a href='../S/5.html#L101'>thread</a>            101 os/kozos.c       readyque.tail = thread;</span>
+<span class='curline'><a href='../S/5.html#L113'>thread</a>            113 os/kozos.c     static void thread_init( kz_thread * thread )</span>
+<span class='curline'><a href='../S/5.html#L116'>thread</a>            116 os/kozos.c       thread-&gt;init.func(thread-&gt;init.argc, thread-&gt;init.argv);</span>
+<span class='curline'><a href='../S/5.html#L122'>thread</a>            122 os/kozos.c       kz_thread * thread = NULL;</span>
+<span class='curline'><a href='../S/5.html#L127'>thread</a>            127 os/kozos.c           thread = &amp;threads[i];</span>
+<span class='curline'><a href='../S/5.html#L132'>thread</a>            132 os/kozos.c       return thread;</span>
+<span class='curline'><a href='../S/5.html#L161'>thread</a>            161 os/kozos.c       kz_thread * thread = NULL;</span>
+<span class='curline'><a href='../S/5.html#L164'>thread</a>            164 os/kozos.c       thread = get_vacant_TCB();</span>
+<span class='curline'><a href='../S/5.html#L165'>thread</a>            165 os/kozos.c       if (thread == NULL) {</span>
+<span class='curline'><a href='../S/5.html#L171'>thread</a>            171 os/kozos.c       memset(thread, 0, sizeof(*thread));</span>
+<span class='curline'><a href='../S/5.html#L174'>thread</a>            174 os/kozos.c       strcpy(thread-&gt;name, name);</span>
+<span class='curline'><a href='../S/5.html#L175'>thread</a>            175 os/kozos.c       thread-&gt;init.func = func;</span>
+<span class='curline'><a href='../S/5.html#L176'>thread</a>            176 os/kozos.c       thread-&gt;init.argc = argc;</span>
+<span class='curline'><a href='../S/5.html#L177'>thread</a>            177 os/kozos.c       thread-&gt;init.argv = argv;</span>
+<span class='curline'><a href='../S/5.html#L180'>thread</a>            180 os/kozos.c       thread-&gt;stack = get_stack_area(stack_size);</span>
+<span class='curline'><a href='../S/5.html#L183'>thread</a>            183 os/kozos.c       sp = (uint32 *)thread-&gt;stack;</span>
+<span class='curline'><a href='../S/5.html#L196'>thread</a>            196 os/kozos.c       push(sp, (uint32)thread);</span>
+<span class='curline'><a href='../S/5.html#L199'>thread</a>            199 os/kozos.c       thread-&gt;context.sp = (uint32)sp;</span>
+<span class='curline'><a href='../S/5.html#L205'>thread</a>            205 os/kozos.c       put(thread);</span>
+<span class='curline'><a href='../S/5.html#L207'>thread</a>            207 os/kozos.c       return (kz_thread_id_t)thread;</span>
+<span class='curline'><a href='../S/5.html#L210'>thread</a>            210 os/kozos.c     static int thread_exit(kz_thread * thread)</span>
+<span class='curline'><a href='../S/5.html#L212'>thread</a>            212 os/kozos.c       puts(thread-&gt;name); puts(" EXIT.\n");</span>
+<span class='curline'><a href='../S/5.html#L215'>thread</a>            215 os/kozos.c       memset(thread, 0, sizeof(kz_thread));</span>
+</pre>
+</body>
+</html>

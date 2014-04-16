@@ -1,0 +1,16 @@
+<map id="memset" name="memset">
+<area shape="rect" id="node3" href="$kozos_8c.html#a2e6488cfd47118e19d4407d3a23eac3f" title="create TCB " alt="" coords="137,47,233,74"/>
+<area shape="rect" id="node13" href="$kozos_8h.html#a7078d5505c1e0c61af51bc66e5025685" title="ライブラリ関数 " alt="" coords="905,72,973,99"/>
+<area shape="rect" id="node18" href="$elf_8c.html#a59e612053a62a485fef60d4bea2b80e0" title="elf_load_header" alt="" coords="125,199,245,226"/>
+<area shape="rect" id="node26" href="$kozos_8c.html#a92177eed4eabc923bcd27462d8ce57b8" title="get_stack_area" alt="" coords="128,98,243,124"/>
+<area shape="rect" id="node30" href="$kozos_8c.html#a4dd8e8425a1c0c5d866a9271d243cdef" title="thread_exit" alt="" coords="313,148,401,175"/>
+<area shape="rect" id="node5" href="$kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b" title="system call " alt="" coords="315,72,400,99"/>
+<area shape="rect" id="node7" href="$kozos_8c.html#acd68041208fa0120669ac78343a47dc0" title="call_functions" alt="" coords="470,98,573,124"/>
+<area shape="rect" id="node9" href="$kozos_8c.html#aef8f2fde0f7865d66b9a7daf0e2426e0" title="syscall_proc" alt="" coords="622,98,719,124"/>
+<area shape="rect" id="node11" href="$kozos_8c.html#a69f871c66a43d6f0a644c57def130160" title="syscall_intr" alt="" coords="768,98,856,124"/>
+<area shape="rect" id="node15" href="$os_2main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="1021,72,1072,99"/>
+<area shape="rect" id="node20" href="$elf_8c.html#ab6ee5a7e957e5a4e552dfa2fe3724c13" title="elf_load_program" alt="" coords="294,199,421,226"/>
+<area shape="rect" id="node22" href="$elf_8h.html#a58b7300af370cb019f7098d7446f640d" title="elf_load" alt="" coords="486,199,557,226"/>
+<area shape="rect" id="node24" href="$bootload_2main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="645,199,696,226"/>
+<area shape="rect" id="node33" href="$kozos_8c.html#ad878125b5a334d151d787886f190ccf2" title="softerr_intr" alt="" coords="771,148,853,175"/>
+</map>

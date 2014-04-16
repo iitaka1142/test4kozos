@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>readyque</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/5.html#L44'>readyque</a>           44 os/kozos.c     } readyque;</span>
+<span class='curline'><a href='../S/5.html#L66'>readyque</a>           66 os/kozos.c       kz_thread * result = readyque.head;</span>
+<span class='curline'><a href='../S/5.html#L68'>readyque</a>           68 os/kozos.c       if(readyque.head == NULL){</span>
+<span class='curline'><a href='../S/5.html#L71'>readyque</a>           71 os/kozos.c       else if(readyque.head == readyque.tail){</span>
+<span class='curline'><a href='../S/5.html#L73'>readyque</a>           73 os/kozos.c         readyque.head = readyque.tail = NULL;</span>
+<span class='curline'><a href='../S/5.html#L76'>readyque</a>           76 os/kozos.c         readyque.head = readyque.head-&gt;next;</span>
+<span class='curline'><a href='../S/5.html#L92'>readyque</a>           92 os/kozos.c       if(readyque.tail == NULL) {</span>
+<span class='curline'><a href='../S/5.html#L94'>readyque</a>           94 os/kozos.c         readyque.head = thread;</span>
+<span class='curline'><a href='../S/5.html#L98'>readyque</a>           98 os/kozos.c         readyque.tail-&gt;next = thread;</span>
+<span class='curline'><a href='../S/5.html#L101'>readyque</a>          101 os/kozos.c       readyque.tail = thread;</span>
+<span class='curline'><a href='../S/5.html#L261'>readyque</a>          261 os/kozos.c       if( readyque.head == NULL ){</span>
+<span class='curline'><a href='../S/5.html#L265'>readyque</a>          265 os/kozos.c       current = readyque.head;</span>
+<span class='curline'><a href='../S/5.html#L305'>readyque</a>          305 os/kozos.c       readyque.head = readyque.tail = NULL;</span>
+</pre>
+</body>
+</html>

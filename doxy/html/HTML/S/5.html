@@ -1,0 +1,384 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>os/kozos.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP' /><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/45.html'>os</a>/kozos.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L64'>[^]</a><a href='#L330'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L64' title='Defined at 64.'>get</a></li>
+<li><a href='#L86' title='Defined at 86.'>put</a></li>
+<li><a href='#L107' title='Defined at 107.'>thread_end</a></li>
+<li><a href='#L113' title='Defined at 113.'>thread_init</a></li>
+<li><a href='#L120' title='Defined at 120.'>get_vacant_TCB</a></li>
+<li><a href='#L135' title='Defined at 135.'>get_stack_area</a></li>
+<li><a href='#L146' title='Defined at 146.'>push</a></li>
+<li><a href='#L153' title='Defined at 153.'>pop</a></li>
+<li><a href='#L159' title='Defined at 159.'>thread_run</a></li>
+<li><a href='#L210' title='Defined at 210.'>thread_exit</a></li>
+<li><a href='#L221' title='Defined at 221.'>setintr</a></li>
+<li><a href='#L234' title='Defined at 234.'>call_functions</a></li>
+<li><a href='#L250' title='Defined at 250.'>syscall_proc</a></li>
+<li><a href='#L259' title='Defined at 259.'>schedule</a></li>
+<li><a href='#L270' title='Defined at 270.'>syscall_intr</a></li>
+<li><a href='#L277' title='Defined at 277.'>softerr_intr</a></li>
+<li><a href='#L286' title='Defined at 286.'>thread_intr</a></li>
+<li><a href='#L301' title='Defined at 301.'>kz_start</a></li>
+<li><a href='#L321' title='Defined at 321.'>kz_sysdown</a></li>
+<li><a href='#L330' title='Defined at 330.'>kz_syscall</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1' />   1 <em class='sharp'>#include</em> "<a href='39.html'>../misc/defines.h</a>"
+<a id='L2' name='L2' />   2 <em class='sharp'>#include</em> "<a href='30.html'>../misc/intr.h</a>"
+<a id='L3' name='L3' />   3 <em class='sharp'>#include</em> "<a href='37.html'>../misc/interrupt.h</a>"
+<a id='L4' name='L4' />   4 <em class='sharp'>#include</em> "<a href='../I/5.html'>lib.h</a>"
+<a id='L5' name='L5' />   5 <em class='sharp'>#include</em> "<a href='7.html'>syscall.h</a>"
+<a id='L6' name='L6' />   6 <em class='sharp'>#include</em> "<a href='11.html'>kozos.h</a>"
+<a id='L7' name='L7' />   7 
+<a id='L8' name='L8' />   8 <em class='sharp'>#define</em> <a href='../R/131.html' title='Multiple referred from 2 places.'>THREAD_NUM</a> 6
+<a id='L9' name='L9' />   9 <em class='sharp'>#define</em> <a href='../S/5.html#L20' title='Referred from 20 in os/kozos.c.'>THREAD_NAME_MAX_SIZE</a> 15
+<a id='L10' name='L10' />  10 
+<a id='L11' name='L11' />  11 <em class='comment'>/** Thread context */</em>
+<a id='L12' name='L12' />  12 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> _kz_context <em class='brace'>{</em>
+<a id='L13' name='L13' />  13   <a href='../S/37.html#L18' title='Defined at 18 in misc/interrupt.h.'>stack_ptr_t</a> <a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>; <em class='comment'>///&lt; stack pointer</em>
+<a id='L14' name='L14' />  14 <em class='brace'>}</em> <a href='../R/179.html' title='Multiple referred from 2 places.'>kz_context</a>;
+<a id='L15' name='L15' />  15 
+<a id='L16' name='L16' />  16 <em class='comment'>/** Task Control Block */</em>
+<a id='L17' name='L17' />  17 <strong class='reserved'>typedef</strong> <strong class='reserved'>struct</strong> <a href='../S/5.html#L19' title='Referred from 19 in os/kozos.c.'>_kz_thread</a> <em class='brace'>{</em>
+<a id='L18' name='L18' />  18   <em class='comment'>/** using queue */</em>
+<a id='L19' name='L19' />  19   <strong class='reserved'>struct</strong> <a href='../S/5.html#L17' title='Defined at 17 in os/kozos.c.'>_kz_thread</a> *<a href='../Y/172.html' title='Multiple used in 3 places.'>next</a>;
+<a id='L20' name='L20' />  20   <strong class='reserved'>char</strong> <a href='../Y/171.html' title='Multiple used in 17 places.'>name</a> [<a href='../S/5.html#L9' title='Defined at 9 in os/kozos.c.'>THREAD_NAME_MAX_SIZE</a> + 1];
+<a id='L21' name='L21' />  21   <strong class='reserved'>char</strong> * <a href='../Y/230.html' title='Multiple used in 7 places.'>stack</a>;
+<a id='L22' name='L22' />  22 
+<a id='L23' name='L23' />  23   <em class='comment'>/** parameters for startup(thread_init()) */</em>
+<a id='L24' name='L24' />  24   <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L25' name='L25' />  25     <a href='../Y/161.html' title='Multiple used in 8 places.'>kz_func_t</a> <a href='../Y/143.html' title='Multiple used in 13 places.'>func</a>;
+<a id='L26' name='L26' />  26     <strong class='reserved'>int</strong> <a href='../Y/68.html' title='Multiple used in 18 places.'>argc</a>;
+<a id='L27' name='L27' />  27     <strong class='reserved'>char</strong> ** <a href='../Y/69.html' title='Multiple used in 25 places.'>argv</a>;
+<a id='L28' name='L28' />  28   <em class='brace'>}</em> <a href='../S/20.html#L54' title='Defined at 54 in bootload/main.c.'>init</a>;
+<a id='L29' name='L29' />  29   
+<a id='L30' name='L30' />  30   <em class='comment'>/** buffer for system call */</em>
+<a id='L31' name='L31' />  31   <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L32' name='L32' />  32     <a href='../S/7.html#L10' title='Defined at 10 in os/syscall.h.'>kz_syscall_type_t</a> <a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>;
+<a id='L33' name='L33' />  33     <a href='../S/7.html#L32' title='Defined at 32 in os/syscall.h.'>kz_syscall_param_t</a> * <a href='../Y/183.html' title='Multiple used in 17 places.'>param</a>;
+<a id='L34' name='L34' />  34   <em class='brace'>}</em> <a href='../Y/243.html' title='Multiple used in 4 places.'>syscall</a>;
+<a id='L35' name='L35' />  35   
+<a id='L36' name='L36' />  36   <a href='../S/5.html#L14' title='Defined at 14 in os/kozos.c.'>kz_context</a> <a href='../Y/104.html' title='Multiple used in 6 places.'>context</a>;
+<a id='L37' name='L37' />  37   
+<a id='L38' name='L38' />  38 <em class='brace'>}</em> <strong class='reserved'>__attribute__</strong>((aligned(64))) <a href='../R/187.html' title='Multiple referred from 14 places.'>kz_thread</a>;
+<a id='L39' name='L39' />  39 
+<a id='L40' name='L40' />  40 <em class='comment'>/** ready queue of thread */</em>
+<a id='L41' name='L41' />  41 <strong class='reserved'>static</strong> <strong class='reserved'>struct</strong> <em class='brace'>{</em>
+<a id='L42' name='L42' />  42   <a href='../S/5.html#L38' title='Defined at 38 in os/kozos.c.'>kz_thread</a> * <a href='../Y/151.html' title='Multiple used in 10 places.'>head</a>;
+<a id='L43' name='L43' />  43   <a href='../S/5.html#L38' title='Defined at 38 in os/kozos.c.'>kz_thread</a> * <a href='../Y/244.html' title='Multiple used in 7 places.'>tail</a>;
+<a id='L44' name='L44' />  44 <em class='brace'>}</em> <a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>;
+<a id='L45' name='L45' />  45 
+<a id='L46' name='L46' />  46 <strong class='reserved'>static</strong> <a href='../S/5.html#L38' title='Defined at 38 in os/kozos.c.'>kz_thread</a> * <a href='../Y/108.html' title='Multiple used in 15 places.'>current</a>; <em class='comment'>///&lt; current thread</em>
+<a id='L47' name='L47' />  47 <strong class='reserved'>static</strong> <a href='../S/5.html#L38' title='Defined at 38 in os/kozos.c.'>kz_thread</a> <a href='../Y/252.html' title='Multiple used in 4 places.'>threads</a>[<a href='../S/5.html#L8' title='Defined at 8 in os/kozos.c.'>THREAD_NUM</a>]; <em class='comment'>///&lt; Task Control Block(TCB)</em>
+<a id='L48' name='L48' />  48 <strong class='reserved'>static</strong> <a href='../Y/162.html' title='Multiple used in 3 places.'>kz_handler_t</a> <a href='../Y/150.html' title='Multiple used in 5 places.'>handlers</a>[<a href='../S/30.html#L6' title='Defined at 6 in misc/intr.h.'>SOFTVEC_TYPE_NUM</a>]; <em class='comment'>///&lt; interrupt handler</em>
+<a id='L49' name='L49' />  49 
+<a id='L50' name='L50' />  50 <strong class='reserved'>void</strong> <a href='../Y/117.html' title='Multiple used in 3 places.'>dispatch</a>(<a href='../S/5.html#L14' title='Defined at 14 in os/kozos.c.'>kz_context</a> * <a href='../Y/104.html' title='Multiple used in 6 places.'>context</a>) <strong class='reserved'>__attribute__</strong>((<a href='../Y/173.html' title='Multiple used in 6 places.'>noreturn</a>));
+<a id='L51' name='L51' />  51 <em class='comment'>/**&lt;</em>
+<a id='L52' name='L52' />  52 <em class='comment'>   @see startup.s</em>
+<a id='L53' name='L53' />  53 <em class='comment'>*/</em>
+<a id='L54' name='L54' />  54 
+<a id='L55' name='L55' />  55 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/5.html#L286' title='Defined at 286 in os/kozos.c.'>thread_intr</a>(<a href='../S/37.html#L12' title='Defined at 12 in misc/interrupt.h.'>softvec_type_t</a> <a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>, <a href='../S/37.html#L18' title='Defined at 18 in misc/interrupt.h.'>stack_ptr_t</a> <a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>) <strong class='reserved'>__attribute__</strong>((<a href='../Y/173.html' title='Multiple used in 6 places.'>noreturn</a>));
+<a id='L56' name='L56' />  56 <em class='comment'>/**&lt;</em>
+<a id='L57' name='L57' />  57 <em class='comment'>    interrupt handler</em>
+<a id='L58' name='L58' />  58 <em class='comment'>*/</em>
+<a id='L59' name='L59' />  59 
+<a id='L60' name='L60' />  60 <em class='comment'>/** get 1 thread from ready queue</em>
+<a id='L61' name='L61' />  61 <em class='comment'></em>
+<a id='L62' name='L62' />  62 <em class='comment'>    (side effect) queue lose its top element</em>
+<a id='L63' name='L63' />  63 <em class='comment'> */</em>
+<a id='L64' name='L64' />  64 <strong class='reserved'>static</strong> <a href='../S/5.html#L38' title='Defined at 38 in os/kozos.c.'>kz_thread</a> * <a href='../R/169.html' title='Multiple referred from 2 places.'>get</a>( <strong class='reserved'>void</strong> )
+<a id='L65' name='L65' />  65 <em class='brace'>{</em>
+<a id='L66' name='L66' />  66   <a href='../S/5.html#L38' title='Defined at 38 in os/kozos.c.'>kz_thread</a> * <a href='../Y/201.html' title='Multiple used in 2 places.'>result</a> = <a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/151.html' title='Multiple used in 10 places.'>head</a>;
+<a id='L67' name='L67' />  67 
+<a id='L68' name='L68' />  68   <strong class='reserved'>if</strong>(<a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/151.html' title='Multiple used in 10 places.'>head</a> == <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>)<em class='brace'>{</em>
+<a id='L69' name='L69' />  69     <em class='comment'>// do not have to do anything</em>
+<a id='L70' name='L70' />  70   <em class='brace'>}</em>
+<a id='L71' name='L71' />  71   <strong class='reserved'>else</strong> <strong class='reserved'>if</strong>(<a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/151.html' title='Multiple used in 10 places.'>head</a> == <a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/244.html' title='Multiple used in 7 places.'>tail</a>)<em class='brace'>{</em>
+<a id='L72' name='L72' />  72     <em class='comment'>// queue has only 1 element and become empty</em>
+<a id='L73' name='L73' />  73     <a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/151.html' title='Multiple used in 10 places.'>head</a> = <a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/244.html' title='Multiple used in 7 places.'>tail</a> = <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>;
+<a id='L74' name='L74' />  74   <em class='brace'>}</em>
+<a id='L75' name='L75' />  75   <strong class='reserved'>else</strong><em class='brace'>{</em>
+<a id='L76' name='L76' />  76     <a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/151.html' title='Multiple used in 10 places.'>head</a> = <a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/151.html' title='Multiple used in 10 places.'>head</a>-&gt;<a href='../Y/172.html' title='Multiple used in 3 places.'>next</a>;
+<a id='L77' name='L77' />  77   <em class='brace'>}</em>
+<a id='L78' name='L78' />  78   
+<a id='L79' name='L79' />  79   <strong class='reserved'>return</strong> <a href='../Y/201.html' title='Multiple used in 2 places.'>result</a>;
+<a id='L80' name='L80' />  80 <em class='brace'>}</em>
+<a id='L81' name='L81' />  81 
+<a id='L82' name='L82' />  82 <em class='comment'>/** put 1 thread to ready queue</em>
+<a id='L83' name='L83' />  83 <em class='comment'></em>
+<a id='L84' name='L84' />  84 <em class='comment'>    (side effect)queue get longer    </em>
+<a id='L85' name='L85' />  85 <em class='comment'> */</em>
+<a id='L86' name='L86' />  86 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../R/197.html' title='Multiple referred from 2 places.'>put</a>( <a href='../S/5.html#L38' title='Defined at 38 in os/kozos.c.'>kz_thread</a> * <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a> )
+<a id='L87' name='L87' />  87 <em class='brace'>{</em>
+<a id='L88' name='L88' />  88   <strong class='reserved'>if</strong>(<a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a> == <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>) <em class='brace'>{</em>
+<a id='L89' name='L89' />  89     <strong class='reserved'>return</strong> -1;
+<a id='L90' name='L90' />  90   <em class='brace'>}</em>
+<a id='L91' name='L91' />  91 
+<a id='L92' name='L92' />  92   <strong class='reserved'>if</strong>(<a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/244.html' title='Multiple used in 7 places.'>tail</a> == <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>) <em class='brace'>{</em>
+<a id='L93' name='L93' />  93     <em class='comment'>// queue is empty</em>
+<a id='L94' name='L94' />  94     <a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/151.html' title='Multiple used in 10 places.'>head</a> = <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>;
+<a id='L95' name='L95' />  95   <em class='brace'>}</em>
+<a id='L96' name='L96' />  96   <strong class='reserved'>else</strong> <em class='brace'>{</em>
+<a id='L97' name='L97' />  97     <em class='comment'>// put given thread to ready queue</em>
+<a id='L98' name='L98' />  98     <a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/244.html' title='Multiple used in 7 places.'>tail</a>-&gt;<a href='../Y/172.html' title='Multiple used in 3 places.'>next</a> = <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>;
+<a id='L99' name='L99' />  99   <em class='brace'>}</em>
+<a id='L100' name='L100' /> 100 
+<a id='L101' name='L101' /> 101   <a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/244.html' title='Multiple used in 7 places.'>tail</a> = <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>;
+<a id='L102' name='L102' /> 102   
+<a id='L103' name='L103' /> 103   <strong class='reserved'>return</strong> <a href='../S/39.html#L10' title='Defined at 10 in misc/defines.h.'>EXIT_SUCCESS</a>;
+<a id='L104' name='L104' /> 104 <em class='brace'>}</em>
+<a id='L105' name='L105' /> 105 
+<a id='L106' name='L106' /> 106 <em class='comment'>/** exit thread */</em>
+<a id='L107' name='L107' /> 107 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../R/240.html' title='Multiple referred from 2 places.'>thread_end</a>( <strong class='reserved'>void</strong> )
+<a id='L108' name='L108' /> 108 <em class='brace'>{</em>
+<a id='L109' name='L109' /> 109   <a href='../S/14.html#L20' title='Defined at 20 in os/syscall.c.'>kz_exit</a>();
+<a id='L110' name='L110' /> 110 <em class='brace'>}</em>
+<a id='L111' name='L111' /> 111 
+<a id='L112' name='L112' /> 112 <em class='comment'>/** start up thread */</em>
+<a id='L113' name='L113' /> 113 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/5.html#L187' title='Referred from 187 in os/kozos.c.'>thread_init</a>( <a href='../S/5.html#L38' title='Defined at 38 in os/kozos.c.'>kz_thread</a> * <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a> )
+<a id='L114' name='L114' /> 114 <em class='brace'>{</em>
+<a id='L115' name='L115' /> 115   <em class='comment'>/* call main function of thread */</em>
+<a id='L116' name='L116' /> 116   <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>-&gt;<a href='../S/20.html#L54' title='Defined at 54 in bootload/main.c.'>init</a>.<a href='../Y/143.html' title='Multiple used in 13 places.'>func</a>(<a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>-&gt;<a href='../S/20.html#L54' title='Defined at 54 in bootload/main.c.'>init</a>.<a href='../Y/68.html' title='Multiple used in 18 places.'>argc</a>, <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>-&gt;<a href='../S/20.html#L54' title='Defined at 54 in bootload/main.c.'>init</a>.<a href='../Y/69.html' title='Multiple used in 25 places.'>argv</a>);
+<a id='L117' name='L117' /> 117   <a href='../S/5.html#L107' title='Defined at 107 in os/kozos.c.'>thread_end</a>();
+<a id='L118' name='L118' /> 118 <em class='brace'>}</em>
+<a id='L119' name='L119' /> 119 
+<a id='L120' name='L120' /> 120 <strong class='reserved'>inline</strong> <strong class='reserved'>static</strong> <a href='../S/5.html#L38' title='Defined at 38 in os/kozos.c.'>kz_thread</a> * <a href='../S/5.html#L164' title='Referred from 164 in os/kozos.c.'>get_vacant_TCB</a>( <strong class='reserved'>void</strong> )
+<a id='L121' name='L121' /> 121 <em class='brace'>{</em>
+<a id='L122' name='L122' /> 122   <a href='../S/5.html#L38' title='Defined at 38 in os/kozos.c.'>kz_thread</a> * <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a> = <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>;
+<a id='L123' name='L123' /> 123 
+<a id='L124' name='L124' /> 124   <em class='comment'>/// search for bacant TCB</em>
+<a id='L125' name='L125' /> 125   <strong class='reserved'>for</strong>(<strong class='reserved'>int</strong> <a href='../Y/154.html' title='Multiple used in 85 places.'>i</a> = 0; <a href='../Y/154.html' title='Multiple used in 85 places.'>i</a> &lt; <a href='../S/5.html#L8' title='Defined at 8 in os/kozos.c.'>THREAD_NUM</a>; <a href='../Y/154.html' title='Multiple used in 85 places.'>i</a>++)<em class='brace'>{</em>
+<a id='L126' name='L126' /> 126     <strong class='reserved'>if</strong>(<a href='../Y/252.html' title='Multiple used in 4 places.'>threads</a>[<a href='../Y/154.html' title='Multiple used in 85 places.'>i</a>].<a href='../S/20.html#L54' title='Defined at 54 in bootload/main.c.'>init</a>.<a href='../Y/143.html' title='Multiple used in 13 places.'>func</a> == <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>) <em class='brace'>{</em>
+<a id='L127' name='L127' /> 127       <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a> = &amp;<a href='../Y/252.html' title='Multiple used in 4 places.'>threads</a>[<a href='../Y/154.html' title='Multiple used in 85 places.'>i</a>];
+<a id='L128' name='L128' /> 128       <strong class='reserved'>break</strong>;
+<a id='L129' name='L129' /> 129     <em class='brace'>}</em>
+<a id='L130' name='L130' /> 130   <em class='brace'>}</em>
+<a id='L131' name='L131' /> 131   
+<a id='L132' name='L132' /> 132   <strong class='reserved'>return</strong> <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>;
+<a id='L133' name='L133' /> 133 <em class='brace'>}</em>
+<a id='L134' name='L134' /> 134 
+<a id='L135' name='L135' /> 135 <strong class='reserved'>inline</strong> <strong class='reserved'>static</strong> <strong class='reserved'>char</strong> * <a href='../S/5.html#L180' title='Referred from 180 in os/kozos.c.'>get_stack_area</a>(<a href='../S/37.html#L18' title='Defined at 18 in misc/interrupt.h.'>stack_ptr_t</a> <a href='../Y/231.html' title='Multiple used in 13 places.'>stack_size</a>)
+<a id='L136' name='L136' /> 136 <em class='brace'>{</em>
+<a id='L137' name='L137' /> 137   <strong class='reserved'>extern</strong> <strong class='reserved'>char</strong> <a href='../Y/254.html' title='Multiple used in 2 places.'>userstack</a>;
+<a id='L138' name='L138' /> 138   <strong class='reserved'>static</strong> <strong class='reserved'>char</strong> * <a href='../Y/251.html' title='Multiple used in 4 places.'>thread_stack</a> = &amp;<a href='../Y/254.html' title='Multiple used in 2 places.'>userstack</a>;
+<a id='L139' name='L139' /> 139 
+<a id='L140' name='L140' /> 140   <a href='../D/230.html' title='Multiple defined in 2 places.'>memset</a>(<a href='../Y/251.html' title='Multiple used in 4 places.'>thread_stack</a>, 0, <a href='../Y/231.html' title='Multiple used in 13 places.'>stack_size</a>);
+<a id='L141' name='L141' /> 141   <a href='../Y/251.html' title='Multiple used in 4 places.'>thread_stack</a> += <a href='../Y/231.html' title='Multiple used in 13 places.'>stack_size</a>;
+<a id='L142' name='L142' /> 142   
+<a id='L143' name='L143' /> 143   <strong class='reserved'>return</strong> <a href='../Y/251.html' title='Multiple used in 4 places.'>thread_stack</a>;
+<a id='L144' name='L144' /> 144 <em class='brace'>}</em>
+<a id='L145' name='L145' /> 145 
+<a id='L146' name='L146' /> 146 <strong class='reserved'>inline</strong> <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../R/196.html' title='Multiple referred from 9 places.'>push</a>(<a href='../S/39.html#L16' title='Defined at 16 in misc/defines.h.'>uint32</a> * <a href='../Y/230.html' title='Multiple used in 7 places.'>stack</a>, <a href='../S/39.html#L16' title='Defined at 16 in misc/defines.h.'>uint32</a> <a href='../Y/255.html' title='Multiple used in 14 places.'>value</a>)
+<a id='L147' name='L147' /> 147 <em class='brace'>{</em>
+<a id='L148' name='L148' /> 148   *(--<a href='../Y/230.html' title='Multiple used in 7 places.'>stack</a>) = <a href='../Y/255.html' title='Multiple used in 14 places.'>value</a>;
+<a id='L149' name='L149' /> 149 
+<a id='L150' name='L150' /> 150   <strong class='reserved'>return</strong> <a href='../S/39.html#L10' title='Defined at 10 in misc/defines.h.'>EXIT_SUCCESS</a>;
+<a id='L151' name='L151' /> 151 <em class='brace'>}</em>
+<a id='L152' name='L152' /> 152 
+<a id='L153' name='L153' /> 153 <strong class='reserved'>inline</strong> <strong class='reserved'>static</strong> <a href='../S/37.html#L18' title='Defined at 18 in misc/interrupt.h.'>stack_ptr_t</a> pop(<a href='../S/39.html#L16' title='Defined at 16 in misc/defines.h.'>uint32</a> * <a href='../Y/230.html' title='Multiple used in 7 places.'>stack</a>)
+<a id='L154' name='L154' /> 154 <em class='brace'>{</em>
+<a id='L155' name='L155' /> 155   <strong class='reserved'>return</strong> *(<a href='../Y/230.html' title='Multiple used in 7 places.'>stack</a>++);
+<a id='L156' name='L156' /> 156 <em class='brace'>}</em>
+<a id='L157' name='L157' /> 157 
+<a id='L158' name='L158' /> 158 <em class='comment'>/** system call */</em>
+<a id='L159' name='L159' /> 159 <strong class='reserved'>static</strong> <a href='../S/7.html#L12' title='Defined at 12 in os/syscall.h.'>kz_thread_id_t</a> <a href='../R/244.html' title='Multiple referred from 2 places.'>thread_run</a>(<a href='../S/39.html#L17' title='Defined at 17 in misc/defines.h.'>String</a> <a href='../Y/171.html' title='Multiple used in 17 places.'>name</a>, <a href='../Y/161.html' title='Multiple used in 8 places.'>kz_func_t</a> <a href='../Y/143.html' title='Multiple used in 13 places.'>func</a>, <strong class='reserved'>int</strong> <a href='../Y/68.html' title='Multiple used in 18 places.'>argc</a>, <strong class='reserved'>char</strong> * <a href='../Y/69.html' title='Multiple used in 25 places.'>argv</a>[], <a href='../S/37.html#L18' title='Defined at 18 in misc/interrupt.h.'>stack_ptr_t</a> <a href='../Y/231.html' title='Multiple used in 13 places.'>stack_size</a>)
+<a id='L160' name='L160' /> 160 <em class='brace'>{</em>
+<a id='L161' name='L161' /> 161   <a href='../S/5.html#L38' title='Defined at 38 in os/kozos.c.'>kz_thread</a> * <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a> = <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>;
+<a id='L162' name='L162' /> 162   <a href='../S/39.html#L16' title='Defined at 16 in misc/defines.h.'>uint32</a> * <a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a> = <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>;
+<a id='L163' name='L163' /> 163   
+<a id='L164' name='L164' /> 164   <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a> = <a href='../S/5.html#L120' title='Defined at 120 in os/kozos.c.'>get_vacant_TCB</a>();
+<a id='L165' name='L165' /> 165   <strong class='reserved'>if</strong> (<a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a> == <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>) <em class='brace'>{</em>
+<a id='L166' name='L166' /> 166     <em class='comment'>/// did not find</em>
+<a id='L167' name='L167' /> 167     <strong class='reserved'>return</strong> -1;
+<a id='L168' name='L168' /> 168   <em class='brace'>}</em>
+<a id='L169' name='L169' /> 169   
+<a id='L170' name='L170' /> 170   <em class='comment'>// clear TCB</em>
+<a id='L171' name='L171' /> 171   <a href='../D/230.html' title='Multiple defined in 2 places.'>memset</a>(<a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>, 0, <strong class='reserved'>sizeof</strong>(*<a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>));
+<a id='L172' name='L172' /> 172   
+<a id='L173' name='L173' /> 173   <em class='comment'>// init thread parameters</em>
+<a id='L174' name='L174' /> 174   <a href='../D/275.html' title='Multiple defined in 2 places.'>strcpy</a>(<a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>-&gt;<a href='../Y/171.html' title='Multiple used in 17 places.'>name</a>, <a href='../Y/171.html' title='Multiple used in 17 places.'>name</a>);
+<a id='L175' name='L175' /> 175   <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>-&gt;<a href='../S/20.html#L54' title='Defined at 54 in bootload/main.c.'>init</a>.<a href='../Y/143.html' title='Multiple used in 13 places.'>func</a> = <a href='../Y/143.html' title='Multiple used in 13 places.'>func</a>;
+<a id='L176' name='L176' /> 176   <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>-&gt;<a href='../S/20.html#L54' title='Defined at 54 in bootload/main.c.'>init</a>.<a href='../Y/68.html' title='Multiple used in 18 places.'>argc</a> = <a href='../Y/68.html' title='Multiple used in 18 places.'>argc</a>;
+<a id='L177' name='L177' /> 177   <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>-&gt;<a href='../S/20.html#L54' title='Defined at 54 in bootload/main.c.'>init</a>.<a href='../Y/69.html' title='Multiple used in 25 places.'>argv</a> = <a href='../Y/69.html' title='Multiple used in 25 places.'>argv</a>;
+<a id='L178' name='L178' /> 178 
+<a id='L179' name='L179' /> 179   <em class='comment'>// get stack area</em>
+<a id='L180' name='L180' /> 180   <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>-&gt;<a href='../Y/230.html' title='Multiple used in 7 places.'>stack</a> = <a href='../S/5.html#L135' title='Defined at 135 in os/kozos.c.'>get_stack_area</a>(<a href='../Y/231.html' title='Multiple used in 13 places.'>stack_size</a>);
+<a id='L181' name='L181' /> 181   
+<a id='L182' name='L182' /> 182   <em class='comment'>// initialize stack area</em>
+<a id='L183' name='L183' /> 183   <a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a> = (<a href='../S/39.html#L16' title='Defined at 16 in misc/defines.h.'>uint32</a> *)<a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>-&gt;<a href='../Y/230.html' title='Multiple used in 7 places.'>stack</a>;
+<a id='L184' name='L184' /> 184   (<strong class='reserved'>void</strong>)<a href='../S/5.html#L146' title='Defined at 146 in os/kozos.c.'>push</a>(<a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>, (<a href='../S/39.html#L16' title='Defined at 16 in misc/defines.h.'>uint32</a>)<a href='../S/5.html#L107' title='Defined at 107 in os/kozos.c.'>thread_end</a>);
+<a id='L185' name='L185' /> 185   
+<a id='L186' name='L186' /> 186   <em class='comment'>// set program counter</em>
+<a id='L187' name='L187' /> 187   (<strong class='reserved'>void</strong>)<a href='../S/5.html#L146' title='Defined at 146 in os/kozos.c.'>push</a>(<a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>, (<a href='../S/39.html#L16' title='Defined at 16 in misc/defines.h.'>uint32</a>)<a href='../S/5.html#L113' title='Defined at 113 in os/kozos.c.'>thread_init</a>);
+<a id='L188' name='L188' /> 188   <a href='../S/5.html#L146' title='Defined at 146 in os/kozos.c.'>push</a>(<a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>, 0); <em class='comment'>// ER6</em>
+<a id='L189' name='L189' /> 189   <a href='../S/5.html#L146' title='Defined at 146 in os/kozos.c.'>push</a>(<a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>, 0); <em class='comment'>// ER5</em>
+<a id='L190' name='L190' /> 190   <a href='../S/5.html#L146' title='Defined at 146 in os/kozos.c.'>push</a>(<a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>, 0); <em class='comment'>// ER4</em>
+<a id='L191' name='L191' /> 191   <a href='../S/5.html#L146' title='Defined at 146 in os/kozos.c.'>push</a>(<a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>, 0); <em class='comment'>// ER3</em>
+<a id='L192' name='L192' /> 192   <a href='../S/5.html#L146' title='Defined at 146 in os/kozos.c.'>push</a>(<a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>, 0); <em class='comment'>// ER2</em>
+<a id='L193' name='L193' /> 193   <a href='../S/5.html#L146' title='Defined at 146 in os/kozos.c.'>push</a>(<a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>, 0); <em class='comment'>// ER1</em>
+<a id='L194' name='L194' /> 194 
+<a id='L195' name='L195' /> 195   <em class='comment'>// arguments of thread_init)</em>
+<a id='L196' name='L196' /> 196   <a href='../S/5.html#L146' title='Defined at 146 in os/kozos.c.'>push</a>(<a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>, (<a href='../S/39.html#L16' title='Defined at 16 in misc/defines.h.'>uint32</a>)<a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>);
+<a id='L197' name='L197' /> 197 
+<a id='L198' name='L198' /> 198   <em class='comment'>// set context of thread</em>
+<a id='L199' name='L199' /> 199   <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>-&gt;<a href='../Y/104.html' title='Multiple used in 6 places.'>context</a>.<a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a> = (<a href='../S/39.html#L16' title='Defined at 16 in misc/defines.h.'>uint32</a>)<a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>;
+<a id='L200' name='L200' /> 200 
+<a id='L201' name='L201' /> 201   <em class='comment'>// put thread to ready queue since that thread use system call</em>
+<a id='L202' name='L202' /> 202   <a href='../S/5.html#L86' title='Defined at 86 in os/kozos.c.'>put</a>(<a href='../Y/108.html' title='Multiple used in 15 places.'>current</a>);
+<a id='L203' name='L203' /> 203   
+<a id='L204' name='L204' /> 204   <em class='comment'>// put new thread to ready queue</em>
+<a id='L205' name='L205' /> 205   <a href='../S/5.html#L86' title='Defined at 86 in os/kozos.c.'>put</a>(<a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>);
+<a id='L206' name='L206' /> 206 
+<a id='L207' name='L207' /> 207   <strong class='reserved'>return</strong> (<a href='../S/7.html#L12' title='Defined at 12 in os/syscall.h.'>kz_thread_id_t</a>)<a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>;
+<a id='L208' name='L208' /> 208 <em class='brace'>}</em>
+<a id='L209' name='L209' /> 209 
+<a id='L210' name='L210' /> 210 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../R/241.html' title='Multiple referred from 2 places.'>thread_exit</a>(<a href='../S/5.html#L38' title='Defined at 38 in os/kozos.c.'>kz_thread</a> * <a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>)
+<a id='L211' name='L211' /> 211 <em class='brace'>{</em>
+<a id='L212' name='L212' /> 212   <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>(<a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>-&gt;<a href='../Y/171.html' title='Multiple used in 17 places.'>name</a>); <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>(" EXIT.\n");
+<a id='L213' name='L213' /> 213 
+<a id='L214' name='L214' /> 214   <em class='comment'>/// clear TCB</em>
+<a id='L215' name='L215' /> 215   <a href='../D/230.html' title='Multiple defined in 2 places.'>memset</a>(<a href='../Y/250.html' title='Multiple used in 27 places.'>thread</a>, 0, <strong class='reserved'>sizeof</strong>(<a href='../S/5.html#L38' title='Defined at 38 in os/kozos.c.'>kz_thread</a>));
+<a id='L216' name='L216' /> 216 
+<a id='L217' name='L217' /> 217   <strong class='reserved'>return</strong> <a href='../S/39.html#L10' title='Defined at 10 in misc/defines.h.'>EXIT_SUCCESS</a>;
+<a id='L218' name='L218' /> 218 <em class='brace'>}</em>
+<a id='L219' name='L219' /> 219 
+<a id='L220' name='L220' /> 220 <em class='comment'>/** set interrupt handler */</em>
+<a id='L221' name='L221' /> 221 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../R/225.html' title='Multiple referred from 2 places.'>setintr</a>(<a href='../S/37.html#L12' title='Defined at 12 in misc/interrupt.h.'>softvec_type_t</a> <a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>, <a href='../Y/162.html' title='Multiple used in 3 places.'>kz_handler_t</a> <a href='../Y/149.html' title='Multiple used in 8 places.'>handler</a>)
+<a id='L222' name='L222' /> 222 <em class='brace'>{</em>
+<a id='L223' name='L223' /> 223   <strong class='reserved'>if</strong>( <a href='../Y/253.html' title='Multiple used in 34 places.'>type</a> &lt; 0 || <a href='../S/30.html#L6' title='Defined at 6 in misc/intr.h.'>SOFTVEC_TYPE_NUM</a> &lt;= <a href='../Y/253.html' title='Multiple used in 34 places.'>type</a> ) <em class='brace'>{</em>
+<a id='L224' name='L224' /> 224     <strong class='reserved'>return</strong> -1;
+<a id='L225' name='L225' /> 225   <em class='brace'>}</em> 
+<a id='L226' name='L226' /> 226 
+<a id='L227' name='L227' /> 227   <a href='../S/36.html#L25' title='Defined at 25 in misc/interrupt.c.'>softvec_setintr</a>(<a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>, <a href='../S/5.html#L286' title='Defined at 286 in os/kozos.c.'>thread_intr</a>);
+<a id='L228' name='L228' /> 228 
+<a id='L229' name='L229' /> 229   <a href='../Y/150.html' title='Multiple used in 5 places.'>handlers</a>[<a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>] = <a href='../Y/149.html' title='Multiple used in 8 places.'>handler</a>;
+<a id='L230' name='L230' /> 230 
+<a id='L231' name='L231' /> 231   <strong class='reserved'>return</strong> <a href='../S/39.html#L10' title='Defined at 10 in misc/defines.h.'>EXIT_SUCCESS</a>;
+<a id='L232' name='L232' /> 232 <em class='brace'>}</em>
+<a id='L233' name='L233' /> 233 
+<a id='L234' name='L234' /> 234 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/5.html#L254' title='Referred from 254 in os/kozos.c.'>call_functions</a>(<a href='../S/7.html#L10' title='Defined at 10 in os/syscall.h.'>kz_syscall_type_t</a> <a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>, <a href='../S/7.html#L32' title='Defined at 32 in os/syscall.h.'>kz_syscall_param_t</a> * <a href='../Y/183.html' title='Multiple used in 17 places.'>param</a>)
+<a id='L235' name='L235' /> 235 <em class='brace'>{</em>
+<a id='L236' name='L236' /> 236   <strong class='reserved'>switch</strong>(<a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>)<em class='brace'>{</em>
+<a id='L237' name='L237' /> 237   <strong class='reserved'>case</strong> <a href='../S/7.html#L8' title='Defined at 8 in os/syscall.h.'>KZ_SYSCALL_TYPE_RUN</a>:
+<a id='L238' name='L238' /> 238     <a href='../Y/183.html' title='Multiple used in 17 places.'>param</a>-&gt;<a href='../Y/204.html' title='Multiple used in 8 places.'>run</a>.<a href='../Y/202.html' title='Multiple used in 3 places.'>ret</a> = <a href='../S/5.html#L159' title='Defined at 159 in os/kozos.c.'>thread_run</a>(<a href='../Y/183.html' title='Multiple used in 17 places.'>param</a>-&gt;<a href='../Y/204.html' title='Multiple used in 8 places.'>run</a>.<a href='../Y/171.html' title='Multiple used in 17 places.'>name</a>, <a href='../Y/183.html' title='Multiple used in 17 places.'>param</a>-&gt;<a href='../Y/204.html' title='Multiple used in 8 places.'>run</a>.<a href='../Y/143.html' title='Multiple used in 13 places.'>func</a>, <a href='../Y/183.html' title='Multiple used in 17 places.'>param</a>-&gt;<a href='../Y/204.html' title='Multiple used in 8 places.'>run</a>.<a href='../Y/68.html' title='Multiple used in 18 places.'>argc</a>, <a href='../Y/183.html' title='Multiple used in 17 places.'>param</a>-&gt;<a href='../Y/204.html' title='Multiple used in 8 places.'>run</a>.<a href='../Y/69.html' title='Multiple used in 25 places.'>argv</a>, <a href='../Y/183.html' title='Multiple used in 17 places.'>param</a>-&gt;<a href='../Y/204.html' title='Multiple used in 8 places.'>run</a>.<a href='../Y/231.html' title='Multiple used in 13 places.'>stack_size</a>);
+<a id='L239' name='L239' /> 239     <strong class='reserved'>break</strong>;
+<a id='L240' name='L240' /> 240   <strong class='reserved'>case</strong> <a href='../S/7.html#L9' title='Defined at 9 in os/syscall.h.'>KZ_SYSCALL_TYPE_EXIT</a>:
+<a id='L241' name='L241' /> 241     <a href='../S/5.html#L210' title='Defined at 210 in os/kozos.c.'>thread_exit</a>(<a href='../Y/108.html' title='Multiple used in 15 places.'>current</a>);
+<a id='L242' name='L242' /> 242     <strong class='reserved'>break</strong>;
+<a id='L243' name='L243' /> 243   <strong class='reserved'>default</strong>:
+<a id='L244' name='L244' /> 244     <strong class='reserved'>break</strong>;
+<a id='L245' name='L245' /> 245   <em class='brace'>}</em>
+<a id='L246' name='L246' /> 246   
+<a id='L247' name='L247' /> 247   <strong class='reserved'>return</strong>;
+<a id='L248' name='L248' /> 248 <em class='brace'>}</em>
+<a id='L249' name='L249' /> 249 
+<a id='L250' name='L250' /> 250 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/5.html#L272' title='Referred from 272 in os/kozos.c.'>syscall_proc</a>(<a href='../S/7.html#L10' title='Defined at 10 in os/syscall.h.'>kz_syscall_type_t</a> <a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>, <a href='../S/7.html#L32' title='Defined at 32 in os/syscall.h.'>kz_syscall_param_t</a> * <a href='../Y/183.html' title='Multiple used in 17 places.'>param</a>)
+<a id='L251' name='L251' /> 251 <em class='brace'>{</em>
+<a id='L252' name='L252' /> 252   <a href='../Y/108.html' title='Multiple used in 15 places.'>current</a> = <a href='../S/5.html#L64' title='Defined at 64 in os/kozos.c.'>get</a>();
+<a id='L253' name='L253' /> 253   
+<a id='L254' name='L254' /> 254   <a href='../S/5.html#L234' title='Defined at 234 in os/kozos.c.'>call_functions</a>(<a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>, <a href='../Y/183.html' title='Multiple used in 17 places.'>param</a>);
+<a id='L255' name='L255' /> 255   
+<a id='L256' name='L256' /> 256   <strong class='reserved'>return</strong>;
+<a id='L257' name='L257' /> 257 <em class='brace'>}</em>
+<a id='L258' name='L258' /> 258 
+<a id='L259' name='L259' /> 259 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/5.html#L295' title='Referred from 295 in os/kozos.c.'>schedule</a>(<strong class='reserved'>void</strong>)
+<a id='L260' name='L260' /> 260 <em class='brace'>{</em>
+<a id='L261' name='L261' /> 261   <strong class='reserved'>if</strong>( <a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/151.html' title='Multiple used in 10 places.'>head</a> == <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a> )<em class='brace'>{</em>
+<a id='L262' name='L262' /> 262     <a href='../S/5.html#L321' title='Defined at 321 in os/kozos.c.'>kz_sysdown</a>();
+<a id='L263' name='L263' /> 263   <em class='brace'>}</em>
+<a id='L264' name='L264' /> 264 
+<a id='L265' name='L265' /> 265   <a href='../Y/108.html' title='Multiple used in 15 places.'>current</a> = <a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/151.html' title='Multiple used in 10 places.'>head</a>;
+<a id='L266' name='L266' /> 266 
+<a id='L267' name='L267' /> 267   <strong class='reserved'>return</strong>;
+<a id='L268' name='L268' /> 268 <em class='brace'>}</em>
+<a id='L269' name='L269' /> 269 
+<a id='L270' name='L270' /> 270 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/5.html#L310' title='Referred from 310 in os/kozos.c.'>syscall_intr</a>(<strong class='reserved'>void</strong>)
+<a id='L271' name='L271' /> 271 <em class='brace'>{</em>
+<a id='L272' name='L272' /> 272   <a href='../S/5.html#L250' title='Defined at 250 in os/kozos.c.'>syscall_proc</a>(<a href='../Y/108.html' title='Multiple used in 15 places.'>current</a>-&gt;<a href='../Y/243.html' title='Multiple used in 4 places.'>syscall</a>.<a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>, <a href='../Y/108.html' title='Multiple used in 15 places.'>current</a>-&gt;<a href='../Y/243.html' title='Multiple used in 4 places.'>syscall</a>.<a href='../Y/183.html' title='Multiple used in 17 places.'>param</a>);
+<a id='L273' name='L273' /> 273 
+<a id='L274' name='L274' /> 274   <strong class='reserved'>return</strong>;
+<a id='L275' name='L275' /> 275 <em class='brace'>}</em>
+<a id='L276' name='L276' /> 276 
+<a id='L277' name='L277' /> 277 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../S/5.html#L311' title='Referred from 311 in os/kozos.c.'>softerr_intr</a>(<strong class='reserved'>void</strong>)
+<a id='L278' name='L278' /> 278 <em class='brace'>{</em>
+<a id='L279' name='L279' /> 279   <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>(<a href='../Y/108.html' title='Multiple used in 15 places.'>current</a>-&gt;<a href='../Y/171.html' title='Multiple used in 17 places.'>name</a>); <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>(" Down.\n");
+<a id='L280' name='L280' /> 280   (<strong class='reserved'>void</strong>)<a href='../S/5.html#L64' title='Defined at 64 in os/kozos.c.'>get</a>();
+<a id='L281' name='L281' /> 281   <a href='../S/5.html#L210' title='Defined at 210 in os/kozos.c.'>thread_exit</a>(<a href='../Y/108.html' title='Multiple used in 15 places.'>current</a>);
+<a id='L282' name='L282' /> 282 
+<a id='L283' name='L283' /> 283   <strong class='reserved'>return</strong>;
+<a id='L284' name='L284' /> 284 <em class='brace'>}</em>  
+<a id='L285' name='L285' /> 285 
+<a id='L286' name='L286' /> 286 <strong class='reserved'>static</strong> <strong class='reserved'>void</strong> <a href='../R/243.html' title='Multiple referred from 2 places.'>thread_intr</a>(<a href='../S/37.html#L12' title='Defined at 12 in misc/interrupt.h.'>softvec_type_t</a> <a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>, <a href='../S/37.html#L18' title='Defined at 18 in misc/interrupt.h.'>stack_ptr_t</a> <a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>)
+<a id='L287' name='L287' /> 287 <em class='brace'>{</em>
+<a id='L288' name='L288' /> 288   <em class='comment'>// save context of current thread</em>
+<a id='L289' name='L289' /> 289   <a href='../Y/108.html' title='Multiple used in 15 places.'>current</a>-&gt;<a href='../Y/104.html' title='Multiple used in 6 places.'>context</a>.<a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a> = <a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>;
+<a id='L290' name='L290' /> 290 
+<a id='L291' name='L291' /> 291   <strong class='reserved'>if</strong>(<a href='../Y/150.html' title='Multiple used in 5 places.'>handlers</a>[<a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>] != <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>)<em class='brace'>{</em>
+<a id='L292' name='L292' /> 292     <a href='../Y/150.html' title='Multiple used in 5 places.'>handlers</a>[<a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>]();
+<a id='L293' name='L293' /> 293   <em class='brace'>}</em>
+<a id='L294' name='L294' /> 294 
+<a id='L295' name='L295' /> 295   <a href='../S/5.html#L259' title='Defined at 259 in os/kozos.c.'>schedule</a>();
+<a id='L296' name='L296' /> 296   
+<a id='L297' name='L297' /> 297   <a href='../Y/117.html' title='Multiple used in 3 places.'>dispatch</a>(&amp;<a href='../Y/108.html' title='Multiple used in 15 places.'>current</a>-&gt;<a href='../Y/104.html' title='Multiple used in 6 places.'>context</a>);
+<a id='L298' name='L298' /> 298   <em class='comment'>// no return </em>
+<a id='L299' name='L299' /> 299 <em class='brace'>}</em>
+<a id='L300' name='L300' /> 300 
+<a id='L301' name='L301' /> 301 <strong class='reserved'>void</strong> <a href='../R/182.html' title='Multiple referred from 2 places.'>kz_start</a>(<a href='../Y/161.html' title='Multiple used in 8 places.'>kz_func_t</a> <a href='../Y/143.html' title='Multiple used in 13 places.'>func</a>, <strong class='reserved'>char</strong> * <a href='../Y/171.html' title='Multiple used in 17 places.'>name</a>, <a href='../S/39.html#L15' title='Defined at 15 in misc/defines.h.'>uint16</a> <a href='../Y/231.html' title='Multiple used in 13 places.'>stack_size</a>, <strong class='reserved'>int</strong> <a href='../Y/68.html' title='Multiple used in 18 places.'>argc</a>, <strong class='reserved'>char</strong> * <a href='../Y/69.html' title='Multiple used in 25 places.'>argv</a>[])
+<a id='L302' name='L302' /> 302 <em class='brace'>{</em>
+<a id='L303' name='L303' /> 303   <em class='comment'>// initialization</em>
+<a id='L304' name='L304' /> 304   <a href='../Y/108.html' title='Multiple used in 15 places.'>current</a> = <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>;
+<a id='L305' name='L305' /> 305   <a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/151.html' title='Multiple used in 10 places.'>head</a> = <a href='../Y/196.html' title='Multiple used in 13 places.'>readyque</a>.<a href='../Y/244.html' title='Multiple used in 7 places.'>tail</a> = <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>;
+<a id='L306' name='L306' /> 306   <a href='../D/230.html' title='Multiple defined in 2 places.'>memset</a>(<a href='../Y/252.html' title='Multiple used in 4 places.'>threads</a>, 0, <strong class='reserved'>sizeof</strong>(<a href='../Y/252.html' title='Multiple used in 4 places.'>threads</a>));
+<a id='L307' name='L307' /> 307   <a href='../D/230.html' title='Multiple defined in 2 places.'>memset</a>(<a href='../Y/150.html' title='Multiple used in 5 places.'>handlers</a>, 0, <strong class='reserved'>sizeof</strong>(<a href='../Y/150.html' title='Multiple used in 5 places.'>handlers</a>));
+<a id='L308' name='L308' /> 308 
+<a id='L309' name='L309' /> 309   <em class='comment'>// register interrupt handler</em>
+<a id='L310' name='L310' /> 310   <a href='../S/5.html#L221' title='Defined at 221 in os/kozos.c.'>setintr</a>(<a href='../S/30.html#L9' title='Defined at 9 in misc/intr.h.'>SOFTVEC_TYPE_SYSCALL</a>, <a href='../S/5.html#L270' title='Defined at 270 in os/kozos.c.'>syscall_intr</a>);
+<a id='L311' name='L311' /> 311   <a href='../S/5.html#L221' title='Defined at 221 in os/kozos.c.'>setintr</a>(<a href='../S/30.html#L8' title='Defined at 8 in misc/intr.h.'>SOFTVEC_TYPE_SOFTERR</a>, <a href='../S/5.html#L277' title='Defined at 277 in os/kozos.c.'>softerr_intr</a>);
+<a id='L312' name='L312' /> 312 
+<a id='L313' name='L313' /> 313   <a href='../Y/108.html' title='Multiple used in 15 places.'>current</a> = (<a href='../S/5.html#L38' title='Defined at 38 in os/kozos.c.'>kz_thread</a> *)<a href='../S/5.html#L159' title='Defined at 159 in os/kozos.c.'>thread_run</a>(<a href='../Y/171.html' title='Multiple used in 17 places.'>name</a>, <a href='../Y/143.html' title='Multiple used in 13 places.'>func</a>, <a href='../Y/68.html' title='Multiple used in 18 places.'>argc</a>, <a href='../Y/69.html' title='Multiple used in 25 places.'>argv</a>, <a href='../Y/231.html' title='Multiple used in 13 places.'>stack_size</a>);
+<a id='L314' name='L314' /> 314 
+<a id='L315' name='L315' /> 315   <a href='../Y/117.html' title='Multiple used in 3 places.'>dispatch</a>(&amp;<a href='../Y/108.html' title='Multiple used in 15 places.'>current</a>-&gt;<a href='../Y/104.html' title='Multiple used in 6 places.'>context</a>);
+<a id='L316' name='L316' /> 316   
+<a id='L317' name='L317' /> 317   <em class='comment'>//no return</em>
+<a id='L318' name='L318' /> 318 <em class='brace'>}</em>
+<a id='L319' name='L319' /> 319 
+<a id='L320' name='L320' /> 320 <strong class='reserved'>void</strong> <a href='../S/5.html#L321' title='Defined at 321 in os/kozos.c.'>kz_sysdown</a>(<strong class='reserved'>void</strong>) <strong class='reserved'>__attribute__</strong>((<a href='../Y/173.html' title='Multiple used in 6 places.'>noreturn</a>));
+<a id='L321' name='L321' /> 321 <strong class='reserved'>void</strong> <a href='../R/186.html' title='Multiple referred from 3 places.'>kz_sysdown</a>(<strong class='reserved'>void</strong>)
+<a id='L322' name='L322' /> 322 <em class='brace'>{</em>
+<a id='L323' name='L323' /> 323   <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("system error!\n");
+<a id='L324' name='L324' /> 324   
+<a id='L325' name='L325' /> 325   <em class='comment'>// infinity loop</em>
+<a id='L326' name='L326' /> 326   <strong class='reserved'>while</strong>(1)
+<a id='L327' name='L327' /> 327     ;
+<a id='L328' name='L328' /> 328 <em class='brace'>}</em>
+<a id='L329' name='L329' /> 329 
+<a id='L330' name='L330' /> 330 <strong class='reserved'>void</strong> <a href='../R/183.html' title='Multiple referred from 3 places.'>kz_syscall</a>(<a href='../S/7.html#L10' title='Defined at 10 in os/syscall.h.'>kz_syscall_type_t</a> <a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>, <a href='../S/7.html#L32' title='Defined at 32 in os/syscall.h.'>kz_syscall_param_t</a> * <a href='../Y/183.html' title='Multiple used in 17 places.'>param</a>)
+<a id='L331' name='L331' /> 331 <em class='brace'>{</em>
+<a id='L332' name='L332' /> 332   <a href='../Y/108.html' title='Multiple used in 15 places.'>current</a>-&gt;<a href='../Y/243.html' title='Multiple used in 4 places.'>syscall</a>.<a href='../Y/253.html' title='Multiple used in 34 places.'>type</a> = <a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>;
+<a id='L333' name='L333' /> 333   <a href='../Y/108.html' title='Multiple used in 15 places.'>current</a>-&gt;<a href='../Y/243.html' title='Multiple used in 4 places.'>syscall</a>.<a href='../Y/183.html' title='Multiple used in 17 places.'>param</a> = <a href='../Y/183.html' title='Multiple used in 17 places.'>param</a>;
+<a id='L334' name='L334' /> 334   
+<a id='L335' name='L335' /> 335   <strong class='reserved'>asm</strong> <strong class='reserved'>volatile</strong> ("trapa #0"); <em class='comment'>// trap interrupt</em>
+<a id='L336' name='L336' /> 336   
+<a id='L337' name='L337' /> 337   <em class='comment'>//no return;</em>
+<a id='L338' name='L338' /> 338 <em class='brace'>}</em>
+<a id='L339' name='L339' /> 339 
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM' />
+<em class='comment'>/* [&lt;][&gt;]<a href='#L64'>[^]</a><a href='#L330'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

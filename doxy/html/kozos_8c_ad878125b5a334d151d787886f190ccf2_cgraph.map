@@ -1,0 +1,8 @@
+<map id="softerr_intr" name="softerr_intr">
+<area shape="rect" id="node3" href="$lib_8c.html#a44ddf1a8f6a75ff235a733ff8d90cae3" title="puts" alt="" coords="285,5,331,32"/>
+<area shape="rect" id="node11" href="$kozos_8c.html#a4dd8e8425a1c0c5d866a9271d243cdef" title="thread_exit" alt="" coords="136,56,224,83"/>
+<area shape="rect" id="node5" href="$lib_8c.html#acee36427208c7c321ab875217dca17c4" title="putc" alt="" coords="393,5,439,32"/>
+<area shape="rect" id="node7" href="$serial_8c.html#aed0806bd3de71f20d6df8ef6f49bda31" title="serial_send_byte" alt="" coords="489,5,613,32"/>
+<area shape="rect" id="node9" href="$serial_8c.html#abf48ded30f8aa6fff8cb48dce0af0590" title="serial_is_send_enable" alt="" coords="661,5,819,32"/>
+<area shape="rect" id="node14" href="$lib_8c.html#a89ddf4c406cf5f89be48dd3e4af4cdc4" title="memset" alt="" coords="273,56,343,83"/>
+</map>

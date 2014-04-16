@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>os/main.c</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP' /><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/45.html'>os</a>/main.c</h2>
+<em class='comment'>/* [&lt;][&gt;]<a href='#L6'>[^]</a><a href='#L13'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L6' title='Defined at 6.'>start_threads</a></li>
+<li><a href='#L13' title='Defined at 13.'>main</a></li>
+</ol>
+<hr />
+<pre>
+<a id='L1' name='L1' />   1 <em class='sharp'>#include</em> "<a href='39.html'>../misc/defines.h</a>"
+<a id='L2' name='L2' />   2 <em class='sharp'>#include</em> "<a href='37.html'>../misc/interrupt.h</a>"
+<a id='L3' name='L3' />   3 <em class='sharp'>#include</em> "<a href='../I/5.html'>lib.h</a>"
+<a id='L4' name='L4' />   4 <em class='sharp'>#include</em> "<a href='11.html'>kozos.h</a>"
+<a id='L5' name='L5' />   5 
+<a id='L6' name='L6' />   6 <strong class='reserved'>static</strong> <strong class='reserved'>int</strong> <a href='../S/4.html#L20' title='Referred from 20 in os/main.c.'>start_threads</a>(<strong class='reserved'>int</strong> <a href='../Y/68.html' title='Multiple used in 18 places.'>argc</a>, <strong class='reserved'>char</strong> * <a href='../Y/69.html' title='Multiple used in 25 places.'>argv</a>[])
+<a id='L7' name='L7' />   7 <em class='brace'>{</em>
+<a id='L8' name='L8' />   8   <a href='../S/14.html#L5' title='Defined at 5 in os/syscall.c.'>kz_run</a>(<a href='../S/3.html#L7' title='Defined at 7 in os/test08_1.c.'>test08_1_main</a>, "command", 0x100, 0, <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>);
+<a id='L9' name='L9' />   9   
+<a id='L10' name='L10' />  10   <strong class='reserved'>return</strong> <a href='../S/39.html#L10' title='Defined at 10 in misc/defines.h.'>EXIT_SUCCESS</a>;
+<a id='L11' name='L11' />  11 <em class='brace'>}</em>
+<a id='L12' name='L12' />  12 
+<a id='L13' name='L13' />  13 <strong class='reserved'>int</strong> main(<strong class='reserved'>void</strong>)
+<a id='L14' name='L14' />  14 <em class='brace'>{</em>
+<a id='L15' name='L15' />  15   <a href='../S/37.html#L28' title='Defined at 28 in misc/interrupt.h.'>INTR_DISABLE</a>; <em class='comment'>// disable interrupt</em>
+<a id='L16' name='L16' />  16 
+<a id='L17' name='L17' />  17   <a href='../D/241.html' title='Multiple defined in 2 places.'>puts</a>("kozos boot succeeded!");
+<a id='L18' name='L18' />  18   
+<a id='L19' name='L19' />  19   <em class='comment'>// start OS</em>
+<a id='L20' name='L20' />  20   <a href='../S/5.html#L301' title='Defined at 301 in os/kozos.c.'>kz_start</a>(<a href='../S/4.html#L6' title='Defined at 6 in os/main.c.'>start_threads</a>, "start", 0x100, 0, <a href='../S/39.html#L9' title='Defined at 9 in misc/defines.h.'>NULL</a>);
+<a id='L21' name='L21' />  21   <em class='comment'>// no return</em>
+<a id='L22' name='L22' />  22   
+<a id='L23' name='L23' />  23   <strong class='reserved'>return</strong> 0;
+<a id='L24' name='L24' />  24 <em class='brace'>}</em>
+<a id='L25' name='L25' />  25 
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM' />
+<em class='comment'>/* [&lt;][&gt;]<a href='#L6'>[^]</a><a href='#L13'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
+<title>kozos: src/misc/serial.h ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">kozos
+   &#160;<span id="projectnumber">Step 8</span>
+   </div>
+   <div id="projectbrief">Create OS in 12 steps</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 作成： Doxygen 1.8.5 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>メインページ</span></a></li>
+      <li><a href="annotated.html"><span>データ構造</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>グローバル</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('serial_8h_source.html','');});
+</script>
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle">
+<div class="title">serial.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="serial_8h.html">説明を見る。</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _SERIAL_H_INCLUDED_</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define _SERIAL_H_INCLUDED_</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="comment">/** @file serial.h</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment"> * シリアル通信</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment"> * 公開関数</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">/** シリアルポート番号 */</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0">   10</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0ad7e57c615615944d813d541c76b53b52">   11</a></span>&#160;  <a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0ad7e57c615615944d813d541c76b53b52">SERIAL_SCI_1</a>,</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0abf568cd030160e53617588a66abb8bf7">   12</a></span>&#160;  <a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0abf568cd030160e53617588a66abb8bf7">SERIAL_SCI_2</a>,</div>
+<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0a783996bae422d424d9fb27e948b8d2bf">   13</a></span>&#160;  <a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0a783996bae422d424d9fb27e948b8d2bf">SERIAL_SCI_3</a>,</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0a519d199110d98dd4dd69852448d210e9">   14</a></span>&#160;  <a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0a519d199110d98dd4dd69852448d210e9">SERIAL_SCI_NUM</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;} <a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0">serial_port</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="serial_8h.html#a5de7da90a335d172ff81d1bccdd09927">   17</a></span>&#160;<span class="preprocessor">#define SERIAL_DEFAULT_DEVICE SERIAL_SCI_2 </span><span class="comment">///&lt; シリアル通信のポート番号</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span>  </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/** 有効無効 */</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="serial_8h.html#ae819fa6b362ade45072d91de6790b74e">   20</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="serial_8h.html#ae819fa6b362ade45072d91de6790b74ead3a9df141be0ccf10389b640f492b26d">   21</a></span>&#160;  <a class="code" href="serial_8h.html#ae819fa6b362ade45072d91de6790b74ead3a9df141be0ccf10389b640f492b26d">DISABLE</a>,</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="serial_8h.html#ae819fa6b362ade45072d91de6790b74ea7d46875fa3ebd2c34d2756950eda83bf">   22</a></span>&#160;  <a class="code" href="serial_8h.html#ae819fa6b362ade45072d91de6790b74ea7d46875fa3ebd2c34d2756950eda83bf">ENABLE</a>,</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;} <a class="code" href="serial_8h.html#ae819fa6b362ade45072d91de6790b74e">port_status</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">/** デバイス初期化 */</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serial_8c.html#a70122e6766c8c5c4dc7893170bc43b36">serial_init</a>( <a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0">serial_port</a> index );<span class="comment"></span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> * @return EXIT_SUCCESS</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/** @breif 送信可能か? */</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<a class="code" href="serial_8h.html#ae819fa6b362ade45072d91de6790b74e">port_status</a> <a class="code" href="serial_8c.html#abf48ded30f8aa6fff8cb48dce0af0590">serial_is_send_enable</a>( <a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0">serial_port</a> index );<span class="comment"></span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * @retval 1 送信可能</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> * @retval 0 送信不可</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">/**  1文字送信 */</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">int</span> <a class="code" href="serial_8c.html#aed0806bd3de71f20d6df8ef6f49bda31">serial_send_byte</a>( <a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0">serial_port</a> index, <span class="keywordtype">char</span> c );<span class="comment"></span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment"> * @param c 送信文字</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> * @return EXIT_SUCCESS</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment">/** 受信可能か? */</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<a class="code" href="serial_8h.html#ae819fa6b362ade45072d91de6790b74e">port_status</a> <a class="code" href="serial_8c.html#a3592a8e9f7fc0651cfcbc638d6192040">serial_is_recv_enable</a>(<a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0">serial_port</a> index);<span class="comment"></span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> * @retval 1 受信可能</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"> * @retval 0 受信不可</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">/** 1文字受信 */</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">char</span> <a class="code" href="serial_8c.html#ab041beadc1139b4c1b12e30e5c21a383">serial_recv_byte</a>(<a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0">serial_port</a> index);<span class="comment"></span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment"> * @return EXIT_SUCCESS</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">/** (割り込み)シリアル通信受信有効チェック */</span> </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<a class="code" href="serial_8h.html#ae819fa6b362ade45072d91de6790b74e">port_status</a> <a class="code" href="serial_8c.html#a3f1a1e04ed5dd7e8f83cc48ee7561991">serial_intr_is_send_enable</a>(<a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0">serial_port</a> index);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">/** (割り込み)シリアル通信受信有効化 */</span> </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordtype">void</span> <a class="code" href="serial_8c.html#a785bf23a0f60486a85bd48a78924fa18">serial_intr_send_enable</a>(<a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0">serial_port</a> index);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">/** (割り込み)シリアル通信受信無効化 */</span> </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">void</span> <a class="code" href="serial_8c.html#a2d262695c7a6b51452c5529d6b434265">serial_intr_send_disable</a>(<a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0">serial_port</a> index);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/** (割り込み)シリアル通信送信有効チェック */</span> </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<a class="code" href="serial_8h.html#ae819fa6b362ade45072d91de6790b74e">port_status</a> <a class="code" href="serial_8c.html#a568cf22593f3b7ad40361cdfff2f4382">serial_intr_is_recv_enable</a>(<a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0">serial_port</a> index);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">/** (割り込み)シリアル通信送信有効化 */</span> </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keywordtype">void</span> <a class="code" href="serial_8c.html#aca8a739dd873713dea1c0239079cca5b">serial_intr_recv_enable</a>(<a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0">serial_port</a> index);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">/** (割り込み)シリアル通信送信無効化 */</span> </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">void</span> <a class="code" href="serial_8c.html#a2b5b618485bd7f819f919734e97c7091">serial_intr_recv_disable</a>(<a class="code" href="serial_8h.html#adc4c564751a3c74ac9094765124167b0">serial_port</a> index);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="serial_8h_html_adc4c564751a3c74ac9094765124167b0a783996bae422d424d9fb27e948b8d2bf"><div class="ttname"><a href="serial_8h.html#adc4c564751a3c74ac9094765124167b0a783996bae422d424d9fb27e948b8d2bf">SERIAL_SCI_3</a></div><div class="ttdef"><b>Definition:</b> <a href="serial_8h_source.html#l00013">serial.h:13</a></div></div>
+<div class="ttc" id="serial_8c_html_a568cf22593f3b7ad40361cdfff2f4382"><div class="ttname"><a href="serial_8c.html#a568cf22593f3b7ad40361cdfff2f4382">serial_intr_is_recv_enable</a></div><div class="ttdeci">port_status serial_intr_is_recv_enable(serial_port index)</div><div class="ttdef"><b>Definition:</b> <a href="serial_8c_source.html#l00186">serial.c:186</a></div></div>
+<div class="ttc" id="serial_8c_html_a70122e6766c8c5c4dc7893170bc43b36"><div class="ttname"><a href="serial_8c.html#a70122e6766c8c5c4dc7893170bc43b36">serial_init</a></div><div class="ttdeci">int serial_init(serial_port index)</div><div class="ttdef"><b>Definition:</b> <a href="serial_8c_source.html#l00061">serial.c:61</a></div></div>
+<div class="ttc" id="serial_8h_html_ae819fa6b362ade45072d91de6790b74ea7d46875fa3ebd2c34d2756950eda83bf"><div class="ttname"><a href="serial_8h.html#ae819fa6b362ade45072d91de6790b74ea7d46875fa3ebd2c34d2756950eda83bf">ENABLE</a></div><div class="ttdef"><b>Definition:</b> <a href="serial_8h_source.html#l00022">serial.h:22</a></div></div>
+<div class="ttc" id="serial_8h_html_adc4c564751a3c74ac9094765124167b0a519d199110d98dd4dd69852448d210e9"><div class="ttname"><a href="serial_8h.html#adc4c564751a3c74ac9094765124167b0a519d199110d98dd4dd69852448d210e9">SERIAL_SCI_NUM</a></div><div class="ttdef"><b>Definition:</b> <a href="serial_8h_source.html#l00014">serial.h:14</a></div></div>
+<div class="ttc" id="serial_8c_html_aed0806bd3de71f20d6df8ef6f49bda31"><div class="ttname"><a href="serial_8c.html#aed0806bd3de71f20d6df8ef6f49bda31">serial_send_byte</a></div><div class="ttdeci">int serial_send_byte(serial_port index, char c)</div><div class="ttdef"><b>Definition:</b> <a href="serial_8c_source.html#l00096">serial.c:96</a></div></div>
+<div class="ttc" id="serial_8c_html_a785bf23a0f60486a85bd48a78924fa18"><div class="ttname"><a href="serial_8c.html#a785bf23a0f60486a85bd48a78924fa18">serial_intr_send_enable</a></div><div class="ttdeci">void serial_intr_send_enable(serial_port index)</div><div class="ttdef"><b>Definition:</b> <a href="serial_8c_source.html#l00157">serial.c:157</a></div></div>
+<div class="ttc" id="serial_8c_html_a3f1a1e04ed5dd7e8f83cc48ee7561991"><div class="ttname"><a href="serial_8c.html#a3f1a1e04ed5dd7e8f83cc48ee7561991">serial_intr_is_send_enable</a></div><div class="ttdeci">port_status serial_intr_is_send_enable(serial_port index)</div><div class="ttdef"><b>Definition:</b> <a href="serial_8c_source.html#l00145">serial.c:145</a></div></div>
+<div class="ttc" id="serial_8c_html_a2b5b618485bd7f819f919734e97c7091"><div class="ttname"><a href="serial_8c.html#a2b5b618485bd7f819f919734e97c7091">serial_intr_recv_disable</a></div><div class="ttdeci">void serial_intr_recv_disable(serial_port index)</div><div class="ttdef"><b>Definition:</b> <a href="serial_8c_source.html#l00212">serial.c:212</a></div></div>
+<div class="ttc" id="serial_8c_html_aca8a739dd873713dea1c0239079cca5b"><div class="ttname"><a href="serial_8c.html#aca8a739dd873713dea1c0239079cca5b">serial_intr_recv_enable</a></div><div class="ttdeci">void serial_intr_recv_enable(serial_port index)</div><div class="ttdef"><b>Definition:</b> <a href="serial_8c_source.html#l00198">serial.c:198</a></div></div>
+<div class="ttc" id="serial_8h_html_ae819fa6b362ade45072d91de6790b74ead3a9df141be0ccf10389b640f492b26d"><div class="ttname"><a href="serial_8h.html#ae819fa6b362ade45072d91de6790b74ead3a9df141be0ccf10389b640f492b26d">DISABLE</a></div><div class="ttdef"><b>Definition:</b> <a href="serial_8h_source.html#l00021">serial.h:21</a></div></div>
+<div class="ttc" id="serial_8c_html_a3592a8e9f7fc0651cfcbc638d6192040"><div class="ttname"><a href="serial_8c.html#a3592a8e9f7fc0651cfcbc638d6192040">serial_is_recv_enable</a></div><div class="ttdeci">port_status serial_is_recv_enable(serial_port index)</div><div class="ttdef"><b>Definition:</b> <a href="serial_8c_source.html#l00114">serial.c:114</a></div></div>
+<div class="ttc" id="serial_8c_html_abf48ded30f8aa6fff8cb48dce0af0590"><div class="ttname"><a href="serial_8c.html#abf48ded30f8aa6fff8cb48dce0af0590">serial_is_send_enable</a></div><div class="ttdeci">port_status serial_is_send_enable(serial_port index)</div><div class="ttdef"><b>Definition:</b> <a href="serial_8c_source.html#l00084">serial.c:84</a></div></div>
+<div class="ttc" id="serial_8h_html_adc4c564751a3c74ac9094765124167b0ad7e57c615615944d813d541c76b53b52"><div class="ttname"><a href="serial_8h.html#adc4c564751a3c74ac9094765124167b0ad7e57c615615944d813d541c76b53b52">SERIAL_SCI_1</a></div><div class="ttdef"><b>Definition:</b> <a href="serial_8h_source.html#l00011">serial.h:11</a></div></div>
+<div class="ttc" id="serial_8h_html_adc4c564751a3c74ac9094765124167b0"><div class="ttname"><a href="serial_8h.html#adc4c564751a3c74ac9094765124167b0">serial_port</a></div><div class="ttdeci">serial_port</div><div class="ttdef"><b>Definition:</b> <a href="serial_8h_source.html#l00010">serial.h:10</a></div></div>
+<div class="ttc" id="serial_8h_html_adc4c564751a3c74ac9094765124167b0abf568cd030160e53617588a66abb8bf7"><div class="ttname"><a href="serial_8h.html#adc4c564751a3c74ac9094765124167b0abf568cd030160e53617588a66abb8bf7">SERIAL_SCI_2</a></div><div class="ttdef"><b>Definition:</b> <a href="serial_8h_source.html#l00012">serial.h:12</a></div></div>
+<div class="ttc" id="serial_8h_html_ae819fa6b362ade45072d91de6790b74e"><div class="ttname"><a href="serial_8h.html#ae819fa6b362ade45072d91de6790b74e">port_status</a></div><div class="ttdeci">port_status</div><div class="ttdef"><b>Definition:</b> <a href="serial_8h_source.html#l00020">serial.h:20</a></div></div>
+<div class="ttc" id="serial_8c_html_a2d262695c7a6b51452c5529d6b434265"><div class="ttname"><a href="serial_8c.html#a2d262695c7a6b51452c5529d6b434265">serial_intr_send_disable</a></div><div class="ttdeci">void serial_intr_send_disable(serial_port index)</div><div class="ttdef"><b>Definition:</b> <a href="serial_8c_source.html#l00172">serial.c:172</a></div></div>
+<div class="ttc" id="serial_8c_html_ab041beadc1139b4c1b12e30e5c21a383"><div class="ttname"><a href="serial_8c.html#ab041beadc1139b4c1b12e30e5c21a383">serial_recv_byte</a></div><div class="ttdeci">char serial_recv_byte(serial_port index)</div><div class="ttdef"><b>Definition:</b> <a href="serial_8c_source.html#l00125">serial.c:125</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_88826aa2a10e1882b573f502bc7f4b55.html">misc</a></li><li class="navelem"><a class="el" href="serial_8h.html">serial.h</a></li>
+    <li class="footer">作成：
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
+  </ul>
+</div>
+</body>
+</html>

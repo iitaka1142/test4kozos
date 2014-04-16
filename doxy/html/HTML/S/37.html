@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>misc/interrupt.h</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP' /><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/44.html'>misc</a>/interrupt.h</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<h2 class='header'><a href='../J/13.html' title='Multiple included from 4 places.'>INCLUDED FROM</a></h2>
+<hr />
+<pre>
+<a id='L1' name='L1' />   1 <em class='sharp'>#ifndef</em> <a href='../S/37.html#L2' title='Defined at 2 in misc/interrupt.h.'>_INTERRUPT_H_INCLUDED_</a>
+<a id='L2' name='L2' />   2 <em class='sharp'>#define</em> <a href='../S/37.html#L1' title='Referred from 1 in misc/interrupt.h.'>_INTERRUPT_H_INCLUDED_</a>
+<a id='L3' name='L3' />   3 
+<a id='L4' name='L4' />   4 <em class='sharp'>#include</em> "<a href='39.html'>defines.h</a>"
+<a id='L5' name='L5' />   5 
+<a id='L6' name='L6' />   6 <em class='comment'>/* 以下は、リンカ・スクリプトで定義されたシンボル */</em>
+<a id='L7' name='L7' />   7 <strong class='reserved'>extern</strong> <strong class='reserved'>char</strong> <a href='../Y/222.html' title='Multiple used in 2 places.'>softvec</a>;
+<a id='L8' name='L8' />   8 
+<a id='L9' name='L9' />   9 <em class='sharp'>#define</em> <a href='../S/37.html#L25' title='Referred from 25 in misc/interrupt.h.'>SOFTVEC_ADDR</a> (&amp;<a href='../Y/222.html' title='Multiple used in 2 places.'>softvec</a>)
+<a id='L10' name='L10' />  10 
+<a id='L11' name='L11' />  11 <em class='comment'>/** ソフトウェア割り込み種類の定義 */</em>
+<a id='L12' name='L12' />  12 <strong class='reserved'>typedef</strong> <strong class='reserved'>short</strong> <a href='../R/230.html' title='Multiple referred from 9 places.'>softvec_type_t</a>;
+<a id='L13' name='L13' />  13 <em class='comment'>/**&lt;</em>
+<a id='L14' name='L14' />  14 <em class='comment'>   @see inter.h</em>
+<a id='L15' name='L15' />  15 <em class='comment'> */</em>
+<a id='L16' name='L16' />  16 
+<a id='L17' name='L17' />  17 <em class='comment'>/** スタックポインタ型 */</em>
+<a id='L18' name='L18' />  18 <strong class='reserved'>typedef</strong> <a href='../S/39.html#L16' title='Defined at 16 in misc/defines.h.'>uint32</a> <a href='../R/231.html' title='Multiple referred from 9 places.'>stack_ptr_t</a>;
+<a id='L19' name='L19' />  19 
+<a id='L20' name='L20' />  20 <em class='comment'>/**</em>
+<a id='L21' name='L21' />  21 <em class='comment'>   割り込みハンドラの型</em>
+<a id='L22' name='L22' />  22 <em class='comment'> */</em>
+<a id='L23' name='L23' />  23 <strong class='reserved'>typedef</strong> <strong class='reserved'>void</strong> (* <a href='../Y/223.html' title='Multiple used in 5 places.'>softvec_handler_t</a>)(<a href='../S/37.html#L12' title='Defined at 12 in misc/interrupt.h.'>softvec_type_t</a> <a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>, <a href='../S/37.html#L18' title='Defined at 18 in misc/interrupt.h.'>stack_ptr_t</a> <a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>);
+<a id='L24' name='L24' />  24 
+<a id='L25' name='L25' />  25 <em class='sharp'>#define</em> <a href='../R/121.html' title='Multiple referred from 2 places.'>SOFTVECS</a> ((<a href='../Y/223.html' title='Multiple used in 5 places.'>softvec_handler_t</a> *) <a href='../S/37.html#L9' title='Defined at 9 in misc/interrupt.h.'>SOFTVEC_ADDR</a>)
+<a id='L26' name='L26' />  26 
+<a id='L27' name='L27' />  27 <em class='sharp'>#define</em> INTR_ENABLE  <strong class='reserved'>asm</strong> <strong class='reserved'>volatile</strong> ("andc.b #0x3f,ccr")
+<a id='L28' name='L28' />  28 <em class='sharp'>#define</em> <a href='../R/61.html' title='Multiple referred from 2 places.'>INTR_DISABLE</a> <strong class='reserved'>asm</strong> <strong class='reserved'>volatile</strong> ("orc.b #0xc0,ccr")
+<a id='L29' name='L29' />  29 
+<a id='L30' name='L30' />  30 <em class='comment'>/** ソフトウェア割り込みの初期化 */</em>
+<a id='L31' name='L31' />  31 <strong class='reserved'>int</strong> <a href='../S/36.html#L8' title='Defined at 8 in misc/interrupt.c.'>softvec_init</a>(<strong class='reserved'>void</strong>);
+<a id='L32' name='L32' />  32 
+<a id='L33' name='L33' />  33 <em class='comment'>/** ソフトウェア割り込みベクタの設定 */</em>
+<a id='L34' name='L34' />  34 <strong class='reserved'>int</strong> <a href='../S/36.html#L25' title='Defined at 25 in misc/interrupt.c.'>softvec_setintr</a>(<a href='../S/37.html#L12' title='Defined at 12 in misc/interrupt.h.'>softvec_type_t</a> <a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>, <a href='../Y/223.html' title='Multiple used in 5 places.'>softvec_handler_t</a> <a href='../Y/149.html' title='Multiple used in 8 places.'>handler</a>);
+<a id='L35' name='L35' />  35 
+<a id='L36' name='L36' />  36 <em class='comment'>/** 割り込みハンドラ */</em>
+<a id='L37' name='L37' />  37 <strong class='reserved'>void</strong> <a href='../S/36.html#L39' title='Defined at 39 in misc/interrupt.c.'>interrupt</a>(<a href='../S/37.html#L12' title='Defined at 12 in misc/interrupt.h.'>softvec_type_t</a> <a href='../Y/253.html' title='Multiple used in 34 places.'>type</a>, <a href='../S/37.html#L18' title='Defined at 18 in misc/interrupt.h.'>stack_ptr_t</a> <a href='../Y/224.html' title='Multiple used in 20 places.'>sp</a>);
+<a id='L38' name='L38' />  38 <em class='comment'>/**&lt;</em>
+<a id='L39' name='L39' />  39 <em class='comment'>   IRQ発生によってキックされ、引数として受け取ったhandlerを実行する</em>
+<a id='L40' name='L40' />  40 <em class='comment'> */</em>
+<a id='L41' name='L41' />  41 
+<a id='L42' name='L42' />  42 <em class='sharp'>#endif</em>
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM' />
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

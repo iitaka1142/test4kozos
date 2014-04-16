@@ -1,0 +1,23 @@
+<map id="putc" name="putc">
+<area shape="rect" id="node3" href="$os_2lib_8h.html#ae0ca7622f88a0818572688d85919e6fe" title="getc" alt="" coords="101,81,149,108"/>
+<area shape="rect" id="node15" href="$os_2lib_8h.html#a44ddf1a8f6a75ff235a733ff8d90cae3" title="puts" alt="" coords="102,208,149,235"/>
+<area shape="rect" id="node5" href="$os_2lib_8h.html#ac414099aa125e8638ec89b7593865b12" title="gets" alt="" coords="223,5,271,32"/>
+<area shape="rect" id="node7" href="$bootload_2main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="523,157,573,184"/>
+<area shape="rect" id="node9" href="$test08__1_8c.html#a365da73ee00836b826de141b6d662a78" title="ユーザースレッド " alt="" coords="344,56,451,83"/>
+<area shape="rect" id="node11" href="$os_2main_8c.html#aabc6304dfeadad471d074b11c6e057dd" title="start_threads" alt="" coords="781,171,880,197"/>
+<area shape="rect" id="node13" href="$os_2main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="928,253,979,280"/>
+<area shape="rect" id="node17" href="$elf_8c.html#a6fe593c95dbcbfa1df84c139d4a0e6d6" title="elf_check" alt="" coords="207,107,286,133"/>
+<area shape="rect" id="node22" href="$os_2lib_8h.html#aa600a4b9613354c8112b41d02a80b5d0" title="putxval" alt="" coords="215,208,279,235"/>
+<area shape="rect" id="node24" href="$bootload_2main_8c.html#ad259a6e944deb3853bf6f2d7fa233c63" title="dump" alt="" coords="370,157,425,184"/>
+<area shape="rect" id="node30" href="$kozos_8c.html#a4dd8e8425a1c0c5d866a9271d243cdef" title="thread_exit" alt="" coords="203,309,291,336"/>
+<area shape="rect" id="node41" href="$kozos_8c.html#ad878125b5a334d151d787886f190ccf2" title="softerr_intr" alt="" coords="356,360,439,387"/>
+<area shape="rect" id="node45" href="$kozos_8h.html#aa4c201474d0562849b57ee7bd9ccd364" title="kz_sysdown" alt="" coords="198,411,295,437"/>
+<area shape="rect" id="node19" href="$elf_8h.html#a58b7300af370cb019f7098d7446f640d" title="elf_load" alt="" coords="362,107,433,133"/>
+<area shape="rect" id="node32" href="$kozos_8c.html#acd68041208fa0120669ac78343a47dc0" title="call_functions" alt="" coords="346,309,449,336"/>
+<area shape="rect" id="node34" href="$kozos_8c.html#aef8f2fde0f7865d66b9a7daf0e2426e0" title="syscall_proc" alt="" coords="499,309,597,336"/>
+<area shape="rect" id="node36" href="$kozos_8c.html#a69f871c66a43d6f0a644c57def130160" title="syscall_intr" alt="" coords="645,309,733,336"/>
+<area shape="rect" id="node38" href="$kozos_8h.html#a7078d5505c1e0c61af51bc66e5025685" title="ライブラリ関数 " alt="" coords="797,335,865,361"/>
+<area shape="rect" id="node47" href="$kozos_8c.html#a63e3ec45b7bf0028e55f2b9ab1603306" title="schedule" alt="" coords="359,411,436,437"/>
+<area shape="rect" id="node49" href="$kozos_8c.html#a064de18830e60998f8be0d67a0f2aabf" title="thread_intr" alt="" coords="506,411,590,437"/>
+<area shape="rect" id="node51" href="$kozos_8c.html#a7f5d62b70099d281d35e0336463c49fc" title="setintr" alt="" coords="661,411,718,437"/>
+</map>

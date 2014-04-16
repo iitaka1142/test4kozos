@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>SERIAL_DEFAULT_DEVICE</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/26.html#L114'>SERIAL_DEFAULT_DEVICE</a>  114 bootload/lib.c 		serial_send_byte(SERIAL_DEFAULT_DEVICE, '\r');</span>
+<span class='curline'><a href='../S/26.html#L117'>SERIAL_DEFAULT_DEVICE</a>  117 bootload/lib.c 	return serial_send_byte(SERIAL_DEFAULT_DEVICE, c);</span>
+<span class='curline'><a href='../S/26.html#L123'>SERIAL_DEFAULT_DEVICE</a>  123 bootload/lib.c 	char c = serial_recv_byte(SERIAL_DEFAULT_DEVICE);</span>
+<span class='curline'><a href='../S/20.html#L74'>SERIAL_DEFAULT_DEVICE</a>   74 bootload/main.c   serial_init(SERIAL_DEFAULT_DEVICE);</span>
+<span class='curline'><a href='../S/18.html#L42'>SERIAL_DEFAULT_DEVICE</a>   42 bootload/xmodem.c 	while(!serial_is_recv_enable(SERIAL_DEFAULT_DEVICE)){</span>
+<span class='curline'><a href='../S/18.html#L45'>SERIAL_DEFAULT_DEVICE</a>   45 bootload/xmodem.c 			serial_send_byte(SERIAL_DEFAULT_DEVICE, XMODEM_NAK);</span>
+<span class='curline'><a href='../S/18.html#L58'>SERIAL_DEFAULT_DEVICE</a>   58 bootload/xmodem.c 	block_num = serial_recv_byte(SERIAL_DEFAULT_DEVICE);</span>
+<span class='curline'><a href='../S/18.html#L64'>SERIAL_DEFAULT_DEVICE</a>   64 bootload/xmodem.c 	block_num ^= serial_recv_byte(SERIAL_DEFAULT_DEVICE);</span>
+<span class='curline'><a href='../S/18.html#L72'>SERIAL_DEFAULT_DEVICE</a>   72 bootload/xmodem.c 		c = serial_recv_byte(SERIAL_DEFAULT_DEVICE);</span>
+<span class='curline'><a href='../S/18.html#L79'>SERIAL_DEFAULT_DEVICE</a>   79 bootload/xmodem.c 	check_sum ^= serial_recv_byte(SERIAL_DEFAULT_DEVICE);</span>
+<span class='curline'><a href='../S/18.html#L98'>SERIAL_DEFAULT_DEVICE</a>   98 bootload/xmodem.c 		c = serial_recv_byte(SERIAL_DEFAULT_DEVICE);</span>
+<span class='curline'><a href='../S/18.html#L103'>SERIAL_DEFAULT_DEVICE</a>  103 bootload/xmodem.c 			serial_send_byte(SERIAL_DEFAULT_DEVICE, XMODEM_ACK);</span>
+<span class='curline'><a href='../S/18.html#L114'>SERIAL_DEFAULT_DEVICE</a>  114 bootload/xmodem.c 				serial_send_byte(SERIAL_DEFAULT_DEVICE, XMODEM_NAK);</span>
+<span class='curline'><a href='../S/18.html#L120'>SERIAL_DEFAULT_DEVICE</a>  120 bootload/xmodem.c 				serial_send_byte(SERIAL_DEFAULT_DEVICE, XMODEM_ACK);</span>
+<span class='curline'><a href='../S/8.html#L113'>SERIAL_DEFAULT_DEVICE</a>  113 os/lib.c       		serial_send_byte(SERIAL_DEFAULT_DEVICE, '\r');</span>
+<span class='curline'><a href='../S/8.html#L116'>SERIAL_DEFAULT_DEVICE</a>  116 os/lib.c       	return serial_send_byte(SERIAL_DEFAULT_DEVICE, c);</span>
+<span class='curline'><a href='../S/8.html#L122'>SERIAL_DEFAULT_DEVICE</a>  122 os/lib.c       	char c = serial_recv_byte(SERIAL_DEFAULT_DEVICE);</span>
+</pre>
+</body>
+</html>

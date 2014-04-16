@@ -1,0 +1,11 @@
+set line /dev/ttyS3
+set speed 9600
+set command bytesize 8
+set stop-bits 1
+set parity none
+set flow none
+
+set carrier-watch off
+
+set protocol xmodem rx {rx -a} {sx %s} {sx -a %s} rx rx
+

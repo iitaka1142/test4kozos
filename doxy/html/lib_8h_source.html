@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.5"/>
+<title>kozos: src/misc/lib.h ソースファイル</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+  $(window).load(resizeHeight);
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">kozos
+   &#160;<span id="projectnumber">Step 8</span>
+   </div>
+   <div id="projectbrief">Create OS in 12 steps</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 作成： Doxygen 1.8.5 -->
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>メインページ</span></a></li>
+      <li><a href="annotated.html"><span>データ構造</span></a></li>
+      <li class="current"><a href="files.html"><span>ファイル</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>ファイル一覧</span></a></li>
+      <li><a href="globals.html"><span>グローバル</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('lib_8h_source.html','');});
+</script>
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle">
+<div class="title">lib.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="lib_8h.html">説明を見る。</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef _LIB_H_INCLUDE_</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define _LIB_H_INCLUDE_</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">/**</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">   @file lib.h</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">   共通使用するライブラリ関数</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9">    9</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span> {</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9af9135ff5e5f008fb7249f40c7a6f76b7">   10</a></span>&#160;  <a class="code" href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9af9135ff5e5f008fb7249f40c7a6f76b7">Earlier</a> = -1,</div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9a0e0d4848f799861d016ae63c8fdc41e3">   11</a></span>&#160;  <a class="code" href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9a0e0d4848f799861d016ae63c8fdc41e3">Same</a> = 0,</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9a75643e13b923921f28e924e00575c92e">   12</a></span>&#160;  <a class="code" href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9a75643e13b923921f28e924e00575c92e">Later</a> = 1</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;} <a class="code" href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9">comp_result</a>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">/*---------------------------*</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> * メモリ関連関数</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> *---------------------------*/</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/** メモリを特定のパターンで埋める */</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> * <a class="code" href="lib_8c.html#a89ddf4c406cf5f89be48dd3e4af4cdc4">memset</a>(<span class="keywordtype">void</span> * b, <span class="keywordtype">int</span> c, <span class="keywordtype">long</span> len);<span class="comment"></span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"> * \param b (void*)対象メモリ領域の先頭位置へのポインタ</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> * \param c (int)埋めるためのパターン</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"> * \param len (long)対象メモリ領域のサイズ</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"> * \return 対象メモリ領域の先頭位置へのポインタ</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">/** メモリのコピーを行う */</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> * <a class="code" href="lib_8c.html#ae6f70fe20f24c155744d711f4b953eef">memcpy</a>(<span class="keywordtype">void</span> * dst, <span class="keyword">const</span> <span class="keywordtype">void</span> * src, <span class="keywordtype">long</span> len);<span class="comment"></span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment"> * \param dst (void*)コピーするメモリ領域の先頭位置へのポインタ</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment"> * \param src (const void*)コピーされるメモリ領域の先頭位置へのポインタ</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment"> * \param len (long)領域のサイズ</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="comment"> * \return コピーした領域の先頭位置へのポインタ</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">/** メモリ上のデータの比較を行う */</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<a class="code" href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9">comp_result</a> <a class="code" href="lib_8c.html#ad1f53852e073043deb4282575884d8fa">memcmp</a>(<span class="keyword">const</span> <span class="keywordtype">void</span> * b1, <span class="keyword">const</span> <span class="keywordtype">void</span> * b2, <span class="keywordtype">long</span> len);<span class="comment"></span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment"> * \param b1  比較するデータ1への先頭ポインタ</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment"> * \param b2  比較するデータ2への先頭ポインタ</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"> * \param len 領域のサイズ</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="comment"> * \retval Same    2つは同じ</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"> * \retval Later   b1が大きい</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"> * \retval Earlier b2が大きい</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">/*---------------------------*</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment"> * 文字列関連関数</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment"> *---------------------------*/</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">/** 文字列の長さを返す */</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keywordtype">int</span> <a class="code" href="lib_8c.html#a72d499d4e13e01ca35e557a2b127c7b8">strlen</a>(<a class="code" href="defines_8h.html#af9b57a039e89fcb35ac512f367e70337">cString</a> s);<span class="comment"></span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment"> * \param s 文字列の先頭へのポインタ</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment"> * \return 文字列の長さ</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">/** 文字列のコピーを行う */</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<a class="code" href="defines_8h.html#a2efe6d463d80744789f228f5dc4baa39">String</a> <a class="code" href="lib_8c.html#a4f18eec0e70dda8f611c6d629494a8de">strcpy</a>(<a class="code" href="defines_8h.html#a2efe6d463d80744789f228f5dc4baa39">String</a> dst,  <a class="code" href="defines_8h.html#af9b57a039e89fcb35ac512f367e70337">cString</a> src);<span class="comment"></span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"> * \param dst (String)コピーする文字列の先頭ポインタ</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"> * \param src (String)コピーされる文字列の先頭ポインタ</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"> * \return コピーした文字列の先頭ポインタ</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">/** 文字列の比較を行う */</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<a class="code" href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9">comp_result</a> <a class="code" href="lib_8c.html#af89677dc016299681068b79067ee424d">strcmp</a>(<a class="code" href="defines_8h.html#af9b57a039e89fcb35ac512f367e70337">cString</a> s1, <a class="code" href="defines_8h.html#af9b57a039e89fcb35ac512f367e70337">cString</a> s2);<span class="comment"></span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment"> * \param[in] s1 比較する文字列1への先頭ポインタ</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"> * \param[in] s2 比較する文字列2への先頭ポインタ</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"> * \retval Same    2つは同じ</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment"> * \retval Later   s1が大きい</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment"> * \retval Earlier s2が大きい</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">/** 長さ指定の文字列比較 */</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<a class="code" href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9">comp_result</a> <a class="code" href="lib_8c.html#a33518be6fe96efe10f366f211a8726c9">strncmp</a>(<a class="code" href="defines_8h.html#af9b57a039e89fcb35ac512f367e70337">cString</a> s1, <a class="code" href="defines_8h.html#af9b57a039e89fcb35ac512f367e70337">cString</a> s2, <span class="keywordtype">int</span> len);<span class="comment"></span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment"> * \param[in] s1  比較する文字列1への先頭ポインタ</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment"> * \param[in] s2  比較する文字列2への先頭ポインタ</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment"> * \param[in] len 比較する長さ</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment"> * \retval Same    2つは同じ</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment"> * \retval Later   s1が大きい</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"> * \retval Earlier s2が大きい</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">/** 1文字送信 */</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">int</span> <a class="code" href="lib_8c.html#acee36427208c7c321ab875217dca17c4">putc</a>(<span class="keywordtype">char</span> c);<span class="comment"></span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="comment"> * \param c 送信文字</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment"> * \retval EXIT_SUCCESS 正常終了</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment"> * 改行文字を\nから\rへ変換する</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">/** 1文字受信 */</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keywordtype">char</span> <a class="code" href="lib_8c.html#ae0ca7622f88a0818572688d85919e6fe">getc</a>(<span class="keywordtype">void</span>);<span class="comment"></span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment"> * \return 受信文字</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">/** 文字列送信 */</span> </div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keywordtype">int</span> <a class="code" href="lib_8c.html#a44ddf1a8f6a75ff235a733ff8d90cae3">puts</a>(<a class="code" href="defines_8h.html#af9b57a039e89fcb35ac512f367e70337">cString</a> str);<span class="comment"></span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="comment"> * \param[in] str (char*)送信文字列</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment"> * \retval EXIT_SUCCESS 正常終了 </span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">/** 文字列受信 */</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keywordtype">int</span> <a class="code" href="lib_8c.html#ac414099aa125e8638ec89b7593865b12">gets</a>(<a class="code" href="defines_8h.html#a2efe6d463d80744789f228f5dc4baa39">String</a> buf);<span class="comment"></span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment"> * \param[out] buf 受信文字列格納バッファ</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment"> * </span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment"> * \return EXIT_SUCCESS</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="comment">/** 数値の16進表示 */</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keywordtype">int</span> <a class="code" href="lib_8c.html#aa600a4b9613354c8112b41d02a80b5d0">putxval</a>(<a class="code" href="defines_8h.html#a4b435a49c74bb91f284f075e63416cb6">uint32</a> value, <span class="keywordtype">int</span> column);<span class="comment"></span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">/**&lt;</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment"> * \param value (unsigned long)表示する数値</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="comment"> * \param column (int)桁数</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment"> *</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment"> * \retval EXIT_SUCCESS 処理成功</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="defines_8h_html_a2efe6d463d80744789f228f5dc4baa39"><div class="ttname"><a href="defines_8h.html#a2efe6d463d80744789f228f5dc4baa39">String</a></div><div class="ttdeci">char * String</div><div class="ttdoc">文字列型 </div><div class="ttdef"><b>Definition:</b> <a href="defines_8h_source.html#l00017">defines.h:17</a></div></div>
+<div class="ttc" id="lib_8c_html_a89ddf4c406cf5f89be48dd3e4af4cdc4"><div class="ttname"><a href="lib_8c.html#a89ddf4c406cf5f89be48dd3e4af4cdc4">memset</a></div><div class="ttdeci">void * memset(void *b, int c, long len)</div><div class="ttdef"><b>Definition:</b> <a href="lib_8c_source.html#l00012">lib.c:12</a></div></div>
+<div class="ttc" id="lib_8h_html_a5d2dab4753d102232000e2dff80db4f9af9135ff5e5f008fb7249f40c7a6f76b7"><div class="ttname"><a href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9af9135ff5e5f008fb7249f40c7a6f76b7">Earlier</a></div><div class="ttdef"><b>Definition:</b> <a href="lib_8h_source.html#l00010">lib.h:10</a></div></div>
+<div class="ttc" id="lib_8c_html_a33518be6fe96efe10f366f211a8726c9"><div class="ttname"><a href="lib_8c.html#a33518be6fe96efe10f366f211a8726c9">strncmp</a></div><div class="ttdeci">int strncmp(cString s1, cString s2, int len)</div><div class="ttdef"><b>Definition:</b> <a href="lib_8c_source.html#l00095">lib.c:95</a></div></div>
+<div class="ttc" id="lib_8c_html_ae6f70fe20f24c155744d711f4b953eef"><div class="ttname"><a href="lib_8c.html#ae6f70fe20f24c155744d711f4b953eef">memcpy</a></div><div class="ttdeci">void * memcpy(void *dst, const void *src, long len)</div><div class="ttdef"><b>Definition:</b> <a href="lib_8c_source.html#l00024">lib.c:24</a></div></div>
+<div class="ttc" id="lib_8h_html_a5d2dab4753d102232000e2dff80db4f9"><div class="ttname"><a href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9">comp_result</a></div><div class="ttdeci">comp_result</div><div class="ttdef"><b>Definition:</b> <a href="lib_8h_source.html#l00009">lib.h:9</a></div></div>
+<div class="ttc" id="lib_8c_html_acee36427208c7c321ab875217dca17c4"><div class="ttname"><a href="lib_8c.html#acee36427208c7c321ab875217dca17c4">putc</a></div><div class="ttdeci">int putc(char c)</div><div class="ttdef"><b>Definition:</b> <a href="lib_8c_source.html#l00110">lib.c:110</a></div></div>
+<div class="ttc" id="lib_8c_html_a44ddf1a8f6a75ff235a733ff8d90cae3"><div class="ttname"><a href="lib_8c.html#a44ddf1a8f6a75ff235a733ff8d90cae3">puts</a></div><div class="ttdeci">int puts(cString str)</div><div class="ttdef"><b>Definition:</b> <a href="lib_8c_source.html#l00130">lib.c:130</a></div></div>
+<div class="ttc" id="lib_8c_html_a4f18eec0e70dda8f611c6d629494a8de"><div class="ttname"><a href="lib_8c.html#a4f18eec0e70dda8f611c6d629494a8de">strcpy</a></div><div class="ttdeci">String strcpy(String dst, cString src)</div><div class="ttdef"><b>Definition:</b> <a href="lib_8c_source.html#l00069">lib.c:69</a></div></div>
+<div class="ttc" id="lib_8c_html_af89677dc016299681068b79067ee424d"><div class="ttname"><a href="lib_8c.html#af89677dc016299681068b79067ee424d">strcmp</a></div><div class="ttdeci">int strcmp(cString s1, cString s2)</div><div class="ttdef"><b>Definition:</b> <a href="lib_8c_source.html#l00081">lib.c:81</a></div></div>
+<div class="ttc" id="defines_8h_html_a4b435a49c74bb91f284f075e63416cb6"><div class="ttname"><a href="defines_8h.html#a4b435a49c74bb91f284f075e63416cb6">uint32</a></div><div class="ttdeci">unsigned long uint32</div><div class="ttdoc">32byteデータ </div><div class="ttdef"><b>Definition:</b> <a href="defines_8h_source.html#l00016">defines.h:16</a></div></div>
+<div class="ttc" id="defines_8h_html_af9b57a039e89fcb35ac512f367e70337"><div class="ttname"><a href="defines_8h.html#af9b57a039e89fcb35ac512f367e70337">cString</a></div><div class="ttdeci">const char * cString</div><div class="ttdoc">変更されない文字列型 </div><div class="ttdef"><b>Definition:</b> <a href="defines_8h_source.html#l00018">defines.h:18</a></div></div>
+<div class="ttc" id="lib_8h_html_a5d2dab4753d102232000e2dff80db4f9a75643e13b923921f28e924e00575c92e"><div class="ttname"><a href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9a75643e13b923921f28e924e00575c92e">Later</a></div><div class="ttdef"><b>Definition:</b> <a href="lib_8h_source.html#l00012">lib.h:12</a></div></div>
+<div class="ttc" id="lib_8h_html_a5d2dab4753d102232000e2dff80db4f9a0e0d4848f799861d016ae63c8fdc41e3"><div class="ttname"><a href="lib_8h.html#a5d2dab4753d102232000e2dff80db4f9a0e0d4848f799861d016ae63c8fdc41e3">Same</a></div><div class="ttdef"><b>Definition:</b> <a href="lib_8h_source.html#l00011">lib.h:11</a></div></div>
+<div class="ttc" id="lib_8c_html_ae0ca7622f88a0818572688d85919e6fe"><div class="ttname"><a href="lib_8c.html#ae0ca7622f88a0818572688d85919e6fe">getc</a></div><div class="ttdeci">char getc(void)</div><div class="ttdef"><b>Definition:</b> <a href="lib_8c_source.html#l00120">lib.c:120</a></div></div>
+<div class="ttc" id="lib_8c_html_ac414099aa125e8638ec89b7593865b12"><div class="ttname"><a href="lib_8c.html#ac414099aa125e8638ec89b7593865b12">gets</a></div><div class="ttdeci">int gets(String buf)</div><div class="ttdef"><b>Definition:</b> <a href="lib_8c_source.html#l00140">lib.c:140</a></div></div>
+<div class="ttc" id="lib_8c_html_ad1f53852e073043deb4282575884d8fa"><div class="ttname"><a href="lib_8c.html#ad1f53852e073043deb4282575884d8fa">memcmp</a></div><div class="ttdeci">int memcmp(const void *b1, const void *b2, long len)</div><div class="ttdef"><b>Definition:</b> <a href="lib_8c_source.html#l00037">lib.c:37</a></div></div>
+<div class="ttc" id="lib_8c_html_a72d499d4e13e01ca35e557a2b127c7b8"><div class="ttname"><a href="lib_8c.html#a72d499d4e13e01ca35e557a2b127c7b8">strlen</a></div><div class="ttdeci">int strlen(cString s)</div><div class="ttdef"><b>Definition:</b> <a href="lib_8c_source.html#l00058">lib.c:58</a></div></div>
+<div class="ttc" id="lib_8c_html_aa600a4b9613354c8112b41d02a80b5d0"><div class="ttname"><a href="lib_8c.html#aa600a4b9613354c8112b41d02a80b5d0">putxval</a></div><div class="ttdeci">int putxval(uint32 value, int column)</div><div class="ttdef"><b>Definition:</b> <a href="lib_8c_source.html#l00157">lib.c:157</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_88826aa2a10e1882b573f502bc7f4b55.html">misc</a></li><li class="navelem"><a class="el" href="lib_8h.html">lib.h</a></li>
+    <li class="footer">作成：
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
+  </ul>
+</div>
+</body>
+</html>

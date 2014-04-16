@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>value</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/26.html#L158'>value</a>             158 bootload/lib.c int putxval(uint32 value, int column)</span>
+<span class='curline'><a href='../S/26.html#L167'>value</a>             167 bootload/lib.c 	if(!value &amp;&amp; !column) {</span>
+<span class='curline'><a href='../S/26.html#L172'>value</a>             172 bootload/lib.c 	while(value || column) {</span>
+<span class='curline'><a href='../S/26.html#L173'>value</a>             173 bootload/lib.c 		*(p--) = "0123456789abcdef"[value &amp; 0xf];</span>
+<span class='curline'><a href='../S/26.html#L174'>value</a>             174 bootload/lib.c 		value &gt;&gt;= 4;</span>
+<span class='curline'><a href='../S/17.html#L119'>value</a>             119 bootload/lib.h int putxval(uint32 value, int column);</span>
+<span class='curline'><a href='../S/5.html#L146'>value</a>             146 os/kozos.c     inline static int push(uint32 * stack, uint32 value)</span>
+<span class='curline'><a href='../S/5.html#L148'>value</a>             148 os/kozos.c       *(--stack) = value;</span>
+<span class='curline'><a href='../S/8.html#L157'>value</a>             157 os/lib.c       int putxval(uint32 value, int column)</span>
+<span class='curline'><a href='../S/8.html#L166'>value</a>             166 os/lib.c       	if(!value &amp;&amp; !column) {</span>
+<span class='curline'><a href='../S/8.html#L171'>value</a>             171 os/lib.c       	while(value || column) {</span>
+<span class='curline'><a href='../S/8.html#L172'>value</a>             172 os/lib.c       		*(p--) = "0123456789abcdef"[value &amp; 0xf];</span>
+<span class='curline'><a href='../S/8.html#L173'>value</a>             173 os/lib.c       		value &gt;&gt;= 4;</span>
+<span class='curline'><a href='../S/1.html#L126'>value</a>             126 os/lib.h       int putxval(uint32 value, int column);</span>
+</pre>
+</body>
+</html>

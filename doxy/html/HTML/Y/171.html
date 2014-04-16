@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>name</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<pre>
+<span class='curline'><a href='../S/5.html#L20'>name</a>               20 os/kozos.c       char name [THREAD_NAME_MAX_SIZE + 1];</span>
+<span class='curline'><a href='../S/5.html#L159'>name</a>              159 os/kozos.c     static kz_thread_id_t thread_run(String name, kz_func_t func, int argc, char * argv[], stack_ptr_t stack_size)</span>
+<span class='curline'><a href='../S/5.html#L174'>name</a>              174 os/kozos.c       strcpy(thread-&gt;name, name);</span>
+<span class='curline'><a href='../S/5.html#L212'>name</a>              212 os/kozos.c       puts(thread-&gt;name); puts(" EXIT.\n");</span>
+<span class='curline'><a href='../S/5.html#L238'>name</a>              238 os/kozos.c         param-&gt;run.ret = thread_run(param-&gt;run.name, param-&gt;run.func, param-&gt;run.argc, param-&gt;run.argv, param-&gt;run.stack_size);</span>
+<span class='curline'><a href='../S/5.html#L279'>name</a>              279 os/kozos.c       puts(current-&gt;name); puts(" Down.\n");</span>
+<span class='curline'><a href='../S/5.html#L301'>name</a>              301 os/kozos.c     void kz_start(kz_func_t func, char * name, uint16 stack_size, int argc, char * argv[])</span>
+<span class='curline'><a href='../S/5.html#L313'>name</a>              313 os/kozos.c       current = (kz_thread *)thread_run(name, func, argc, argv, stack_size);</span>
+<span class='curline'><a href='../S/11.html#L8'>name</a>                8 os/kozos.h     kz_thread_id_t kz_run(kz_func_t func, char * name, int stack_size, int argc, char * argv[]);</span>
+<span class='curline'><a href='../S/11.html#L14'>name</a>               14 os/kozos.h     void kz_start(kz_func_t func, char * name, uint16 stack_size, int argc, char * argv[]) __attribute__((noreturn));</span>
+<span class='curline'><a href='../S/14.html#L5'>name</a>                5 os/syscall.c   kz_thread_id_t kz_run(kz_func_t func, char * name, int stack_size, int argc, char * argv[])</span>
+<span class='curline'><a href='../S/14.html#L10'>name</a>               10 os/syscall.c     param.run.name = name;</span>
+<span class='curline'><a href='../S/7.html#L21'>name</a>               21 os/syscall.h       char * name;</span>
+<span class='curline'><a href='../S/28.html#L945'>name</a>              945 writer/h8write.c  char* basename(char *name) {</span>
+<span class='curline'><a href='../S/28.html#L948'>name</a>              948 writer/h8write.c  	p = strlen(name);</span>
+<span class='curline'><a href='../S/28.html#L950'>name</a>              950 writer/h8write.c  		if(name[p] == '\\' || name[p] == '/') return &amp;(name[p+1]);</span>
+<span class='curline'><a href='../S/28.html#L952'>name</a>              952 writer/h8write.c  	return name;</span>
+</pre>
+</body>
+</html>

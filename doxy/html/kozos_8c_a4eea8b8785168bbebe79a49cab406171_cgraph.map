@@ -1,0 +1,27 @@
+<map id="kz_start" name="kz_start">
+<area shape="rect" id="node3" href="$kozos_8c.html#a22e9c35c1764d5ebe1d534d207f114b1" title="dispatch" alt="" coords="429,5,501,32"/>
+<area shape="rect" id="node5" href="$lib_8c.html#a89ddf4c406cf5f89be48dd3e4af4cdc4" title="memset" alt="" coords="875,259,946,285"/>
+<area shape="rect" id="node7" href="$kozos_8c.html#a7f5d62b70099d281d35e0336463c49fc" title="set interrupt handler " alt="" coords="138,107,195,133"/>
+<area shape="rect" id="node26" href="$kozos_8c.html#ad878125b5a334d151d787886f190ccf2" title="softerr_intr" alt="" coords="424,157,507,184"/>
+<area shape="rect" id="node33" href="$kozos_8c.html#a69f871c66a43d6f0a644c57def130160" title="syscall_intr" alt="" coords="123,259,211,285"/>
+<area shape="rect" id="node40" href="$kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b" title="system call " alt="" coords="572,348,657,375"/>
+<area shape="rect" id="node9" href="$interrupt_8c.html#a77d3bbf145b56c7a6bc2706b44b71d68" title="softvec_setintr" alt="" coords="259,107,365,133"/>
+<area shape="rect" id="node11" href="$kozos_8c.html#a064de18830e60998f8be0d67a0f2aabf" title="thread_intr" alt="" coords="270,56,354,83"/>
+<area shape="rect" id="node13" href="$kozos_8c.html#a63e3ec45b7bf0028e55f2b9ab1603306" title="schedule" alt="" coords="427,56,504,83"/>
+<area shape="rect" id="node15" href="$kozos_8c.html#ad271cfae989a014d777a1f46903d6964" title="kz_sysdown" alt="" coords="566,56,663,83"/>
+<area shape="rect" id="node17" href="$lib_8c.html#a44ddf1a8f6a75ff235a733ff8d90cae3" title="puts" alt="" coords="746,107,793,133"/>
+<area shape="rect" id="node19" href="$lib_8c.html#acee36427208c7c321ab875217dca17c4" title="putc" alt="" coords="887,107,934,133"/>
+<area shape="rect" id="node21" href="$serial_8c.html#aed0806bd3de71f20d6df8ef6f49bda31" title="serial_send_byte" alt="" coords="995,107,1119,133"/>
+<area shape="rect" id="node23" href="$serial_8c.html#abf48ded30f8aa6fff8cb48dce0af0590" title="serial_is_send_enable" alt="" coords="1168,107,1325,133"/>
+<area shape="rect" id="node29" href="$kozos_8c.html#a4dd8e8425a1c0c5d866a9271d243cdef" title="thread_exit" alt="" coords="571,157,659,184"/>
+<area shape="rect" id="node35" href="$kozos_8c.html#aef8f2fde0f7865d66b9a7daf0e2426e0" title="syscall_proc" alt="" coords="263,259,361,285"/>
+<area shape="rect" id="node37" href="$kozos_8c.html#acd68041208fa0120669ac78343a47dc0" title="call_functions" alt="" coords="414,259,517,285"/>
+<area shape="rect" id="node42" href="$kozos_8c.html#a2e6488cfd47118e19d4407d3a23eac3f" title="create TCB " alt="" coords="721,309,817,336"/>
+<area shape="rect" id="node45" href="$lib_8c.html#a4f18eec0e70dda8f611c6d629494a8de" title="strcpy" alt="" coords="741,259,798,285"/>
+<area shape="rect" id="node47" href="$kozos_8c.html#a92177eed4eabc923bcd27462d8ce57b8" title="get_stack_area" alt="" coords="712,360,827,387"/>
+<area shape="rect" id="node50" href="$kozos_8c.html#ac4d8f9724e6cfa40d91cd63fa8c275d2" title="thread_end" alt="" coords="724,512,815,539"/>
+<area shape="rect" id="node56" href="$kozos_8c.html#a3ac934c923c7f023b80805c9b7dad8a3" title="start up thread " alt="" coords="728,411,811,437"/>
+<area shape="rect" id="node58" href="$kozos_8c.html#a9cc7c96bdff0e4416f354672b2b1d183" title="put" alt="" coords="750,461,789,488"/>
+<area shape="rect" id="node52" href="$kozos_8h.html#a0e36d3c55bb22d6d54af1eeff7157ff7" title="スレッド強制終了 " alt="" coords="879,512,943,539"/>
+<area shape="rect" id="node54" href="$kozos_8c.html#a2ef06efeac9f498bbabbf145fa8eb107" title="kz_syscall" alt="" coords="1015,512,1100,539"/>
+</map>

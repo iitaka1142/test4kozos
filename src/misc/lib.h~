@@ -1,0 +1,134 @@
+#ifndef _LIB_H_INCLUDE_
+#define _LIB_H_INCLUDE_
+
+/**
+   @file lib.h
+   共通使用するライブラリ関数
+ */
+
+/*---------------------------*
+ * メモリ関連関数
+ *---------------------------*/
+
+/** メモリを特定のパターンで埋める */
+void * memset(void * b, int c, long len);
+/**<
+ * \param b (void*)対象メモリ領域の先頭位置へのポインタ
+ * \param c (int)埋めるためのパターン
+ * \param len (long)対象メモリ領域のサイズ
+ *
+ * \return 対象メモリ領域の先頭位置へのポインタ
+ */
+
+/** メモリのコピーを行う */
+void * memcpy(void * dst, const void * src, long len);
+/**<
+ * \param dst (void*)コピーするメモリ領域の先頭位置へのポインタ
+ * \param src (const void*)コピーされるメモリ領域の先頭位置へのポインタ
+ * \param len (long)領域のサイズ
+ *
+ * \return コピーした領域の先頭位置へのポインタ
+ */
+
+/** メモリ上のデータの比較を行う */
+int memcmp(const void * b1, const void * b2, long len);
+/**<
+ * \param b1 (const void*)比較するデータ1への先頭ポインタ
+ * \param b2 (const void*)比較するデータ2への先頭ポインタ
+ * \param len (long)領域のサイズ
+ *
+ * \retval 0  2つは同じ
+ * \retval 1  b1が大きい
+ * \retval -1 b2が大きい
+ */
+
+/*---------------------------*
+ * 文字列関連関数
+ *---------------------------*/
+
+/** 文字列の長さを返す */
+int strlen(cString s);
+/**<
+ * \param s (const char*)文字列の先頭へのポインタ
+ *
+ * \return 文字列の長さ
+ */
+
+/** 文字列のコピーを行う */
+String strcpy(String dst,  cString src);
+/**<
+ * \param dst (String)コピーする文字列の先頭ポインタ
+ * \param src (String)コピーされる文字列の先頭ポインタ
+ * 
+ * \return コピーした文字列の先頭ポインタ
+ */
+
+typedef enum {
+  Earlier = -1,
+  Same = 0,
+  Later = 1
+} comp_result;
+
+/** 文字列の比較を行う */
+comp_result strcmp(cString s1, cString s2);
+/**<
+ * \param[in] s1 (const void*)比較する文字列1への先頭ポインタ
+ * \param[in] s2 (const void*)比較する文字列2への先頭ポインタ
+ *
+ * \retval 0  2つは同じ
+ * \retval 1  s1が大きい
+ * \retval -1 s2が大きい
+ */
+
+/** 長さ指定の文字列比較 */
+comp_result strncmp(cString s1, cString s2, int len);
+/**<
+ * \param[in] s1 (const void*)比較する文字列1への先頭ポインタ
+ * \param[in] s2 (const void*)比較する文字列2への先頭ポインタ
+ * \param[in] len (int)比較する長さ
+ *
+ * \retval 0  2つは同じ
+ * \retval 1  s1が大きい
+ * \retval -1 s2が大きい
+ */
+
+/** 1文字送信 */
+int putc(char c);
+/**<
+ * \param c (char)送信文字
+ * \retval EXIT_SUCCESS 正常終了
+ *
+ * 改行文字を\nから\rへ変換する
+ */
+
+/** 1文字受信 */
+char getc(void);
+/**<
+ * \return 受信文字
+ */
+
+/** 文字列送信 */ 
+int puts(cString str);
+/**<
+ * \param[in] str (char*)送信文字列
+ * \retval EXIT_SUCCESS 正常終了 
+ */
+
+/** 文字列受信 */
+int gets(String buf);
+/**<
+ * \param[out] buf 受信文字列格納バッファ
+ * 
+ * \return EXIT_SUCCESS
+ */
+
+/** 数値の16進表示 */
+int putxval(uint32 value, int column);
+/**<
+ * \param value (unsigned long)表示する数値
+ * \param column (int)桁数
+ *
+ * \retval EXIT_SUCCESS 処理成功
+ */
+
+#endif

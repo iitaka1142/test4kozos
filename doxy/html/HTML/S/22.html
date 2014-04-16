@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>bootload/startup.s</title>
+<meta name='robots' content='noindex,nofollow' />
+<meta name='generator' content='GLOBAL-6.2.4' />
+<meta http-equiv='Content-Style-Type' content='text/css' />
+<link rel='stylesheet' type='text/css' href='../style.css' />
+</head>
+<body>
+<a id='TOP' name='TOP' /><h2 class='header'><a href='../mains.html'>root</a>/<a href='../files/43.html'>bootload</a>/startup.s</h2>
+<em class='comment'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+<hr />
+<pre>
+<a id='L1' name='L1' />   1         .h8300h
+<a id='L2' name='L2' />   2         .section .text
+<a id='L3' name='L3' />   3         .global _start
+<a id='L4' name='L4' />   4         .type   _start,@function
+<a id='L5' name='L5' />   5 _start:
+<a id='L6' name='L6' />   6         mov.l   #_bootstack,sp
+<a id='L7' name='L7' />   7         jsr             @_main
+<a id='L8' name='L8' />   8 
+<a id='L9' name='L9' />   9 1:
+<a id='L10' name='L10' />  10         bra 1b
+</pre>
+<hr />
+<a id='BOTTOM' name='BOTTOM' />
+<em class='comment'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</em>
+</body>
+</html>

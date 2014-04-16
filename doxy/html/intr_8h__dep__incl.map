@@ -1,0 +1,5 @@
+<map id="src/misc/intr.h" name="src/misc/intr.h">
+<area shape="rect" id="node3" href="$intr_8S.html" title="src/bootload/intr.S" alt="" coords="5,80,135,107"/>
+<area shape="rect" id="node5" href="$interrupt_8c.html" title="src/misc/interrupt.c" alt="" coords="161,80,292,107"/>
+<area shape="rect" id="node7" href="$kozos_8c.html" title="src/os/kozos.c" alt="" coords="317,80,427,107"/>
+</map>

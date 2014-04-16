@@ -1,0 +1,11 @@
+<map id="setintr" name="setintr">
+<area shape="rect" id="node3" href="$interrupt_8c.html#a77d3bbf145b56c7a6bc2706b44b71d68" title="softvec_setintr" alt="" coords="112,5,219,32"/>
+<area shape="rect" id="node5" href="$kozos_8c.html#a064de18830e60998f8be0d67a0f2aabf" title="thread_intr" alt="" coords="123,56,207,83"/>
+<area shape="rect" id="node7" href="$kozos_8c.html#a63e3ec45b7bf0028e55f2b9ab1603306" title="schedule" alt="" coords="267,31,344,57"/>
+<area shape="rect" id="node19" href="$kozos_8c.html#a22e9c35c1764d5ebe1d534d207f114b1" title="dispatch" alt="" coords="269,81,341,108"/>
+<area shape="rect" id="node9" href="$kozos_8c.html#ad271cfae989a014d777a1f46903d6964" title="kz_sysdown" alt="" coords="393,31,490,57"/>
+<area shape="rect" id="node11" href="$lib_8c.html#a44ddf1a8f6a75ff235a733ff8d90cae3" title="puts" alt="" coords="539,31,586,57"/>
+<area shape="rect" id="node13" href="$lib_8c.html#acee36427208c7c321ab875217dca17c4" title="putc" alt="" coords="635,31,682,57"/>
+<area shape="rect" id="node15" href="$serial_8c.html#aed0806bd3de71f20d6df8ef6f49bda31" title="serial_send_byte" alt="" coords="731,31,855,57"/>
+<area shape="rect" id="node17" href="$serial_8c.html#abf48ded30f8aa6fff8cb48dce0af0590" title="serial_is_send_enable" alt="" coords="904,31,1061,57"/>
+</map>

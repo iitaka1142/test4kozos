@@ -1,0 +1,7 @@
+<map id="src/os/main.c" name="src/os/main.c">
+<area shape="rect" id="node3" href="$defines_8h.html" title="../misc/defines.h" alt="" coords="75,229,193,256"/>
+<area shape="rect" id="node5" href="$interrupt_8h.html" title="../misc/interrupt.h" alt="" coords="26,155,146,181"/>
+<area shape="rect" id="node8" href="$lib_8h.html" title="../misc/lib.h" alt="" coords="95,80,181,107"/>
+<area shape="rect" id="node10" href="$kozos_8h.html" title="kozos.h" alt="" coords="206,80,276,107"/>
+<area shape="rect" id="node13" href="$syscall_8h.html" title="syscall.h" alt="" coords="221,155,294,181"/>
+</map>

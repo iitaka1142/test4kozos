@@ -1,0 +1,8 @@
+<map id="create_TCB" name="create_TCB">
+<area shape="rect" id="node3" href="$kozos_8c.html#a8fd64516a2230c46e0e866aa3c54470b" title="system call " alt="" coords="149,31,235,57"/>
+<area shape="rect" id="node5" href="$kozos_8c.html#acd68041208fa0120669ac78343a47dc0" title="call_functions" alt="" coords="283,5,386,32"/>
+<area shape="rect" id="node11" href="$kozos_8h.html#a7078d5505c1e0c61af51bc66e5025685" title="ライブラリ関数 " alt="" coords="718,31,786,57"/>
+<area shape="rect" id="node7" href="$kozos_8c.html#aef8f2fde0f7865d66b9a7daf0e2426e0" title="syscall_proc" alt="" coords="435,5,533,32"/>
+<area shape="rect" id="node9" href="$kozos_8c.html#a69f871c66a43d6f0a644c57def130160" title="syscall_intr" alt="" coords="581,5,669,32"/>
+<area shape="rect" id="node13" href="$os_2main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="835,31,885,57"/>
+</map>
