@@ -1,6 +1,0 @@
-<map id="softvec_setintr" name="softvec_setintr">
-<area shape="rect" id="node3" href="$kozos_8c.html#a7f5d62b70099d281d35e0336463c49fc" title="set interrupt handler " alt="" coords="175,5,233,32"/>
-<area shape="rect" id="node9" href="$interrupt_8h.html#ade04dbe32efde0b18e74a5f0e8502efb" title="softvec_init" alt="" coords="160,56,248,83"/>
-<area shape="rect" id="node5" href="$kozos_8h.html#a7078d5505c1e0c61af51bc66e5025685" title="ライブラリ関数 " alt="" coords="297,5,365,32"/>
-<area shape="rect" id="node7" href="$os_2main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title="main" alt="" coords="413,5,464,32"/>
-</map>

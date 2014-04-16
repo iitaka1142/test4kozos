@@ -1,6 +1,0 @@
-<map id="src/misc/interrupt.h" name="src/misc/interrupt.h">
-<area shape="rect" id="node3" href="$bootload_2main_8c.html" title="src/bootload/main.c" alt="" coords="5,80,144,107"/>
-<area shape="rect" id="node5" href="$interrupt_8c.html" title="src/misc/interrupt.c" alt="" coords="169,80,300,107"/>
-<area shape="rect" id="node7" href="$kozos_8c.html" title="src/os/kozos.c" alt="" coords="325,80,435,107"/>
-<area shape="rect" id="node9" href="$os_2main_8c.html" title="src/os/main.c" alt="" coords="459,80,561,107"/>
-</map>

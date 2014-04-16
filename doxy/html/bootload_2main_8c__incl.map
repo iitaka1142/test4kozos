@@ -1,8 +1,0 @@
-<map id="src/bootload/main.c" name="src/bootload/main.c">
-<area shape="rect" id="node3" href="$defines_8h.html" title="../misc/defines.h" alt="" coords="5,155,123,181"/>
-<area shape="rect" id="node5" href="$interrupt_8h.html" title="../misc/interrupt.h" alt="" coords="53,80,173,107"/>
-<area shape="rect" id="node8" href="$serial_8h.html" title="../misc/serial.h" alt="" coords="197,80,304,107"/>
-<area shape="rect" id="node10" href="$lib_8h.html" title="../misc/lib.h" alt="" coords="329,80,415,107"/>
-<area shape="rect" id="node12" href="$xmodem_8h.html" title="xmodem.h" alt="" coords="440,80,525,107"/>
-<area shape="rect" id="node14" href="$elf_8h.html" title="elf.h" alt="" coords="550,80,596,107"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="schedule" name="schedule">
-<area shape="rect" id="node3" href="$kozos_8c.html#ad271cfae989a014d777a1f46903d6964" title="kz_sysdown" alt="" coords="131,5,229,32"/>
-<area shape="rect" id="node5" href="$lib_8c.html#a44ddf1a8f6a75ff235a733ff8d90cae3" title="puts" alt="" coords="278,5,325,32"/>
-<area shape="rect" id="node7" href="$lib_8c.html#acee36427208c7c321ab875217dca17c4" title="putc" alt="" coords="374,5,421,32"/>
-<area shape="rect" id="node9" href="$serial_8c.html#aed0806bd3de71f20d6df8ef6f49bda31" title="serial_send_byte" alt="" coords="470,5,594,32"/>
-<area shape="rect" id="node11" href="$serial_8c.html#abf48ded30f8aa6fff8cb48dce0af0590" title="serial_is_send_enable" alt="" coords="643,5,800,32"/>
-</map>

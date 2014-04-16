@@ -1,5 +1,0 @@
-<map id="puts" name="puts">
-<area shape="rect" id="node3" href="$lib_8c.html#acee36427208c7c321ab875217dca17c4" title="putc" alt="" coords="102,5,149,32"/>
-<area shape="rect" id="node5" href="$serial_8c.html#aed0806bd3de71f20d6df8ef6f49bda31" title="serial_send_byte" alt="" coords="198,5,322,32"/>
-<area shape="rect" id="node7" href="$serial_8c.html#abf48ded30f8aa6fff8cb48dce0af0590" title="serial_is_send_enable" alt="" coords="371,5,528,32"/>
-</map>

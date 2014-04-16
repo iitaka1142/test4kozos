@@ -1,9 +1,0 @@
-<map id="src/misc/lib.h" name="src/misc/lib.h">
-<area shape="rect" id="node3" href="$elf_8c.html" title="src/bootload/elf.c" alt="" coords="5,80,131,107"/>
-<area shape="rect" id="node5" href="$bootload_2main_8c.html" title="src/bootload/main.c" alt="" coords="155,80,295,107"/>
-<area shape="rect" id="node7" href="$xmodem_8c.html" title="src/bootload/xmodem.c" alt="" coords="319,80,483,107"/>
-<area shape="rect" id="node9" href="$lib_8c.html" title="src/misc/lib.c" alt="" coords="508,80,607,107"/>
-<area shape="rect" id="node11" href="$kozos_8c.html" title="src/os/kozos.c" alt="" coords="631,80,741,107"/>
-<area shape="rect" id="node13" href="$os_2main_8c.html" title="src/os/main.c" alt="" coords="766,80,868,107"/>
-<area shape="rect" id="node15" href="$test08__1_8c.html" title="src/os/test08_1.c" alt="" coords="893,80,1016,107"/>
-</map>

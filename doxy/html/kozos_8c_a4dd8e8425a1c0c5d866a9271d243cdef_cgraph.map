@@ -1,7 +1,0 @@
-<map id="thread_exit" name="thread_exit">
-<area shape="rect" id="node3" href="$lib_8c.html#a89ddf4c406cf5f89be48dd3e4af4cdc4" title="memset" alt="" coords="142,5,213,32"/>
-<area shape="rect" id="node5" href="$lib_8c.html#a44ddf1a8f6a75ff235a733ff8d90cae3" title="puts" alt="" coords="154,56,201,83"/>
-<area shape="rect" id="node7" href="$lib_8c.html#acee36427208c7c321ab875217dca17c4" title="putc" alt="" coords="262,56,309,83"/>
-<area shape="rect" id="node9" href="$serial_8c.html#aed0806bd3de71f20d6df8ef6f49bda31" title="serial_send_byte" alt="" coords="358,56,482,83"/>
-<area shape="rect" id="node11" href="$serial_8c.html#abf48ded30f8aa6fff8cb48dce0af0590" title="serial_is_send_enable" alt="" coords="531,56,688,83"/>
-</map>

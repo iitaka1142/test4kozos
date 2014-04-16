@@ -1,4 +1,0 @@
-<map id="putc" name="putc">
-<area shape="rect" id="node3" href="$serial_8c.html#aed0806bd3de71f20d6df8ef6f49bda31" title="serial_send_byte" alt="" coords="102,5,226,32"/>
-<area shape="rect" id="node5" href="$serial_8c.html#abf48ded30f8aa6fff8cb48dce0af0590" title="serial_is_send_enable" alt="" coords="275,5,432,32"/>
-</map>

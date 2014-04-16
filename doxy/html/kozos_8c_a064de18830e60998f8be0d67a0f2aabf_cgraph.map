@@ -1,9 +1,0 @@
-<map id="thread_intr" name="thread_intr">
-<area shape="rect" id="node3" href="$kozos_8c.html#a22e9c35c1764d5ebe1d534d207f114b1" title="dispatch" alt="" coords="141,5,213,32"/>
-<area shape="rect" id="node5" href="$kozos_8c.html#a63e3ec45b7bf0028e55f2b9ab1603306" title="schedule" alt="" coords="139,56,216,83"/>
-<area shape="rect" id="node7" href="$kozos_8c.html#ad271cfae989a014d777a1f46903d6964" title="kz_sysdown" alt="" coords="265,56,362,83"/>
-<area shape="rect" id="node9" href="$lib_8c.html#a44ddf1a8f6a75ff235a733ff8d90cae3" title="puts" alt="" coords="411,56,458,83"/>
-<area shape="rect" id="node11" href="$lib_8c.html#acee36427208c7c321ab875217dca17c4" title="putc" alt="" coords="507,56,554,83"/>
-<area shape="rect" id="node13" href="$serial_8c.html#aed0806bd3de71f20d6df8ef6f49bda31" title="serial_send_byte" alt="" coords="603,56,727,83"/>
-<area shape="rect" id="node15" href="$serial_8c.html#abf48ded30f8aa6fff8cb48dce0af0590" title="serial_is_send_enable" alt="" coords="776,56,933,83"/>
-</map>
