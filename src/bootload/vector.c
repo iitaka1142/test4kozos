@@ -13,7 +13,7 @@ extern void intr_serintr(void); ///< シリアル割り込み @see startup.s
 /**
    割り込みベクタの設定。
    
-   リンカスクリプトの起動により、先頭番地に配置される。
+   リンカスクリプトにより、先頭番地に配置される。
  */
 void (*vectors[])(void) = {
   start, NULL, NULL, NULL, NULL, NULL, NULL, NULL,//  0 -  7

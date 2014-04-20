@@ -2,6 +2,7 @@
 #define _KOZOS_SYSCALL_H_INCLUDED_
 
 #include "../misc/defines.h"
+#include "../misc/interrupt.h"
 
 /// システムコール番号の定義
 typedef enum {
@@ -11,7 +12,13 @@ typedef enum {
   KZ_SYSCALL_TYPE_SLEEP, ///< sleep thread
   KZ_SYSCALL_TYPE_WAKEUP, ///< thread wake up
   KZ_SYSCALL_TYPE_GETID, ///< get thread id
-  KZ_SYSCALL_TYPE_CHPRI ///< change thread priority
+  KZ_SYSCALL_TYPE_CHPRI, ///< change thread priority
+  KZ_SYSCALL_TYPE_KMALLOC, ///< メモリ確保
+  KZ_SYSCALL_TYPE_KMFREE, ///< メモリ開放
+  KZ_SYSCALL_TYPE_SEND,///< プロセス間通信(送信)
+  KZ_SYSCALL_TYPE_RECV,///< プロセス間通信(受信)
+  KZ_SYSCALL_TYPE_SETINTR,///< 割り込みハンドラ登録
+  KZ_SYSCALL_TYPE_NUM
 } kz_syscall_type_t;
 
 typedef uint32 kz_thread_id_t;
@@ -33,7 +40,7 @@ typedef union {
     
   /// kz_exitのためのパラメータ
   struct {
-    int dummy[0]; ///< dummy data;
+    int dummy[1]; ///< dummy data;
   } exit;
   
   /// kz_waitのためのパラメータ　
@@ -63,6 +70,40 @@ typedef union {
     int ret;
   } chpri;
 
+  /// kz_kmallocのためのパラメータ
+  struct {
+    unsigned int size;
+    void * ret;
+  } kmalloc;
+
+  /// kz_kmfreeのためのパラメータ
+  struct {
+    void * p;
+    int ret;
+  } kmfree;
+
+  /// kz_sendのためのパラメータ
+  struct {
+    kz_msgbox_id_t id;
+    unsigned int size;
+    char * data_ptr;
+    unsigned int ret;
+  } send;
+
+  /// kz_sendのためのパラメータ
+  struct {
+    kz_msgbox_id_t id;
+    unsigned int * size_ptr;
+    char ** data_ptr_ptr;
+    kz_thread_id_t ret;
+  } recv;
+
+  /// kz_setintrのためのパラメータ
+  struct {
+    softvec_type_t type;
+    kz_handler_t handler;
+    int ret;
+  } setintr;
 } kz_syscall_param_t;
 
 #endif

@@ -19,7 +19,13 @@ typedef const char *cString; ///< 変更されない文字列型
 
 typedef enum {
   false = 0,
-  true
+  true,
 } Bool;
+
+typedef enum {
+  MSGBOX_ID_CONSINPUT = 0,
+  MSGBOX_ID_CONSOUTPUT,
+  MSGBOX_ID_NUM
+} kz_msgbox_id_t;
 
 #endif

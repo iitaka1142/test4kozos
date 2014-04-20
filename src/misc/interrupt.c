@@ -15,7 +15,7 @@ int softvec_init(void)
 }
 
 /**
-   意図的なMISRA-C違反: returnは1つに違反。異常系は関数の最後でなくともreturnする。
+   意図的なMISRA-C違反: 「returnは1つ」に違反。異常系は関数の最後でなくともreturnする。
    可読性のため、この方が良いという考えもある。
    参考: 「リファクタリング」 M.Fawler
  */

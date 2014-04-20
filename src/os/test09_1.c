@@ -1,28 +1,28 @@
-#include "../misc/defnes.h"
+#include "../misc/defines.h"
+#include "../misc/lib.h"
 #include "kozos.h"
-#include "lib.h"
 
 int test09_1_main(int argc, char * arvg[])
 {
-  puts("test09_1 started.\n");
+  puts(__func__); puts(" started.\n");
 
-  puts("test09_1 sleep in.\n");
+  puts(__func__); puts(" sleep in.\n");
   kz_sleep();
-  puts("test09_1 sleep out.\n");
+  puts(__func__); puts(" sleep out.\n");
 
-  puts("test09_1 chpri in.\n");
+  puts(__func__); puts(" chpri in.\n");
   kz_chpri(3); // change priority of this thread from 3 to 1
-  puts("test09_1 chpri out.\n");
+  puts(__func__); puts(" chpri out.\n");
   
-  puts("test09_1 wait in.\n");
+  puts(__func__); puts(" wait in.\n");
   kz_wait();
-  puts("test09_1 wait out.\n");
+  puts(__func__); puts(" wait out.\n");
   
-  puts("test09_1 trap in.\n");
+  puts(__func__); puts(" trap in.\n");
   asm volatile ("trapa #1");
-  puts("test09_1 trap out.\n");
+  puts(__func__); puts(" trap out.\n");
   
-  puts("test09_1 end.\n");
+  puts(__func__); puts(" exit.\n");
   
   return EXIT_SUCCESS;
 }

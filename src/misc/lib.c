@@ -92,7 +92,7 @@ int strcmp(cString s1, cString s2)
 }
 
 /* 長さ指定の文字列比較 */
-int strncmp(cString s1, cString s2, int len)
+comp_result strncmp(cString s1, cString s2, int len)
 {
 	while((*s1 || *s2) && (len > 0)) {
 		if(*s1 != *s2) {

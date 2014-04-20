@@ -1,6 +1,6 @@
 # misc/Makefile
 
-OBJS = interrupt.o serial.o
+OBJS = interrupt.o serial.o lib.o
 
 include ../Makefile.in
 

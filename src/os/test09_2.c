@@ -1,24 +1,24 @@
-#include "../misc/defnes.h"
+#include "../misc/defines.h"
+#include "../misc/lib.h"
 #include "kozos.h"
-#include "lib.h"
 
 int test09_2_main(int argc, char * argv[])
 {
-  puts("test09_2 started.\n");
+  puts(__func__); puts(" started.\n");
 
-  puts("test09_2 sleep in.\n");
+  puts(__func__); puts(" sleep in.\n");
   kz_sleep();
-  puts("test09_2 sleep out.\n");
+  puts(__func__); puts(" sleep out.\n");
 
-  puts("test09_2 chpri in.\n");
+  puts(__func__); puts(" chpri in.\n");
   kz_chpri(3); // change priority of this thread from 2 to 3
-  puts("test09_2 chpri out.\n");
+  puts(__func__); puts(" chpri out.\n");
   
-  puts("test09_2 wait in.\n");
+  puts(__func__); puts(" wait in.\n");
   kz_wait();
-  puts("test09_2 wait out.\n");
+  puts(__func__); puts(" wait out.\n");
   
-  puts("test09_2 end.\n");
+  puts(__func__); puts(" exit.\n");
   
   return EXIT_SUCCESS;
 }

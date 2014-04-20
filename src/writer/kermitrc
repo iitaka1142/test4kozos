@@ -8,4 +8,3 @@ set flow none
 set carrier-watch off
 
 set protocol xmodem rx {rx -a} {sx %s} {sx -a %s} rx rx
-
