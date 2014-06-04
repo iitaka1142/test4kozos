@@ -11,6 +11,9 @@ MEMORY
 	userstack(rw)	: o = 0xfff400,	l = 0x000000 /* User Stack */
 	bootstack(rw)	: o = 0xffff00, l = 0x000000 /* Boot Stack */
 	intrstack(rw)	: o = 0xffff00, l = 0x000000 /* Interrupt Stack */
+	sci0		: o = 0xffffb0, l = 0x000000 /* Serial port 0 */
+	sci1		: o = 0xffffb8, l = 0x000000 /* Serial port 1 */
+	sci2		: o = 0xffffc0, l = 0x000000 /* Serial port 2 */
 }
 
 SECTIONS
@@ -64,5 +67,10 @@ SECTIONS
 	.intrstack : {
 		_intrstack = .;
 	} > intrstack
+	
+	.sci0 : {
+	      	_sci0_ptr = .;
+	} > sci0
+
 }
 

@@ -1,5 +1,5 @@
-#include "../misc/defines.h"
-#include "../misc/serial.h"
+#include <defines.h>
+#include <serial.h>
 #include "lib.h"
 
 /** \file lib.c
@@ -8,16 +8,16 @@
  * ソースコード
  */
 
-/* メモリを特定のパターンで埋める */
+/** メモリを特定のパターンで埋める */
 void * memset(void * b, int c, long len)
 {
-	char *p;
+  char *p;
 
-	for(p = b; len > 0; len--){
-		*(p++) = c;
-	}
+  for(p = b; len > 0; len--){
+    *(p++) = (char)c;
+  }
 
-	return b;
+  return b;
 }
 
 /* メモリのコピーを行う */
@@ -139,43 +139,43 @@ int puts(cString str)
 /* 文字列受信 */
 int gets(String buf)
 {
-	int i = 0;
-	uint8 c;
+  int i = 0;
+  char c;
 
-	do {
-		c = getc();
-		if (c == '\n') {
-			c = '\0';
-		}
-		buf[i++] = c;
-	} while (c);
+  do {
+    c = getc();
+    if (c == '\n') {
+      c = '\0';
+    }
+    buf[i++] = c;
+  } while (c);
 
-	return i - 1;
+  return i - 1;
 }
 
 /* 数値の16進表示 */
 int putxval(uint32 value, int column)
 {
-	char buf[9];
-	String p;
+  char buf[9];
+  String p;
 
-	// バッファの最後尾に終端文字を配置
-	p = buf + sizeof(buf) - 1;
-	*(p--) = '\0';
+  /* バッファの最後尾に終端文字を配置 */
+  p = buf + sizeof(buf) - 1;
+  *(p--) = '\0';
 
-	if(!value && !column) {
-		// valueがゼロの時、1桁出力桁を確保
-		column++;
-	}
+  if(!value && !column) {
+    /* valueがゼロの時、1桁出力桁を確保 */
+    column++;
+  }
 
-	while(value || column) {
-		*(p--) = "0123456789abcdef"[value & 0xf];
-		value >>= 4;
-		if(column) column--;
-	}
+  while(value || column) {
+    *(p--) = "0123456789abcdef"[value & 0xf];
+    value >>= 4;
+    if(column) column--;
+  }
 
-	puts(p+1);
+  puts(p+1);
 
-	return EXIT_SUCCESS;
+  return EXIT_SUCCESS;
 }
 

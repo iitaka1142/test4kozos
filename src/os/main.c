@@ -12,7 +12,7 @@ static int start_threads(int argc, char * argv[])
   kz_chpri(15);
 
   INTR_ENABLE;
-  while(true) {
+  while(True) {
     asm volatile ("sleep");
   }
   

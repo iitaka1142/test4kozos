@@ -186,7 +186,7 @@ int consdrv_main(int argc, char * argv[])
   (void)consdrv_init(consreg);
   kz_setintr(SOFTVEC_TYPE_SERINTR, consdrv_intr);
 
-  while(true) {
+  while(True) {
     sender = kz_recv(MSGBOX_ID_CONSOUTPUT, &size, &buf);
     // 送信処理
     index = get_index(buf);

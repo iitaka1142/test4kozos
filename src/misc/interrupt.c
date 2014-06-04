@@ -35,11 +35,11 @@ int softvec_setintr(softvec_type_t type, softvec_handler_t handler)
  */
 void interrupt(softvec_type_t type, stack_ptr_t sp)
 {
+  softvec_handler_t handler = SOFTVECS[type];
+
   if( type < 0 || SOFTVEC_TYPE_NUM <= type ) {
     return;
   }
-
-  softvec_handler_t handler = SOFTVECS[type];
 
   if( handler != NULL ) {
     handler(type, sp);

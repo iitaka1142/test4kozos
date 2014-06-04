@@ -7,11 +7,7 @@
 #include "defines.h"
 #include "serial.h"
 
-#define H8_3069F_SCI0 ((volatile struct h8_3069f_sci *)0xffffb0)
-#define H8_3069F_SCI1 ((volatile struct h8_3069f_sci *)0xffffb8)
-#define H8_3069F_SCI2 ((volatile struct h8_3069f_sci *)0xffffc0)
-
-struct h8_3069f_sci {
+struct _h8_3069f_sci {
   volatile uint8 smr;
   volatile uint8 brr;
   volatile uint8 scr;
@@ -49,23 +45,11 @@ struct h8_3069f_sci {
 #define H8_3069F_SCI_SSR_RDRF		(1<<6) /**< 受信完了 */
 #define H8_3069F_SCI_SSR_TDRE		(1<<7) /**< 送信完了 */
 
-static struct {
-  volatile struct h8_3069f_sci *sci;
-} regs[SERIAL_SCI_NUM] = {
-  { H8_3069F_SCI0 },
-  { H8_3069F_SCI1 },
-  { H8_3069F_SCI2 },
-};
-
-/* デバイスの初期化 */
-int serial_init( serial_port index )
+/** デバイスの初期化 */
+int serial_init( serial_port port )
 {
-  if ( index >= SERIAL_SCI_NUM ){
-    return -1;
-  }
+  volatile serial_port sci = port;
   
-  volatile struct h8_3069f_sci * sci = regs[index].sci;
-
   sci->scr = 0;
   sci->smr = 0;
 
@@ -80,87 +64,64 @@ int serial_init( serial_port index )
   return EXIT_SUCCESS;
 }
 
-/* 送信可能かの判定 */
-port_status serial_is_send_enable( serial_port index )
+/** 送信可能かの判定 */
+port_status serial_is_send_enable( serial_port port )
 {
-  if ( index >= SERIAL_SCI_NUM ){
-    return -1;
-  }
-
-  volatile struct h8_3069f_sci * sci = regs[index].sci;
+  volatile serial_port sci = port;
 
   return (sci->ssr & H8_3069F_SCI_SSR_TDRE)? ENABLE : DISABLE;
 }
 
-/* 1文字送信 */
-int serial_send_byte( serial_port index, char c )
+/** 1文字送信 */
+int serial_send_byte( serial_port port, char c )
 {
-  if ( index >= SERIAL_SCI_NUM ){
-    return -1;
-  }
+  volatile serial_port sci = port;
 
-  volatile struct h8_3069f_sci * sci = regs[index].sci;
-
-  while( !serial_is_send_enable(index) )
+  while( !serial_is_send_enable(port) )
     ;
 
   sci->tdr = (unsigned char)c;
-  sci->ssr &= ~H8_3069F_SCI_SSR_TDRE; /* 送信開始 */
+  sci->ssr &= (uint8)(~H8_3069F_SCI_SSR_TDRE); /* 送信開始 */
 
   return EXIT_SUCCESS;
 }
 
-/* 受信可能かの判定 */
-port_status serial_is_recv_enable(serial_port index)
+/** 受信可能かの判定 */
+port_status serial_is_recv_enable(serial_port port)
 {
-  if ( index >= SERIAL_SCI_NUM ){
-    return -1;
-  }
+  volatile serial_port sci = port;
 
-  volatile struct h8_3069f_sci *sci = regs[index].sci;
   return (sci->ssr & H8_3069F_SCI_SSR_RDRF)? ENABLE : DISABLE;
 }
 
-/* 1文字受信 */
-char serial_recv_byte(serial_port index)
+/** 1文字受信 */
+char serial_recv_byte(serial_port port)
 {
-  if ( index >= SERIAL_SCI_NUM ){
-    return -1;
-  }
-
-  volatile struct h8_3069f_sci *sci = regs[index].sci;
+  volatile serial_port sci = port;
   unsigned char c;
 
   /* 受信文字が来るまで待つ */
-  while (!serial_is_recv_enable(index)) {
+  while (!serial_is_recv_enable(port)) {
     ;
   }
   c = sci->rdr;
-  sci->ssr &= ~H8_3069F_SCI_SSR_RDRF;
+  sci->ssr &= (uint8)(~H8_3069F_SCI_SSR_RDRF);
 
   return (char)c;
 }
 
 /** (割り込み)シリアル通信受信有効チェック */ 
-port_status serial_intr_is_send_enable(serial_port index)
+port_status serial_intr_is_send_enable(serial_port port)
 {
-  if ( index >= SERIAL_SCI_NUM ){
-    return -1;
-  }
-
-  volatile struct h8_3069f_sci * sci = regs[index].sci;
+  volatile serial_port sci = port;
   
   return (sci->scr & H8_3069F_SCI_SCR_TIE) ? ENABLE : DISABLE;
 }
 
 /** (割り込み)シリアル通信受信有効化 */ 
-void serial_intr_send_enable(serial_port index)
+void serial_intr_send_enable(serial_port port)
 {
-  if ( index >= SERIAL_SCI_NUM ){
-    return;
-  }
-
-  volatile struct h8_3069f_sci * sci = regs[index].sci;
+  volatile serial_port sci = port;
   
   sci->scr |= H8_3069F_SCI_SCR_TIE;
   
@@ -169,55 +130,40 @@ void serial_intr_send_enable(serial_port index)
   
 
 /** (割り込み)シリアル通信受信無効化 */ 
-void serial_intr_send_disable(serial_port index)
+void serial_intr_send_disable(serial_port port)
 {
-  if ( index >= SERIAL_SCI_NUM ){
-    return;
-  }
-
-  volatile struct h8_3069f_sci * sci = regs[index].sci;
+  volatile serial_port sci = port;
   
-  sci->scr &= ~H8_3069F_SCI_SCR_TIE;
+  sci->scr &= (uint8)(~H8_3069F_SCI_SCR_TIE);
   
   return;
 }
 
 /** (割り込み)シリアル通信送信有効チェック */ 
-port_status serial_intr_is_recv_enable(serial_port index)
+port_status serial_intr_is_recv_enable(serial_port port)
 {
-  if ( index >= SERIAL_SCI_NUM ){
-    return -1;
-  }
-
-  volatile struct h8_3069f_sci * sci = regs[index].sci;
+  volatile serial_port sci = port;
   
   return (sci->scr & H8_3069F_SCI_SCR_RIE) ? ENABLE : DISABLE;
 }
 
 /** (割り込み)シリアル通信送信有効化 */ 
-void serial_intr_recv_enable(serial_port index)
+void serial_intr_recv_enable(serial_port port)
 {
-  if ( index >= SERIAL_SCI_NUM ){
-    return;
-  }
+  volatile serial_port sci = port;
 
-  volatile struct h8_3069f_sci * sci = regs[index].sci;
-  
   sci->scr |= H8_3069F_SCI_SCR_RIE;
   
   return;
 }
 
 /** (割り込み)シリアル通信送信無効化 */ 
-void serial_intr_recv_disable(serial_port index)
+void serial_intr_recv_disable(serial_port port)
 {
-  if ( index >= SERIAL_SCI_NUM ){
-    return;
-  }
+  volatile serial_port sci = port;
 
-  volatile struct h8_3069f_sci * sci = regs[index].sci;
-  
-  sci->scr &= ~H8_3069F_SCI_SCR_RIE;
+  sci->scr &= (uint8)(~H8_3069F_SCI_SCR_RIE);
   
   return;
 }
+

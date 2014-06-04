@@ -5,12 +5,6 @@ all: tags
 	cd bootload; make all
 	cd os; make all
 
-clean:
-	rm TAGS
-	cd misc; make clean
-	cd bootload; make clean
-	cd os; make clean
-
 image:
 	cd bootload; make image
 
@@ -29,3 +23,9 @@ connect:
 
 tags:
 	find . -name "*.[chCHsS]" -or -name "*.scr" | etags -
+
+clean:
+	rm -f TAGS
+	cd misc; make clean
+	cd bootload; make clean
+	cd os; make clean

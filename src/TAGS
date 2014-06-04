@@ -1,0 +1,642 @@
+
+os/kozos.c,2632
+#define THREAD_NUM 10,212
+#define PRIORITY_NUM 11,233
+#define THREAD_NAME_MAX_SIZE 12,257
+typedef struct _kz_context 15,312
+  stack_ptr_t sp;16,341
+} kz_context;17,378
+typedef struct _kz_thread kz_thread;20,421
+struct _kz_thread 21,458
+  kz_thread * next;22,478
+  char name 24,520
+  int priority;25,560
+  char * stack;26,600
+      Bool ready 29,676
+    } bit;30,698
+    uint32 array;32,710
+  } flag;33,728
+    kz_func_t func;37,813
+    int argc;38,833
+    char ** argv;39,847
+  } init;40,865
+    kz_syscall_type_t type;44,921
+    kz_syscall_param_t * param;45,949
+  } syscall;46,981
+  kz_context context;48,997
+  kz_thread * head;68,1868
+  kz_thread * tail;69,1912
+} readyque[readyque70,1956
+typedef struct _msg_buf kz_msgbuf;73,1984
+struct _msg_buf 74,2019
+  kz_msgbuf * next;75,2037
+  kz_thread * sender;77,2060
+    unsigned int size;79,2093
+    char * data_ptr;80,2116
+  } param;81,2137
+typedef struct _msg_box kz_msgbox;84,2154
+struct _msg_box{_msg_box85,2189
+  kz_thread * reciever;86,2206
+  kz_msgbuf * head;87,2230
+  kz_msgbuf * tail;88,2250
+static kz_thread * current;94,2418
+static kz_thread threads[threads95,2466
+static kz_handler_t handlers[handlers96,2533
+static kz_msgbox msg_boxes[msg_boxes97,2604
+void dump_que(101,2668
+void dispatch(116,2935
+static void thread_intr(121,3025
+static void thread_end(127,3163
+static void thread_init(133,3232
+static kz_thread * get(142,3484
+static int put(176,4256
+static inline kz_thread * create_TCB(204,4873
+static inline char * get_stack_area(219,5184
+#define push(231,5428
+#define pop(234,5513
+static kz_thread_id_t thread_run(238,5565
+static int thread_exit(295,7051
+static int thread_wait(310,7288
+static int thread_sleep(322,7413
+static int thread_wakeup(333,7569
+static kz_thread_id_t thread_getid(348,7826
+static int thread_chpri(361,8033
+static void * thread_kmalloc(379,8334
+static int thread_kmfree(392,8537
+static int set_reciever(402,8643
+static Bool wait_msg_of(414,8874
+static kz_msgbuf * deque(420,9012
+static kz_msgbox * enque(434,9239
+static kz_thread_id_t recvmsg(448,9492
+static void sendmsg(467,9986
+static unsigned int thread_send(488,10443
+static kz_thread_id_t thread_recv(506,10777
+static int thread_setintr(526,11199
+static void call_functions(540,11448
+static void syscall_proc(589,13056
+static void srvcall_proc(600,13282
+static kz_thread * schedule(612,13640
+static void syscall_intr(627,13954
+static void softerr_intr(634,14064
+static void thread_intr(643,14210
+void kz_start(661,14490
+void kz_sysdown(684,15129
+void kz_syscall(694,15250
+void kz_srvcall(704,15501
+
+os/test09_1.c,24
+int test09_1_main(5,74
+
+os/main.c,49
+static int start_threads(7,164
+int main(22,434
+
+os/startup.s,48
+_start:_start5,69
+_dispatch:_dispatch14,175
+
+os/syscall.h,1686
+#define _KOZOS_SYSCALL_H_INCLUDED_2,35
+  KZ_SYSCALL_TYPE_RUN,9,188
+  KZ_SYSCALL_TYPE_EXIT,10,227
+  KZ_SYSCALL_TYPE_WAIT,11,268
+  KZ_SYSCALL_TYPE_SLEEP,12,309
+  KZ_SYSCALL_TYPE_WAKEUP,13,352
+  KZ_SYSCALL_TYPE_GETID,14,398
+  KZ_SYSCALL_TYPE_CHPRI,15,442
+  KZ_SYSCALL_TYPE_KMALLOC,16,495
+  KZ_SYSCALL_TYPE_KMFREE,17,543
+  KZ_SYSCALL_TYPE_SEND,18,590
+  KZ_SYSCALL_TYPE_RECV,19,648
+  KZ_SYSCALL_TYPE_SETINTR,20,706
+  KZ_SYSCALL_TYPE_NUM21,768
+} kz_syscall_type_t;22,790
+typedef uint32 kz_thread_id_t;24,812
+typedef int (* kz_func_t)25,843
+typedef void (* kz_handler_t)26,895
+    kz_func_t func;32,1059
+    String name;33,1092
+    int priority;34,1126
+    int stack_size;35,1158
+    int argc;36,1194
+    char * *argv;argv37,1232
+    kz_thread_id_t ret;38,1273
+  } run;39,1328
+    int dummy[dummy43,1394
+  } exit;44,1429
+    int ret;48,1497
+  } wait;49,1510
+    int ret;53,1579
+  } sleep;54,1592
+    kz_thread_id_t id;58,1663
+    int ret;59,1686
+  } wakeup;60,1699
+    kz_thread_id_t ret;64,1770
+  } getid;65,1794
+    int priority;69,1864
+    int ret;70,1882
+  } chpri;71,1895
+    unsigned int size;75,1962
+    void * ret;76,1985
+  } kmalloc;77,2001
+    void * p;81,2069
+    int ret;82,2083
+  } kmfree;83,2096
+    kz_msgbox_id_t id;87,2161
+    unsigned int size;88,2184
+    char * data_ptr;89,2207
+    unsigned int ret;90,2228
+  } send;91,2250
+    kz_msgbox_id_t id;95,2313
+    unsigned int * size_ptr;96,2336
+    char ** data_ptr_ptr;97,2365
+    kz_thread_id_t ret;98,2391
+  } recv;99,2415
+    softvec_type_t type;103,2481
+    kz_handler_t handler;104,2506
+    int ret;105,2532
+  } setintr;106,2545
+} kz_syscall_param_t;107,2558
+
+os/test08_1.c,45
+#define PROMPT 5,74
+int test08_1_main(7,95
+
+os/test09_3.c,25
+int test09_3_main(8,145
+
+os/test10_1.c,24
+int test10_1_main(5,74
+
+os/kozos.h,80
+#define _KOZOS_H_INCLUDED_2,27
+void kz_start(57,1314
+void kz_sysdown(60,1464
+
+os/test11_1.c,24
+int test11_1_main(5,74
+
+os/ld.scr,31
+OUTPUT_FORMAT(1,0
+MEMORY5,68
+
+os/test11_2.c,24
+int test11_2_main(5,74
+
+os/test09_2.c,24
+int test09_2_main(5,74
+
+os/consdrv.c,648
+#define CONSDRV_DEVICE_NUM 9,180
+#define CONS_BUFFER_SIZE 10,209
+struct consreg 12,238
+  serial_port port_index;13,255
+  kz_thread_id_t sender;15,305
+  char * send_buf;17,340
+  unsigned int send_len;18,368
+  char * recv_buf;21,420
+  unsigned int recv_len;22,449
+} __attribute__((aligned(32))) consreg[consreg23,483
+static int consdrv_init(25,544
+static int send_char(32,655
+static inline unsigned int get_index(45,955
+static int send_string(50,1048
+static int consdrv_send_intrproc(81,2204
+static int consdrv_recv_intrproc(94,2573
+static void consdrv_intr(124,3265
+ static int consdrv_command(143,3696
+int consdrv_main(179,4589
+
+os/consdrv.h,108
+#define _CONSDRV_H_INCLUDED_2,29
+enum consdrv_cmd 4,59
+  CONSDRV_CMD_USE 5,78
+  CONSDRV_CMD_WRITE 6,103
+
+os/command.c,123
+static int send_use(7,123
+  #define len 9,163
+  #undef len18,348
+static int send_write(22,387
+int command_main(38,668
+
+os/msg.h,36
+#define _KOZOS_MSG_H_INCLUDED_2,31
+
+os/consdrv.s,228
+_send_char:_send_char5,66
+_send_string:_send_string17,237
+.L6:.L628,404
+.L5:.L546,678
+.L4:.L464,963
+.L7:.L787,1328
+_consdrv_command:_consdrv_command96,1451
+_consdrv_main:_consdrv_main139,2125
+.L12:.L12146,2236
+
+os/memory.c,428
+typedef struct _kzmem_block kzmem_block;6,94
+struct _kzmem_block 13,224
+  kzmem_block * next;14,246
+  int size;15,304
+typedef struct _kzmem_pool 21,349
+  int size;22,378
+  int num;23,390
+  kzmem_block *free;free24,401
+} kzmem_pool;25,422
+static kzmem_pool pool[pool30,475
+#define MEMORY_AREA_NUM 35,557
+static int kzmem_init_pool(38,646
+int kzmem_init(72,1540
+void * kzmem_alloc(81,1676
+int kzmem_free(114,2548
+
+os/memory.h,39
+#define _KOZOS_MEMORY_H_INCLUDED_2,34
+
+os/syscall.c,428
+kz_thread_id_t kz_run(6,85
+void kz_exit(23,483
+int kz_wait(29,570
+int kz_sleep(38,715
+int kz_wakeup(47,860
+kz_thread_id_t kz_getid(58,1046
+int kz_chpri(67,1215
+void * kz_kmalloc(78,1411
+int kz_kmfree(90,1616
+int kz_send(102,1798
+kz_thread_id_t kz_recv(117,2107
+int kz_setintr(131,2420
+int kx_wakeup(143,2653
+void * kx_kmalloc(154,2823
+int kx_kmfree(165,3002
+int kx_send(176,3158
+kz_thread_id_t kx_recv(189,3414
+
+bootload/xmodem.h,32
+#define _XMODEM_H_INCLUDE_2,27
+
+bootload/elf.h,30
+#define _ELF_H_INCLUDED_2,25
+
+bootload/ld.scr,31
+OUTPUT_FORMAT(1,0
+MEMORY5,68
+
+bootload/startup.s,20
+_start:_start5,65
+
+bootload/elf.c,937
+struct elf_header 14,175
+		uint8 magic[magic19,247
+		uint8 format;21,336
+		uint8 version;22,382
+		uint8 abi;23,444
+		uint8 abi_version;24,474
+		uint8 reserve[reserve25,521
+	} id;26,574
+	short type;27,581
+	short arch;28,621
+	long version;29,652
+	long entry_point;30,700
+	long program_header_offset;31,749
+	long section_header_offset;32,835
+	long flags;33,921
+	short header_size;34,955
+	short program_header_size;35,1020
+	short program_header_num;36,1093
+	short section_header_size;37,1162
+	short section_header_num;38,1235
+	short section_name_index;39,1304
+struct elf_program_header 46,1435
+	long type;47,1463
+	long offset;48,1505
+	long virtual_addr;49,1549
+	long physical_addr;50,1597
+	long file_size;51,1646
+	long memory_size;52,1696
+	long flag;53,1748
+	long align;54,1781
+static int elf_check(92,2604
+static int elf_load_program(117,3290
+static int elf_load_header(130,3671
+char * elf_load(145,4069
+
+bootload/xmodem.c,318
+#define XMODEM_SOH 13,201
+#define XMODEM_STX 14,225
+#define XMODEM_EOT 15,249
+#define XMODEM_ACK 16,273
+#define XMODEM_NAK 17,297
+#define XMODEM_CAN 18,321
+#define XMODEM_EOF 19,345
+#define XMODEM_BLOCK_SIZE 21,385
+static int xmodem_wait(38,817
+static int xmodem_read_block(52,1044
+long xmodem_recv(87,1769
+
+bootload/intr.S,108
+_intr_softerr:_intr_softerr7,109
+_intr_syscall:_intr_syscall34,582
+_intr_serintr:_intr_serintr60,1054
+
+bootload/main.c,171
+int global_data 14,204
+int global_bss;15,228
+static void wait(46,831
+static int init(55,938
+static int dump(81,1587
+static void printval(107,1936
+int main(116,2223
+
+writer/h8write.c,4871
+#define		LINUX1,0
+#undef		Solaris2,15
+#undef		FreeBSD3,31
+#undef		Win324,47
+#define VER	20,518
+#define CPU3048 25,564
+#define CPU3664 26,590
+#define CPU3067 27,616
+#define CPU3068 28,642
+#define CPU3052 29,668
+#define CPU3064 30,694
+#define CPU7045 31,720
+#define CPU3069 32,746
+ #define        RSLINE 39,828
+ #define	RSLINE	42,879
+ #define	RSLINE	45,930
+ #define	RSLINE	48,981
+#define	WAIT_SEND	54,1075
+#define	DEBUG	61,1167
+#define	COMBUF_SIZE	67,1205
+#define	BOOT_COMBUF_SIZE	68,1230
+ #define MAXPATHLEN 75,1399
+#define	MESSAGE	79,1451
+#define	WARNING	80,1469
+#define	FATAL	81,1487
+#define	ERR_TEST	84,1521
+#define	ERR_OPTION	85,1540
+#define	ERR_INPUTFILE	86,1561
+#define	ERR_OPENLINE	87,1585
+#define	ERR_INITLINE	88,1608
+#define	ERR_READLINE	89,1631
+#define	ERR_S_FORMAT	90,1654
+#define	ERR_H8_DATA	91,1677
+#define	ERR_CPU_TYPE	92,1699
+#define	ERR_EEPROM_WRITE	93,1722
+#define	ERR_EEPROM_TRANS	94,1750
+#define	ERR_LINESPEED	95,1778
+#define	ERR_GET_3096ID	96,1803
+#define	ERR_BOOT_SUM	97,1829
+#define	ERR_ALREADY_QUERY	98,1853
+#define	ERR_SET_QUERYMODE	99,1882
+#define	ERR_DEV_CODE	100,1911
+#define	ERR_CLK_MODE	101,1935
+#define	ERR_SET_RATE	102,1959
+#define	ERR_WRITE	103,1983
+#define 	BIN3048_SIZE	106,2020
+#define 	BIN3052_SIZE	107,2048
+#define 	BIN3064_SIZE	108,2076
+#define 	BIN3067_SIZE	109,2104
+#define 	BIN3068_SIZE	110,2132
+#define 	BIN3664_SIZE	111,2160
+#define 	BIN7045_SIZE	112,2188
+#define 	BIN3069_SIZE	113,2216
+#define 	ROM3048_START	115,2266
+#define 	ROM3052_START	116,2291
+#define 	ROM3064_START	117,2316
+#define 	ROM3067_START	118,2341
+#define 	ROM3068_START	119,2366
+#define 	ROM3664_START	120,2391
+#define 	ROM7045_START	121,2416
+#define 	ROM3048_END	123,2461
+#define 	ROM3052_END	124,2490
+#define 	ROM3064_END	125,2519
+#define 	ROM3067_END	126,2548
+#define 	ROM3068_END	127,2577
+#define 	ROM3664_END	128,2606
+#define 	ROM7045_END	129,2634
+#define	BIT_RATE_SET_MAX	132,2696
+#define	BIT_RATE_SET_MAX_3069	133,2725
+#define	BIT_SET_CODE	135,2760
+#define	BIT_SET_CHEK	136,2815
+#define	BIT_SET_FIN	138,2872
+#define	BIT_SET_RES_3069	139,2932
+#define	BIT_SET_RES	140,2987
+#define	BIT_SET_RES_NG	141,3038
+#define	QUERY_DEV_COM	144,3119
+#define	QUERY_DEV_RES	145,3173
+#define QUERY_DEV_DEV_CODE_SIZE 146,3228
+#define	SEL_DEV_COM	148,3263
+#define	SEL_DEV_RES	149,3323
+#define	SEL_DEV_ERR_RES	150,3384
+#define	SEL_DEV_ERR_SUM	151,3455
+#define	SEL_DEV_ERR_CODE	153,3548
+#define	QUERY_CLK_COM	156,3644
+#define	QUERY_CLK_RES	157,3702
+#define	SEL_CLK_COM	159,3762
+#define	SEL_CLK_RES	160,3821
+#define	SEL_CLK_ERR_RES	161,3881
+#define	SEL_CLK_ERR_SUM	162,3951
+#define	SEL_CLK_ERR_MODE	164,4043
+#define	SEL_CLK_SIZE	166,4139
+#define	SEL_CLK_MODE	167,4193
+#define	QUERY_SCL_COM	169,4248
+#define	QUERY_SCL_RES	170,4302
+#define	QUERY_FRQ_COM	172,4358
+#define	QUERY_FRQ_RES	173,4416
+#define	QUERY_PAGE_SIZE_COM	175,4476
+#define	QUERY_PAGE_SIZE_RES	176,4536
+#define	SET_RATE_COM	178,4601
+#define	SET_RATE_RES	179,4657
+#define	SET_RATE_ERR_RES	180,4714
+#define	SET_RATE_ERR_SUM	181,4781
+#define	SET_RATE_ERR_RATE	183,4855
+#define	SET_RATE_ERR_INP_FREQ	185,4933
+#define	SET_RATE_ERR_TIME	187,5026
+#define	SET_RATE_ERR_FREQ	189,5104
+#define	SET_RATE_CK_COM	191,5187
+#define	SET_RATE_SIZE	192,5253
+#define	QUERY_ERR_RES	194,5305
+#define	NON_ERR_RES	195,5359
+#define	SWITCH_TO_ERASE_COM	197,5410
+#define	SEL_WRITE_FORMAT	198,5471
+#define	WRITE_128_COM	199,5527
+#define	WRITE_128_ERR_ADD	200,5576
+#define	WRITE_128_ERR_WRT	201,5637
+#define	READ_COM	202,5686
+#define	READ_RES	203,5725
+#define	READ_AREA	204,5768
+#define	READ_COM_LEN	206,5838
+static char bin3048[bin3048208,5889
+static unsigned  char bin3052[bin3052251,9383
+static unsigned char bin3067[bin3067326,15679
+static unsigned char bin3068[bin3068401,21924
+static unsigned char bin3664[bin3664478,28361
+static char bin3064[bin3064539,33472
+static char bin7045[bin7045616,39900
+int	debug=671,44270
+char	programname[programname676,44329
+void	error_print(682,44450
+ HANDLE		TheFd;754,46507
+ DCB		dcb;755,46523
+ OVERLAPPED	WOp;756,46534
+ OVERLAPPED	ROp;757,46551
+ int writecom(759,46569
+ int getbyte(766,46697
+ struct termios TheTty;786,47071
+ int TheFd;787,47095
+ ssize_t writecom(789,47109
+ ssize_t readcom(796,47228
+ unsigned char getbyte(803,47345
+void putbyte(816,47549
+void bytecheck(823,47631
+void opencom(836,47917
+void closecom(936,51237
+ char* basename(945,51337
+int query_area(956,51509
+int query_pagesize(979,51898
+int query_device(1010,52604
+int query_scale(1067,54036
+int query_freq(1094,54675
+int query_clock(1128,55419
+int select_device(1163,56282
+int select_clock(1208,57399
+void simple_command(1246,58245
+int set_rate(1254,58340
+unsigned char put_long(1319,59717
+void print_usage(1338,60036
+int	get_cpu_id(1361,61077
+int main(1404,61637
+
+misc/intr.h,172
+#define _INTR_H_INCLUDED_2,26
+#define SOFTVEC_TYPE_NUM 6,112
+#define SOFTVEC_TYPE_SOFTERR 8,144
+#define SOFTVEC_TYPE_SYSCALL 9,175
+#define SOFTVEC_TYPE_SERINTR 10,206
+
+misc/serial.h,242
+#define _SERIAL_H_INCLUDED_2,28
+  SERIAL_SCI_1,11,171
+  SERIAL_SCI_2,12,187
+  SERIAL_SCI_3,13,203
+  SERIAL_SCI_NUM14,219
+} serial_port;15,236
+#define SERIAL_DEFAULT_DEVICE 17,252
+  DISABLE,21,378
+  ENABLE22,389
+} port_status;23,398
+
+misc/serial.c,1862
+#define H8_3069F_SCI0 11,119
+const static volatile struct h8_3069_sci * H8_3069F_SCI0 16,326
+#define H8_3069F_SCI1 18,419
+#define H8_3069F_SCI2 19,484
+struct h8_3069f_sci 22,557
+  volatile uint8 smr;23,579
+  volatile uint8 brr;24,601
+  volatile uint8 scr;25,623
+  volatile uint8 tdr;26,645
+  volatile uint8 ssr;27,667
+  volatile uint8 rdr;28,689
+  volatile uint8 scmr;29,711
+#define H8_3069F_SCI_SMR_CKS_PER1	32,738
+#define H8_3069F_SCI_SMR_CKS_PER4	33,779
+#define H8_3069F_SCI_SMR_CKS_PER16 34,820
+#define H8_3069F_SCI_SMR_MP 35,863
+#define H8_3069F_SCI_SMR_STOP	36,900
+#define H8_3069F_SCI_SMR_OE	37,938
+#define H8_3069F_SCI_SMR_PE	38,974
+#define H8_3069F_SCI_SMR_CHR	39,1010
+#define H8_3069F_SCI_SMR_CA	40,1047
+#define H8_3069F_SCI_SCR_CKE0	42,1084
+#define H8_3069F_SCI_SCR_CKE1	43,1122
+#define H8_3069F_SCI_SCR_TEIE	44,1160
+#define H8_3069F_SCI_SCR_MPIE	45,1198
+#define H8_3069F_SCI_SCR_RE	46,1236
+#define H8_3069F_SCI_SCR_TE	47,1293
+#define H8_3069F_SCI_SCR_RIE	48,1350
+#define H8_3069F_SCI_SCR_TIE	49,1420
+#define H8_3069F_SCI_SSR_MPBT	51,1491
+#define H8_3069F_SCI_SSR_MPB	52,1529
+#define H8_3069F_SCI_SSR_TEND	53,1566
+#define H8_3069F_SCI_SSR_PER	54,1604
+#define H8_3069F_SCI_SSR_FERERS	55,1641
+#define H8_3069F_SCI_SSR_ORER	56,1681
+#define H8_3069F_SCI_SSR_RDRF	57,1719
+#define H8_3069F_SCI_SSR_TDRE	58,1778
+  volatile struct h8_3069f_sci *sci;sci61,1854
+} regs[regs62,1891
+int serial_init(69,2017
+port_status serial_is_send_enable(92,2457
+port_status serial_send_byte(104,2712
+port_status serial_is_recv_enable(122,3087
+char serial_recv_byte(134,3341
+port_status serial_intr_is_send_enable(154,3757
+void serial_intr_send_enable(166,4052
+void serial_intr_send_disable(181,4323
+port_status serial_intr_is_recv_enable(195,4611
+void serial_intr_recv_enable(207,4906
+void serial_intr_recv_disable(221,5174
+
+misc/interrupt.c,74
+int softvec_init(7,71
+int softvec_setintr(22,484
+void interrupt(36,704
+
+misc/interrupt.h,260
+#define _INTERRUPT_H_INCLUDED_2,31
+#define SOFTVEC_ADDR 9,183
+typedef short softvec_type_t;12,269
+typedef uint32 stack_ptr_t;18,360
+typedef void (* softvec_handler_t)23,431
+#define SOFTVECS 25,505
+#define INTR_ENABLE 27,560
+#define INTR_DISABLE 28,615
+
+misc/defines.h,456
+#define _DEFINES_H_INCLUDED_2,29
+#define NULL 10,115
+#define EXIT_SUCCESS 13,173
+#define NoReturnFunction 15,217
+typedef unsigned char uint8;17,269
+typedef unsigned short uint16;18,320
+typedef unsigned long uint32;19,374
+typedef char * String;20,427
+typedef const char *cString;cString21,471
+  False 24,555
+  True25,568
+} Bool;26,575
+  MSGBOX_ID_CONSINPUT 29,599
+  MSGBOX_ID_CONSOUTPUT,30,626
+  MSGBOX_ID_NUM31,650
+} kz_msgbox_id_t;32,666
+
+misc/lib.c,253
+void * memset(12,195
+void * memcpy(24,359
+int memcmp(37,566
+int strlen(58,905
+String strcpy(69,1032
+int strcmp(81,1199
+comp_result strncmp(95,1383
+int putc(110,1592
+char getc(120,1756
+int puts(130,1901
+int gets(140,2007
+int putxval(157,2200
+
+misc/lib.h,100
+#define _LIB_H_INCLUDE_2,24
+  Earlier 10,131
+  Same 11,147
+  Later 12,159
+} comp_result;13,171
+
+misc/misra2012deviation.h,0
+
+bootload/vector.c,0
+
+os/msg.c,0

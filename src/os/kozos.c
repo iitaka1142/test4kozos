@@ -151,7 +151,7 @@ static kz_thread * get( int priority )
     // if queue is empty, return NULL
     // (do not have to do anything)
   }
-  else if(result->flag.bit.ready == false){
+  else if(result->flag.bit.ready == False){
     // thread at top of queue hasn't been in ready state yet
   }
   else{
@@ -159,7 +159,7 @@ static kz_thread * get( int priority )
     readyque[priority].head = readyque[priority].head->next;
     
     // set ready flag as false
-    result->flag.bit.ready = false;
+    result->flag.bit.ready = False;
 
   }
   
@@ -178,7 +178,7 @@ static int put( kz_thread * thread )
   if(thread == NULL) {
     return -1;
   }
-  else if(thread->flag.bit.ready == true) {
+  else if(thread->flag.bit.ready == True) {
     // if thread has already been in ready state
     // don't do anything
   }
@@ -195,7 +195,7 @@ static int put( kz_thread * thread )
   thread->next = NULL;
   
   readyque[thread->priority].tail = thread;
-  thread->flag.bit.ready = true;
+  thread->flag.bit.ready = True;
   
   return EXIT_SUCCESS;
 }

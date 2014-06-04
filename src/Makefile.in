@@ -20,7 +20,7 @@ H8WRITE = ../writer/h8write
 H8WRITE_SERDEV = /dev/ttyS3
 
 CFLAGS = -Wall -mh -nostdinc -nostdlib -fno-builtin \
-	 -I. -Os \
+	 -I. -Imisc -Os \
 	 -std=gnu99
 
 LDFLAGS = -static -T ld.scr -L.

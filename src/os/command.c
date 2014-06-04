@@ -42,7 +42,7 @@ int command_main(int argc, char * argv[])
 
   send_use(SERIAL_DEFAULT_DEVICE);
 
-  while(true) {
+  while(True) {
     send_write("command> ");
 
     kz_recv(MSGBOX_ID_CONSINPUT, &size, &str);
