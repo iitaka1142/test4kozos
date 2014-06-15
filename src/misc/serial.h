@@ -14,16 +14,18 @@ typedef enum {
 
 /** シリアル通信ポート */
 typedef enum {
-  SERIAL_SCI_1 = 0xffffb0,
-  SERIAL_SCI_2 = 0xffffb8,
-  SERIAL_SCI_3 = 0xffffc0,
+  SERIAL_SCI_0 = 0xffffb0,
+  SERIAL_SCI_1 = 0xffffb8,
+  SERIAL_SCI_2 = 0xffffc0,
   SERIAL_SCI_NUM = 3
 } h8_3069f_sci;
 
 /** シリアル通信ポート構造体 */
 typedef struct _h8_3069f_sci * serial_port;
+/** シリアル通信ポートを表す序数 */
+typedef unsigned int port_index;
 
-#define SERIAL_DEFAULT_DEVICE (serial_port)SERIAL_SCI_2 /**< シリアル通信のポート番号 */
+#define SERIAL_DEFAULT_DEVICE (serial_port)SERIAL_SCI_1 /**< シリアル通信のポート番号 */
 
 /** デバイス初期化 */
 int serial_init( serial_port port );
@@ -77,5 +79,14 @@ void serial_intr_recv_enable(serial_port port);
 
 /** (割り込み)シリアル通信送信無効化 */ 
 void serial_intr_recv_disable(serial_port port);
+
+/** ポートを指定する序数をシリアル通信ポートに変換する
+    4byteのデータを保持できない時に使用する
+*/
+serial_port get_serial_port_from(port_index index);
+
+/** ポートアドレスを序数に変換する */
+port_index get_port_index_from(serial_port port);
+
 
 #endif

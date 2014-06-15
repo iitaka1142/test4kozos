@@ -49,17 +49,23 @@ struct _h8_3069f_sci {
 int serial_init( serial_port port )
 {
   volatile serial_port sci = port;
-  
-  sci->scr = 0;
-  sci->smr = 0;
 
+  /* レジスタを変更する前にシリアル通信を不許可にする */
+  sci->scr = 0x00;
+  
+  sci->smr = 0x00;
   /* 20MHzのクロックから9600bpsを生成(25MHzの場合は80にする) */
   sci->brr = 64;
+  /* */
+  sci->tdr = 0xFF;
+
+  sci->ssr = 0x00;
+  
+  sci->scmr = 0xF2;
 
   /* 送受信可能 */
   sci->scr = H8_3069F_SCI_SCR_RE | H8_3069F_SCI_SCR_TE;
 
-  sci->ssr = 0;
 
   return EXIT_SUCCESS;
 }
@@ -167,3 +173,44 @@ void serial_intr_recv_disable(serial_port port)
   return;
 }
 
+serial_port get_serial_port_from(port_index index)
+{
+  h8_3069f_sci port; 
+
+  switch(index) {
+  case 0:
+    port = SERIAL_SCI_0;
+    break;
+  case 1:
+    port = SERIAL_SCI_1;
+    break;
+  case 2:
+    port = SERIAL_SCI_2;
+    break;
+  default:
+    return NULL;
+  }
+  
+  return (serial_port)port;
+}
+
+port_index get_port_index_from(serial_port port)
+{
+  port_index index;
+  
+  
+  if(port == (serial_port)SERIAL_SCI_0) {
+    index = 0;
+  }
+  else if(port == (serial_port)SERIAL_SCI_1) {
+    index = 1;
+  }
+  else if(port == (serial_port)SERIAL_SCI_2) {
+    index = 2;
+  }
+  else {
+    index = (port_index)-1;
+  }
+
+  return index;
+}

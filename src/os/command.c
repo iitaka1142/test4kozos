@@ -6,16 +6,16 @@
 
 static int send_use(serial_port port)
 {
-  #define len 3
-  char * buffer = kz_kmalloc(len);
+  #define LEN 3
+  char * buffer = kz_kmalloc(LEN);
 
   buffer[0] = '0';
   buffer[1] = CONSDRV_CMD_USE;
-  buffer[2] = (char)('0' + port);
+  buffer[2] = (char)('0' + get_port_index_from(port));
 
-  kz_send(MSGBOX_ID_CONSOUTPUT, len, buffer); 
+  kz_send(MSGBOX_ID_CONSOUTPUT, LEN, buffer); 
 
-  #undef len
+  #undef LEN
   return EXIT_SUCCESS;
 }
 
